@@ -1,0 +1,28 @@
+.Container {
+  max-width: 60rem;
+  margin: 3rem auto 0;
+  font-family: sans-serif;
+
+  h1 {
+    color: #333;
+  }
+
+  p {
+    color: #aaa;
+  }
+}
+.post {
+  h1 {
+    font-weight: 800;
+    text-transform: lowercase;
+  }
+  span {
+    color: #aaa;
+  }
+  img {
+    width: 100%;
+  }
+  p {
+    color: #000000;
+  }
+}
