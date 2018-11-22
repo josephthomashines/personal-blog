@@ -2,7 +2,7 @@ require(`dotenv`).config({ path: `.env` })
 
 module.exports = {
   siteMetadata: {
-    name: 'johi blog',
+    name: 'josephhines',
     tagline: 'Web Development, Design, AI, Graphics, Games, and life',
   },
   plugins: [
@@ -25,7 +25,7 @@ module.exports = {
         background_color: '#663399',
         theme_color: '#663399',
         display: 'minimal-ui',
-        icon: 'src/images/logo.svg',
+        icon: 'src/images/logo.png',
       },
     },
     'gatsby-transformer-remark',
