@@ -42,7 +42,7 @@ export const indexPageQuery = graphql`
         tagline
       }
     }
-    allContentfulPost {
+    allContentfulPost(sort: { fields: [date], order: DESC }) {
       edges {
         node {
           title
