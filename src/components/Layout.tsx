@@ -23,8 +23,53 @@ class Layout extends React.Component<ILayoutProps> {
             <p>{this.props.tagline}</p>
           </div>
         </div>
-        <div className={styles.Container}>
+        <div
+          className={styles.Container}
+          // style={{ minHeight: `${window.innerHeight}px` }}
+        >
           <div className={styles.postWrapper}>{this.props.children}</div>
+        </div>
+        <div className={styles.footer}>
+          <div className={styles.message}>
+            <h2>That's all, folks</h2>
+          </div>
+          <div className={styles.links}>
+            <div className={styles.wrapper}>
+              <h2>links</h2>
+              <div>
+                <p>
+                  <a
+                    href='https://josephthomashines.com'
+                    target='_blank'
+                    rel='noopener'
+                  >
+                    CV Site
+                  </a>
+                </p>
+                <p>
+                  <a
+                    href='http://github.com/josephthomashines'
+                    target='_blank'
+                    rel='noopener'
+                  >
+                    Github
+                  </a>
+                </p>
+                <p>
+                  <a
+                    href='https://www.linkedin.com/in/joseph-hines-iii-b58923139/'
+                    target='_blank'
+                    rel='noopener'
+                  >
+                    LinkedIn
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className={styles.goodbye}>
+            <h2>Copyright &copy; {new Date().getFullYear()} Joseph Hines</h2>
+          </div>
         </div>
       </React.Fragment>
     )

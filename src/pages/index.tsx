@@ -64,7 +64,7 @@ export const indexPageQuery = graphql`
 export default class IndexPage extends React.Component<IndexPageProps, {}> {
   public renderPost(post: any, index: any): JSX.Element {
     return (
-      <React.Fragment>
+      <React.Fragment key={`post-preview-fragment-${index}`}>
         {post.thumbnail ? (
           <div
             style={{

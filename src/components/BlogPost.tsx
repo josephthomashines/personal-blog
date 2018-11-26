@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 import * as styles from '../style/index.module.scss'
 
 import Layout from '../components/Layout'
@@ -12,27 +12,90 @@ interface IndexPageProps {
         tagline
       }
     }
-    contentfulPost: {
+    main: {
       title
+      slug
+      date
+      body: {
+        childMarkdownRemark: {
+          html
+        }
+      }
+      thumbnail: {
+        fixed: {
+          tracedSVG
+          src
+        }
+      }
+    }
+    next: {
+      title
+      slug
+      date
+      thumbnail: {
+        fixed: {
+          tracedSVG
+          src
+        }
+      }
+    }
+    previous: {
+      title
+      slug
+      date
+      thumbnail: {
+        fixed: {
+          tracedSVG
+          src
+        }
+      }
     }
   }
 }
 
 export const blogQuery = graphql`
-  query($contentful_id: String!) {
+  query($contentful_id: String!, $next: String, $previous: String) {
     site {
       siteMetadata {
         name
         tagline
       }
     }
-    contentfulPost(contentful_id: { eq: $contentful_id }) {
+    main: contentfulPost(contentful_id: { eq: $contentful_id }) {
       title
       slug
       date
       body {
         childMarkdownRemark {
           html
+        }
+      }
+      thumbnail {
+        fixed(width: 2000, height: 2000) {
+          tracedSVG
+          src
+        }
+      }
+    }
+    next: contentfulPost(contentful_id: { eq: $next }) {
+      title
+      slug
+      date
+      thumbnail {
+        fixed(width: 2000, height: 2000) {
+          tracedSVG
+          src
+        }
+      }
+    }
+    previous: contentfulPost(contentful_id: { eq: $previous }) {
+      title
+      slug
+      date
+      thumbnail {
+        fixed(width: 2000, height: 2000) {
+          tracedSVG
+          src
         }
       }
     }
@@ -46,6 +109,18 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
         <h1>{post.title}</h1>
         <span>{post.date}</span>
         <div
+          style={{
+            backgroundImage: `url("${post.thumbnail.fixed.src}"), url("${
+              post.thumbnail.fixed.tracedSVG
+            }")`,
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+          }}
+          key={index}
+          className={styles.thumbnail}
+        />
+        <div
           dangerouslySetInnerHTML={{
             __html: post.body.childMarkdownRemark.html,
           }}
@@ -56,11 +131,66 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
   public render(): JSX.Element {
     const { name, tagline } = this.props.data.site.siteMetadata
 
-    const post = this.renderPost(this.props.data.contentfulPost, 0)
+    const post = this.renderPost(this.props.data.main, 0)
+    const afterword = []
 
+    if (this.props.data.previous) {
+      afterword.push(
+        <div
+          style={{
+            backgroundImage: `url("${
+              this.props.data.previous.thumbnail.fixed.src
+            }"), url("${this.props.data.previous.thumbnail.fixed.tracedSVG}")`,
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+          }}
+          key={this.props.data.previous.slug}
+          className={`${styles.postPreview} ${styles.previous}`}
+        >
+          <div
+            onClick={() => navigate(`/${this.props.data.previous.slug}`)}
+            role='link'
+            tabIndex={0}
+            className={styles.filter}
+          >
+            <h1>{this.props.data.previous.title}</h1>
+            <span>{this.props.data.previous.date}</span>
+          </div>
+        </div>,
+      )
+    }
+
+    if (this.props.data.next) {
+      afterword.push(
+        <div
+          style={{
+            backgroundImage: `url("${
+              this.props.data.next.thumbnail.fixed.src
+            }"), url("${this.props.data.next.thumbnail.fixed.tracedSVG}")`,
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+          }}
+          key={this.props.data.next.slug}
+          className={`${styles.postPreview} ${styles.next}`}
+        >
+          <div
+            onClick={() => navigate(`/${this.props.data.next.slug}`)}
+            role='link'
+            tabIndex={0}
+            className={styles.filter}
+          >
+            <h1>{this.props.data.next.title}</h1>
+            <span>{this.props.data.next.date}</span>
+          </div>
+        </div>,
+      )
+    }
     return (
       <Layout tagline={tagline} name={name}>
         {post}
+        <div className={styles.afterword}>{afterword}</div>
       </Layout>
     )
   }
