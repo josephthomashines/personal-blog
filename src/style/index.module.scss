@@ -7,6 +7,27 @@ $darkgrey: #696969;
 $grey: #d8d8d8;
 $red: #ff4136;
 
+@keyframes rainbow {
+  0% {
+    color: orange;
+  }
+  20% {
+    color: green;
+  }
+  40% {
+    color: red;
+  }
+  60% {
+    color: blue;
+  }
+  80% {
+    color: yellow;
+  }
+  100% {
+    color: purple;
+  }
+}
+
 html {
   font-family: sans-serif;
 }
@@ -17,7 +38,7 @@ html {
   top: 0;
   left: 0;
   padding: 0 2%;
-  width: 100%;
+  width: 96%;
   background: $background;
   height: 140px;
 
@@ -74,7 +95,7 @@ html {
 }
 .postPreview {
   width: 20rem;
-  max-height: 20rem;
+  height: 10rem;
   margin: 20px 0;
   overflow: hidden;
 
@@ -82,14 +103,14 @@ html {
     all: none;
     top: 0;
     padding: 20px 10px;
-    background: #e7e7e7cc;
+    background: #e7e7e710;
     background-size: cover;
     transition: 0.5s;
     cursor: pointer;
     h1 {
       font-weight: 900;
       text-transform: lowercase;
-      transition: 0.6s;
+      transition: text-decoration 0.6s;
     }
     span {
       font-weight: 900;
@@ -103,12 +124,21 @@ html {
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    h1,
+    span,
+    p {
+      visibility: hidden;
+    }
     &:hover {
-      background: #e7e7e710;
+      background: #e7e7e7cc;
 
       h1 {
-        color: $red;
         text-decoration: underline;
+      }
+      h1,
+      span,
+      p {
+        visibility: visible;
       }
     }
   }
@@ -116,8 +146,8 @@ html {
 .post {
   .thumbnail {
     width: 100%;
-    height: 300px;
-    margin: 20px 0;
+    max-height: 30rem;
+    margin: 20px auto;
   }
   h1 {
     font-weight: 800;

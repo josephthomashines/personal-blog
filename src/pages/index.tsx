@@ -22,7 +22,7 @@ interface IndexPageProps {
           thumbnail: {
             fixed(
               width: 2000,
-              height: 2000,
+              height: 1000,
             ): {
               tracedSVG: string
               src: string
@@ -50,7 +50,7 @@ export const indexPageQuery = graphql`
           date
           tag
           thumbnail {
-            fixed(width: 2000, height: 2000) {
+            fixed(width: 2000, height: 1000) {
               tracedSVG
               src
             }
@@ -73,7 +73,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
               }")`,
               backgroundPosition: 'center center',
               backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
+              backgroundSize: 'contain',
             }}
             key={index}
             className={styles.postPreview}

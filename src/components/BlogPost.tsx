@@ -71,7 +71,7 @@ export const blogQuery = graphql`
         }
       }
       thumbnail {
-        fixed(width: 2000, height: 2000) {
+        fixed(width: 2000, height: 1000) {
           tracedSVG
           src
         }
@@ -82,7 +82,7 @@ export const blogQuery = graphql`
       slug
       date
       thumbnail {
-        fixed(width: 2000, height: 2000) {
+        fixed(width: 2000, height: 1000) {
           tracedSVG
           src
         }
@@ -93,7 +93,7 @@ export const blogQuery = graphql`
       slug
       date
       thumbnail {
-        fixed(width: 2000, height: 2000) {
+        fixed(width: 2000, height: 1000) {
           tracedSVG
           src
         }
@@ -102,24 +102,17 @@ export const blogQuery = graphql`
   }
 `
 
+// TODO: Get
+
 export default class BlogPost extends React.Component<IndexPageProps, {}> {
   public renderPost(post: any, index: any): JSX.Element {
     return (
       <div key={index} className={styles.post}>
         <h1>{post.title}</h1>
         <span>{post.date}</span>
-        <div
-          style={{
-            backgroundImage: `url("${post.thumbnail.fixed.src}"), url("${
-              post.thumbnail.fixed.tracedSVG
-            }")`,
-            backgroundPosition: 'center center',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-          }}
-          key={index}
-          className={styles.thumbnail}
-        />
+        <div className={styles.thumbnail}>
+          <img src={post.thumbnail.fixed.src} key={index} />
+        </div>
         <div
           dangerouslySetInnerHTML={{
             __html: post.body.childMarkdownRemark.html,
