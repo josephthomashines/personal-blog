@@ -66,24 +66,14 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
     return (
       <React.Fragment key={`post-preview-fragment-${index}`}>
         {post.thumbnail ? (
-          <div
-            style={{
-              backgroundImage: `url("${post.thumbnail.fixed.src}"), url("${
-                post.thumbnail.fixed.tracedSVG
-              }")`,
-              backgroundPosition: 'center center',
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'contain',
-            }}
-            key={index}
-            className={styles.postPreview}
-          >
+          <div key={index} className={styles.postPreview}>
             <div
               onClick={() => navigate(`/${post.slug}`)}
               role='link'
               tabIndex={0}
               className={styles.filter}
             >
+              <img src={post.thumbnail.fixed.src} />
               <h1>{post.title}</h1>
               <p>{post.tag}</p>
               <span>{post.date}</span>

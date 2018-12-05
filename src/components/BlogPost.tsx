@@ -130,14 +130,6 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
     if (this.props.data.previous) {
       afterword.push(
         <div
-          style={{
-            backgroundImage: `url("${
-              this.props.data.previous.thumbnail.fixed.src
-            }"), url("${this.props.data.previous.thumbnail.fixed.tracedSVG}")`,
-            backgroundPosition: 'center center',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-          }}
           key={this.props.data.previous.slug}
           className={`${styles.postPreview} ${styles.previous}`}
         >
@@ -147,6 +139,7 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
             tabIndex={0}
             className={styles.filter}
           >
+            <img src={this.props.data.previous.thumbnail.fixed.src} />
             <h1>{this.props.data.previous.title}</h1>
             <span>{this.props.data.previous.date}</span>
           </div>
@@ -157,14 +150,6 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
     if (this.props.data.next) {
       afterword.push(
         <div
-          style={{
-            backgroundImage: `url("${
-              this.props.data.next.thumbnail.fixed.src
-            }"), url("${this.props.data.next.thumbnail.fixed.tracedSVG}")`,
-            backgroundPosition: 'center center',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-          }}
           key={this.props.data.next.slug}
           className={`${styles.postPreview} ${styles.next}`}
         >
@@ -174,6 +159,7 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
             tabIndex={0}
             className={styles.filter}
           >
+            <img src={this.props.data.next.thumbnail.fixed.src} />
             <h1>{this.props.data.next.title}</h1>
             <span>{this.props.data.next.date}</span>
           </div>
