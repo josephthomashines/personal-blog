@@ -1,5 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
+@font-face {
+  font-family: Cooper;
+  src: url('./font/CooperHewitt-Medium.woff');
+}
+@font-face {
+  font-family: Cooper;
+  src: url('./font/CooperHewitt-Bold.woff');
+  font-weight: bold;
+}
+@font-face {
+  font-family: Cooper;
+  src: url('./font/CooperHewitt-MediumItalic.woff');
+  font-style: italic;
+}
+@font-face {
+  font-family: FiraSans;
+  src: url('./font/FiraSans-Regular.woff');
+}
+
 $break: 968px;
 
 $primary: #dddddd;
@@ -30,17 +49,24 @@ $red: #ff4136;
   }
 }
 
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 html {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Cooper', sans-serif;
+  text-rendering: optimizeLegibility;
 }
 
 .header {
-  position: fixed;
+  position: absolute;
   display: flex;
   top: 0;
   left: 0;
-  padding: 0 2%;
-  width: 96%;
+  padding: 0 4%;
+  width: 100%;
   background: $background;
   height: 140px;
 
@@ -65,7 +91,7 @@ html {
 
     p {
       color: $red;
-      font-size: 12px;
+      font-size: 15px;
     }
   }
   @media screen and (min-width: $break) {
@@ -162,7 +188,12 @@ html {
     width: 100%;
   }
   p {
+    width: 95%;
     color: #000000;
+    font-size: 20px;
+    line-height: 1.4;
+    max-width: 700px;
+    margin: 0 auto;
   }
 }
 
@@ -266,4 +297,12 @@ html {
       }
     }
   }
+}
+
+pre {
+  border-radius: 10px;
+}
+code {
+  font-family: 'FiraSans', monospace;
+  font-size: 15px;
 }
