@@ -32,6 +32,7 @@ interface IndexPageProps {
       title
       slug
       date
+      tag
       thumbnail: {
         fixed: {
           tracedSVG
@@ -43,6 +44,7 @@ interface IndexPageProps {
       title
       slug
       date
+      tag
       thumbnail: {
         fixed: {
           tracedSVG
@@ -81,6 +83,7 @@ export const blogQuery = graphql`
       title
       slug
       date
+      tag
       thumbnail {
         fixed(width: 2000, height: 1000) {
           tracedSVG
@@ -92,6 +95,7 @@ export const blogQuery = graphql`
       title
       slug
       date
+      tag
       thumbnail {
         fixed(width: 2000, height: 1000) {
           tracedSVG
@@ -141,6 +145,7 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
           >
             <img src={this.props.data.previous.thumbnail.fixed.src} />
             <h1>{this.props.data.previous.title}</h1>
+            <p>{this.props.data.previous.tag}</p>
             <span>{this.props.data.previous.date}</span>
           </div>
         </div>,
@@ -161,6 +166,7 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
           >
             <img src={this.props.data.next.thumbnail.fixed.src} />
             <h1>{this.props.data.next.title}</h1>
+            <p>{this.props.data.next.tag}</p>
             <span>{this.props.data.next.date}</span>
           </div>
         </div>,
