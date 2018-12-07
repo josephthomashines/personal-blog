@@ -115,7 +115,11 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
         <h1>{post.title}</h1>
         <span>{post.date}</span>
         <div className={styles.thumbnail}>
-          <img src={post.thumbnail.fixed.src} key={index} />
+          <img
+            src={post.thumbnail.fixed.src}
+            key={index}
+            alt={`post-${index}`}
+          />
         </div>
         <div
           dangerouslySetInnerHTML={{
@@ -143,7 +147,10 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
             tabIndex={0}
             className={styles.filter}
           >
-            <img src={this.props.data.previous.thumbnail.fixed.src} />
+            <img
+              src={this.props.data.previous.thumbnail.fixed.src}
+              alt='prev'
+            />
             <h1>{this.props.data.previous.title}</h1>
             <p>{this.props.data.previous.tag}</p>
             <span>{this.props.data.previous.date}</span>
@@ -164,7 +171,7 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
             tabIndex={0}
             className={styles.filter}
           >
-            <img src={this.props.data.next.thumbnail.fixed.src} />
+            <img src={this.props.data.next.thumbnail.fixed.src} alt='next' />
             <h1>{this.props.data.next.title}</h1>
             <p>{this.props.data.next.tag}</p>
             <span>{this.props.data.next.date}</span>

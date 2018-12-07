@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as styles from '../style/index.module.scss'
 import { navigate } from 'gatsby'
+import { Helmet } from 'react-helmet'
 
 import logo from '../images/logo.png'
 
@@ -14,10 +15,23 @@ class Layout extends React.Component<ILayoutProps> {
   public render(): JSX.Element {
     return (
       <React.Fragment>
+        <Helmet
+          title={this.props.name}
+          meta={[
+            { name: 'description', content: this.props.tagline },
+            {
+              name: 'keywords',
+              content:
+                'blog, CS, Computer Science, Drexel, Web Development, Web Design',
+            },
+          ]}
+        >
+          <html lang='en' />
+        </Helmet>
         <div className={styles.header}>
           <div className={styles.fixed}>
             <h1 onClick={() => navigate(`/`)} role='link' tabIndex={0}>
-              <img src={logo} />
+              <img src={logo} alt='logo' />
               {this.props.name}
             </h1>
             <p>{this.props.tagline}</p>
