@@ -106,8 +106,6 @@ export const blogQuery = graphql`
   }
 `
 
-// TODO: Get
-
 export default class BlogPost extends React.Component<IndexPageProps, {}> {
   public renderPost(post: any, index: any): JSX.Element {
     return (
