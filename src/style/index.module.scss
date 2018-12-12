@@ -2,17 +2,23 @@
 
 @font-face {
   font-family: Cooper;
-  src: url('./font/CooperHewitt-Medium.woff');
+  src: url('./font/CooperHewitt-Medium.eot');
+  src: url('./font/CooperHewitt-Medium.woff') format('woff'),
+    url('./font/CooperHewitt-Medium.svg') format('svg');
   font-weight: normal;
 }
 @font-face {
   font-family: CooperBold;
-  src: url('./font/CooperHewitt-Bold.woff');
+  src: url('./font/CooperHewitt-Bold.eot');
+  src: url('./font/CooperHewitt-Bold.woff') format('woff'),
+    url('./font/CooperHewitt-Bold.svg') format('svg');
   font-weight: bold;
 }
 @font-face {
   font-family: CooperItalic;
-  src: url('./font/CooperHewitt-MediumItalic.woff');
+  src: url('./font/CooperHewitt-MediumItalic.eot');
+  src: url('./font/CooperHewitt-MediumItalic.woff') format('woff'),
+    url('./font/CooperHewitt-MediumItalic.svg') format('svg');
   font-weight: normal;
   font-style: italic;
 }
