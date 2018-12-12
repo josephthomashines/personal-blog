@@ -6,12 +6,12 @@
   font-weight: normal;
 }
 @font-face {
-  font-family: Cooper;
+  font-family: CooperBold;
   src: url('./font/CooperHewitt-Bold.woff');
   font-weight: bold;
 }
 @font-face {
-  font-family: Cooper;
+  font-family: CooperItalic;
   src: url('./font/CooperHewitt-MediumItalic.woff');
   font-weight: normal;
   font-style: italic;
@@ -37,48 +37,46 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  border-top: 5px solid #ff4136;
 }
 
 .header {
-  position: absolute;
+  position: relative;
   display: flex;
-  top: 0;
-  left: 0;
-  padding: 0 4%;
-  width: 100%;
-  height: 140px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
 
-  .fixed {
-    top: 0;
-    left: 0;
+  width: 260px;
+  height: 20vh;
+  margin: 100px auto 75px auto;
+
+  h1 {
+    color: $background;
+    cursor: pointer;
+    font-family: CooperItalic;
+    img {
+      width: 64px;
+      margin: 0 20px 0 0;
+      vertical-align: middle;
+    }
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  p {
+    color: $red;
+    font-size: 15px;
     width: fit-content;
     margin: 0 auto;
-    h1 {
-      color: $background;
-      cursor: pointer;
-      img {
-        width: 64px;
-        margin: 0 20px 0 0;
-        vertical-align: middle;
-      }
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-
-    p {
-      color: $red;
-      font-size: 15px;
-      width: fit-content;
-      margin: 0 auto;
-    }
   }
   @media screen and (min-width: $break) {
   }
 }
 .Container {
   max-width: 60rem;
-  margin: 10rem auto 0 auto;
+  margin: 0 auto;
 
   h1 {
     color: #333;
@@ -106,13 +104,19 @@ html {
   margin: 20px 0;
   overflow: hidden;
 
+  &:hover {
+    -moz-box-shadow: 0 0 8px 0 #a7a7a7;
+    -webkit-box-shadow: 0 0 8px 0 #a7a7a7;
+    box-shadow: 0 0 8px 0 #a7a7a7;
+  }
+
   .filter {
     all: none;
     top: 0;
     padding: 20px 10px;
     background-size: cover;
-    transition: 0.5s;
     cursor: pointer;
+
     h1 {
       font-weight: 900;
       text-transform: lowercase;
@@ -135,8 +139,6 @@ html {
     p {
     }
     &:hover {
-      border: 1px solid;
-
       h1 {
         text-decoration: underline;
       }
@@ -172,6 +174,14 @@ html {
     font-size: 20px;
     line-height: 1.4;
     margin: 0 auto;
+  }
+  div > p:first-of-type::first-letter {
+    color: #ff4136;
+    font-size: 3em;
+    padding: 0 10px 0 0;
+    margin: 0;
+    float: left;
+    font-family: CooperBold;
   }
   li {
     font-size: 17px;

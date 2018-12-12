@@ -29,14 +29,12 @@ class Layout extends React.Component<ILayoutProps> {
           <html lang='en' />
         </Helmet>
         <div className={styles.header}>
-          <div className={styles.fixed}>
             <h1 onClick={() => navigate(`/`)} role='link' tabIndex={0}>
               <img src={logo} alt='logo' />
               {this.props.name}
             </h1>
             <p>{this.props.tagline}</p>
           </div>
-        </div>
         <div
           className={styles.Container}
           // style={{ minHeight: `${window.innerHeight}px` }}
