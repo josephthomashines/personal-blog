@@ -29,12 +29,12 @@ class Layout extends React.Component<ILayoutProps> {
           <html lang='en' />
         </Helmet>
         <div className={styles.header}>
-            <h1 onClick={() => navigate(`/`)} role='link' tabIndex={0}>
-              <img src={logo} alt='logo' />
-              {this.props.name}
-            </h1>
-            <p>{this.props.tagline}</p>
-          </div>
+          <h1 onClick={() => navigate(`/`)} role='link' tabIndex={0}>
+            <img src={logo} alt='logo' />
+            <em>{this.props.name}</em>
+          </h1>
+          <p>{this.props.tagline}</p>
+        </div>
         <div
           className={styles.Container}
           // style={{ minHeight: `${window.innerHeight}px` }}
