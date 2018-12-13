@@ -73,7 +73,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
               tabIndex={0}
               className={styles.filter}
             >
-              <img src={post.thumbnail.fixed.src} alt='thumb' />
+              <img src={post.thumbnail.fixed.src} alt='thumbnail' />
               <h1>{post.title}</h1>
               <p>{post.tag}</p>
               <span>{post.date}</span>

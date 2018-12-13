@@ -1,6 +1,8 @@
 import React from 'react'
 import * as styles from '../style/index.module.scss'
 
+// import Layout from '../components/Layout'
+
 const NotFoundPage = () => (
   <div className={styles.Container}>
     <h1>NOT FOUND</h1>
