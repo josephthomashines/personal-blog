@@ -62,7 +62,7 @@ pre[class*='language-'] ::selection {
 }
 
 .token.attr-name {
-  color: rgb(173, 219, 103);
+  color: rgb(161, 205, 255);
   font-style: italic;
 }
 
@@ -72,7 +72,7 @@ pre[class*='language-'] ::selection {
 
 .token.string,
 .token.url {
-  color: rgb(0, 151, 0);
+  color: rgb(255, 220, 104);
 }
 
 .token.variable {
@@ -87,7 +87,7 @@ pre[class*='language-'] ::selection {
 .token.char,
 .token.constant,
 .token.function {
-  color: #0074d9;
+  color: #fcff5d;
 }
 
 .token.punctuation {
@@ -101,13 +101,13 @@ pre[class*='language-'] ::selection {
 }
 
 .token.class-name {
-  color: rgb(255, 203, 139);
+  color: rgb(151, 204, 137);
 }
 
 .token.tag,
 .token.operator,
 .token.keyword {
-  color: #ff4136cc;
+  color: rgb(58, 110, 255);
 }
 
 .token.boolean {
@@ -144,6 +144,7 @@ pre[data-line] {
   background: #111111;
   -webkit-overflow-scrolling: touch;
   overflow: auto;
+  margin-top: 25px;
 }
 
 .gatsby-highlight pre[class*='language-'] {

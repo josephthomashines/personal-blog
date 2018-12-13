@@ -178,17 +178,25 @@ em {
     font-weight: 800;
     text-transform: lowercase;
   }
+  h2 {
+    border-left: 8px solid #ff4136;
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-left: 10px;
+    width: fit-content;
+  }
   span {
     color: #aaa;
   }
   img {
     width: 100%;
+    margin-top: 25px;
   }
   p {
     color: #000000;
     font-size: 20px;
     line-height: 1.4;
-    margin: 0 auto;
+    margin: 25px auto 0 auto;
   }
   div > p:first-of-type::first-letter {
     color: #ff4136;
@@ -199,8 +207,8 @@ em {
     font-family: CooperBold;
   }
   li {
-    font-size: 17px;
-    line-height: 1.3;
+    font-size: 18px;
+    line-height: 1.4;
   }
 }
 
