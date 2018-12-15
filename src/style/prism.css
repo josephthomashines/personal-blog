@@ -149,17 +149,17 @@ pre[data-line] {
 }
 
 @media screen and (max-width: 968px) {
-  .gatsby-highlight {
+  .gatsby-highlight * {
     font-size: 11px;
   }
 }
 @media screen and (max-width: 668px) {
-  .gatsby-highlight {
+  .gatsby-highlight * {
     font-size: 9px;
   }
 }
 @media screen and (max-width: 468px) {
-  .gatsby-highlight {
+  .gatsby-highlight * {
     font-size: 8px;
   }
 }
