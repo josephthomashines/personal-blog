@@ -148,6 +148,12 @@ pre[data-line] {
   font-size: 12px;
 }
 
+@media screen and (max-width: 968px) {
+  .gatsby-highlight {
+    font-size: 8px;
+  }
+}
+
 .gatsby-highlight pre[class*='language-'] {
   float: left;
   min-width: 100%;
