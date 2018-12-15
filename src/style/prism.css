@@ -145,6 +145,7 @@ pre[data-line] {
   -webkit-overflow-scrolling: touch;
   overflow: auto;
   margin-top: 25px;
+  font-size: 12px;
 }
 
 .gatsby-highlight pre[class*='language-'] {

@@ -42,6 +42,7 @@ module.exports = {
               noInlineHighlight: false,
             },
           },
+          'gatsby-remark-component',
         ],
       },
     },
@@ -52,6 +53,15 @@ module.exports = {
       options: {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
         accessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-126266466-2',
+        head: false,
+        anonymize: true,
+        respectDNT: false,
       },
     },
   ],

@@ -192,13 +192,14 @@ em {
     width: 100%;
     margin-top: 25px;
   }
-  p {
+  p,
+  div:first-child {
     color: #000000;
     font-size: 20px;
     line-height: 1.4;
     margin: 25px auto 0 auto;
   }
-  div > p:first-of-type::first-letter {
+  div > div:first-of-type::first-letter {
     color: #ff4136;
     font-size: 3em;
     padding: 0 10px 0 0;

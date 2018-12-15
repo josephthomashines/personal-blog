@@ -1,8 +1,16 @@
 import * as React from 'react'
+import rehypeReact from 'rehype-react'
 import { graphql, navigate } from 'gatsby'
+import { OutboundLink } from 'gatsby-plugin-google-analytics'
+
 import * as styles from '../style/index.module.scss'
 
 import Layout from '../components/Layout'
+
+const renderAst = new rehypeReact({
+  createElement: React.createElement,
+  components: { 'ga-link': OutboundLink },
+}).Compiler
 
 interface IndexPageProps {
   data: {
@@ -18,7 +26,7 @@ interface IndexPageProps {
       date
       body: {
         childMarkdownRemark: {
-          html
+          htmlAst
         }
       }
       thumbnail: {
@@ -69,7 +77,7 @@ export const blogQuery = graphql`
       date
       body {
         childMarkdownRemark {
-          html
+          htmlAst
         }
       }
       thumbnail {
@@ -119,11 +127,7 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
             alt={`post-${index}`}
           />
         </div>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: post.body.childMarkdownRemark.html,
-          }}
-        />
+        <div>{renderAst(post.body.childMarkdownRemark.htmlAst)}</div>
       </div>
     )
   }
