@@ -81,6 +81,7 @@ class Layout extends React.Component<ILayoutProps> {
           </div>
           <div className={styles.goodbye}>
             <h2>Copyright &copy; {new Date().getFullYear()} Joseph Hines</h2>
+            <h4>All Rights Reserved.</h4>
           </div>
         </div>
       </React.Fragment>
