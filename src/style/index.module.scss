@@ -169,6 +169,9 @@ em {
   width: 95%;
   max-width: 650px;
   margin: 0 auto;
+  :not(h1, h2, h3) {
+    font-size: 20px;
+  }
   .thumbnail {
     width: 100%;
     max-height: 30rem;
@@ -192,8 +195,7 @@ em {
     width: 100%;
     margin-top: 25px;
   }
-  p,
-  div:first-child {
+  p {
     color: #000000;
     font-size: 20px;
     line-height: 1.4;
