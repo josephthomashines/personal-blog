@@ -43,6 +43,7 @@ module.exports = {
             },
           },
           'gatsby-remark-component',
+          `gatsby-remark-reading-time`,
         ],
       },
     },

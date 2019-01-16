@@ -28,6 +28,15 @@ interface IndexPageProps {
               src: string
             }
           }
+          body: {
+            childMarkdownRemark: {
+              fields: {
+                readingTime: {
+                  text: string
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -55,6 +64,15 @@ export const indexPageQuery = graphql`
               src
             }
           }
+          body {
+            childMarkdownRemark {
+              fields {
+                readingTime {
+                  text
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -63,6 +81,7 @@ export const indexPageQuery = graphql`
 
 export default class IndexPage extends React.Component<IndexPageProps, {}> {
   public renderPost(post: any, index: any): JSX.Element {
+    const ttr: string = post.body.childMarkdownRemark.fields.readingTime.text
     return (
       <React.Fragment key={`post-preview-fragment-${index}`}>
         {post.thumbnail ? (
@@ -76,7 +95,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
               <img src={post.thumbnail.fixed.src} alt='thumbnail' />
               <h1>{post.title}</h1>
               <p>{post.tag}</p>
-              <span>{post.date}</span>
+              <span>{`${post.date} • ${ttr}`}</span>
             </div>
           </div>
         ) : (
@@ -89,7 +108,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
             >
               <h1>{post.title}</h1>
               <p>{post.tag}</p>
-              <span>{post.date}</span>
+              <span>{`${post.date} • ${ttr}`}</span>
             </div>
           </div>
         )}

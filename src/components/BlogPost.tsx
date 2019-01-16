@@ -27,6 +27,11 @@ interface IndexPageProps {
       body: {
         childMarkdownRemark: {
           htmlAst
+          fields: {
+            readingTime: {
+              text: string
+            }
+          }
         }
       }
       thumbnail: {
@@ -47,6 +52,15 @@ interface IndexPageProps {
           src
         }
       }
+      body: {
+        childMarkdownRemark: {
+          fields: {
+            readingTime: {
+              text: string
+            }
+          }
+        }
+      }
     }
     previous: {
       title
@@ -57,6 +71,15 @@ interface IndexPageProps {
         fixed: {
           tracedSVG
           src
+        }
+      }
+      body: {
+        childMarkdownRemark: {
+          fields: {
+            readingTime: {
+              text: string
+            }
+          }
         }
       }
     }
@@ -78,6 +101,11 @@ export const blogQuery = graphql`
       body {
         childMarkdownRemark {
           htmlAst
+          fields {
+            readingTime {
+              text
+            }
+          }
         }
       }
       thumbnail {
@@ -98,6 +126,15 @@ export const blogQuery = graphql`
           src
         }
       }
+      body {
+        childMarkdownRemark {
+          fields {
+            readingTime {
+              text
+            }
+          }
+        }
+      }
     }
     previous: contentfulPost(contentful_id: { eq: $previous }) {
       title
@@ -110,16 +147,26 @@ export const blogQuery = graphql`
           src
         }
       }
+      body {
+        childMarkdownRemark {
+          fields {
+            readingTime {
+              text
+            }
+          }
+        }
+      }
     }
   }
 `
 
 export default class BlogPost extends React.Component<IndexPageProps, {}> {
   public renderPost(post: any, index: any): JSX.Element {
+    let ttr: string = post.body.childMarkdownRemark.fields.readingTime.text
     return (
       <div key={index} className={styles.post}>
         <h1>{post.title}</h1>
-        <span>{post.date}</span>
+        <span>{`${post.date} • ${ttr}`}</span>
         <div className={styles.thumbnail}>
           <img
             src={post.thumbnail.fixed.src}
@@ -138,6 +185,8 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
     const afterword = []
 
     if (this.props.data.previous) {
+      const pttr: string = this.props.data.previous.body.childMarkdownRemark
+        .fields.readingTime.text
       afterword.push(
         <div
           key={this.props.data.previous.slug}
@@ -155,13 +204,15 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
             />
             <h1>{this.props.data.previous.title}</h1>
             <p>{this.props.data.previous.tag}</p>
-            <span>{this.props.data.previous.date}</span>
+            <span>{`${this.props.data.previous.date} • ${pttr}`}</span>
           </div>
         </div>,
       )
     }
 
     if (this.props.data.next) {
+      const nttr: string = this.props.data.next.body.childMarkdownRemark.fields
+        .readingTime.text
       afterword.push(
         <div
           key={this.props.data.next.slug}
@@ -176,7 +227,7 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
             <img src={this.props.data.next.thumbnail.fixed.src} alt='next' />
             <h1>{this.props.data.next.title}</h1>
             <p>{this.props.data.next.tag}</p>
-            <span>{this.props.data.next.date}</span>
+            <span>{`${this.props.data.next.date} • ${nttr}`}</span>
           </div>
         </div>,
       )
