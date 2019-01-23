@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+    <title>Simple Form</title>
+    <style>
+        /* This top block is irrelevant to what is being illustrated here. */
+        * {
+            font-family: sans-serif;
+        }
+        body {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        form {
+            display: block;
+            box-shadow: 2px 2px 4px #e7e7e7, 0px 0px 4px #a7a7a7;
+            border-radius: 3px;
+            padding: 30px 0;
+        }
+        form > input {
+            position: relative;
+            cursor: text;
+            left: 37.5px;
+            font-size: 1.2em;
+        }
+        form > button {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+        /* ------------------------------------------- */
+        /* BEGIN RELEVENT CSS */
+
+        * {
+            box-sizing: content-box;
+        }
+        form {
+            width: 300px;
+        }
+        form > h2 {
+            width: fit-content;
+            margin: 15px auto;
+        }
+        form > input {
+            width: 225px;
+            margin: 10px auto 50px auto;
+        }
+        form > button {
+            left: 25px;
+            width: 250px;
+            padding: 20px 40px;
+            margin: 5px auto;
+        }
+    </style>
+</head>
+  <body>
+    <form>
+      <h2>Join my mailing list!</h2>
+      <input type="text" placeholder="Enter your email here" />
+      <button>Sign me up!</button>
+    </form>
+  </body>
+</html>
