@@ -1,15 +1,15 @@
 import * as React from 'react'
 import rehypeReact from 'rehype-react'
 import { graphql, navigate } from 'gatsby'
-import { OutboundLink } from 'gatsby-plugin-google-analytics'
 
 import * as styles from '../style/index.module.scss'
 
-import Layout from '../components/Layout'
+import Layout from './Layout'
+import OutboundLinkContainer from './OutboundLinkContainer'
 
 const renderAst = new rehypeReact({
   createElement: React.createElement,
-  components: { 'ga-link': OutboundLink },
+  components: { elink: OutboundLinkContainer },
 }).Compiler
 
 interface IndexPageProps {
@@ -21,65 +21,63 @@ interface IndexPageProps {
       }
     }
     main: {
-      title
-      slug
-      date
-      body: {
-        childMarkdownRemark: {
-          htmlAst
-          fields: {
-            readingTime: {
-              text: string
+      frontmatter: {
+        title: string
+        date: string
+        slug: string
+        thumbnail: {
+          childImageSharp: {
+            fluid: {
+              tracedSVG
+              src
             }
           }
         }
       }
-      thumbnail: {
-        fixed: {
-          tracedSVG
-          src
+      fields: {
+        readingTime: {
+          text: string
         }
       }
+      htmlAst
     }
     next: {
-      title
-      slug
-      date
-      tag
-      thumbnail: {
-        fixed: {
-          tracedSVG
-          src
-        }
-      }
-      body: {
-        childMarkdownRemark: {
-          fields: {
-            readingTime: {
-              text: string
+      frontmatter: {
+        title: string
+        date: string
+        slug: string
+        thumbnail: {
+          childImageSharp: {
+            fluid: {
+              tracedSVG
+              src
             }
           }
+        }
+      }
+      fields: {
+        readingTime: {
+          text: string
         }
       }
     }
     previous: {
-      title
-      slug
-      date
-      tag
-      thumbnail: {
-        fixed: {
-          tracedSVG
-          src
-        }
-      }
-      body: {
-        childMarkdownRemark: {
-          fields: {
-            readingTime: {
-              text: string
+      frontmatter: {
+        title: string
+        date: string
+        slug: string
+        thumbnail: {
+          childImageSharp: {
+            fluid: {
+              tracedSVG
+              src
             }
           }
+        }
+      }
+      fields: {
+        readingTime: {
+          text: string
         }
       }
     }
@@ -87,73 +85,71 @@ interface IndexPageProps {
 }
 
 export const blogQuery = graphql`
-  query($contentful_id: String!, $next: String, $previous: String) {
+  query($id: String!, $next: String, $previous: String) {
     site {
       siteMetadata {
         name
         tagline
       }
     }
-    main: contentfulPost(contentful_id: { eq: $contentful_id }) {
-      title
-      slug
-      date
-      body {
-        childMarkdownRemark {
-          htmlAst
-          fields {
-            readingTime {
-              text
+    main: markdownRemark(id: { eq: $id }) {
+      frontmatter {
+        title
+        date
+        slug
+        thumbnail {
+          childImageSharp {
+            fluid {
+              tracedSVG
+              src
             }
           }
         }
       }
-      thumbnail {
-        fixed(width: 2000, height: 1000) {
-          tracedSVG
-          src
+      fields {
+        readingTime {
+          text
+        }
+      }
+      htmlAst
+    }
+    next: markdownRemark(id: { eq: $next }) {
+      frontmatter {
+        title
+        date
+        slug
+        thumbnail {
+          childImageSharp {
+            fluid {
+              tracedSVG
+              src
+            }
+          }
+        }
+      }
+      fields {
+        readingTime {
+          text
         }
       }
     }
-    next: contentfulPost(contentful_id: { eq: $next }) {
-      title
-      slug
-      date
-      tag
-      thumbnail {
-        fixed(width: 2000, height: 1000) {
-          tracedSVG
-          src
-        }
-      }
-      body {
-        childMarkdownRemark {
-          fields {
-            readingTime {
-              text
+    previous: markdownRemark(id: { eq: $previous }) {
+      frontmatter {
+        title
+        date
+        slug
+        thumbnail {
+          childImageSharp {
+            fluid {
+              tracedSVG
+              src
             }
           }
         }
       }
-    }
-    previous: contentfulPost(contentful_id: { eq: $previous }) {
-      title
-      slug
-      date
-      tag
-      thumbnail {
-        fixed(width: 2000, height: 1000) {
-          tracedSVG
-          src
-        }
-      }
-      body {
-        childMarkdownRemark {
-          fields {
-            readingTime {
-              text
-            }
-          }
+      fields {
+        readingTime {
+          text
         }
       }
     }
@@ -162,19 +158,19 @@ export const blogQuery = graphql`
 
 export default class BlogPost extends React.Component<IndexPageProps, {}> {
   public renderPost(post: any, index: any): JSX.Element {
-    let ttr: string = post.body.childMarkdownRemark.fields.readingTime.text
+    let ttr: string = post.fields.readingTime.text
     return (
       <div key={index} className={styles.post}>
-        <h1>{post.title}</h1>
-        <span>{`${post.date} • ${ttr}`}</span>
+        <h1>{post.frontmatter.title}</h1>
+        <span>{`${post.frontmatter.date} • ${ttr}`}</span>
         <div className={styles.thumbnail}>
           <img
-            src={post.thumbnail.fixed.src}
+            src={post.frontmatter.thumbnail.childImageSharp.fluid.src}
             key={index}
             alt={`post-${index}`}
           />
         </div>
-        <div>{renderAst(post.body.childMarkdownRemark.htmlAst)}</div>
+        <div>{renderAst(post.htmlAst)}</div>
       </div>
     )
   }
@@ -185,49 +181,66 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
     const afterword = []
 
     if (this.props.data.previous) {
-      const pttr: string = this.props.data.previous.body.childMarkdownRemark
-        .fields.readingTime.text
+      const pttr: string = this.props.data.previous.fields.readingTime.text
       afterword.push(
         <div
-          key={this.props.data.previous.slug}
+          key={this.props.data.previous.frontmatter.slug}
           className={`${styles.postPreview} ${styles.previous}`}
+          onClick={() =>
+            navigate(
+              `/${this.props.data.previous.frontmatter.date}/${
+                this.props.data.previous.frontmatter.slug
+              }`,
+            )
+          }
         >
-          <div
-            onClick={() => navigate(`/${this.props.data.previous.slug}`)}
-            role='link'
-            tabIndex={0}
-            className={styles.filter}
-          >
-            <img
-              src={this.props.data.previous.thumbnail.fixed.src}
+          <div role='link' tabIndex={0} className={styles.filter}>
+            {/* <img
+              src={
+                this.props.data.previous.frontmatter.thumbnail.childImageSharp
+                  .fluid.src
+              }
               alt='prev'
-            />
-            <h1>{this.props.data.previous.title}</h1>
-            <p>{this.props.data.previous.tag}</p>
-            <span>{`${this.props.data.previous.date} • ${pttr}`}</span>
+            /> */}
+            <h1>&larr; {this.props.data.previous.frontmatter.title}</h1>
+            {/* <p>{this.props.data.previous.tag}</p> */}
+            <span>{`${
+              this.props.data.previous.frontmatter.date
+            } • ${pttr}`}</span>
           </div>
         </div>,
+      )
+    } else {
+      afterword.push(
+        <div className={`${styles.postPreview} ${styles.previous}`} />,
       )
     }
 
     if (this.props.data.next) {
-      const nttr: string = this.props.data.next.body.childMarkdownRemark.fields
-        .readingTime.text
+      const nttr: string = this.props.data.next.fields.readingTime.text
       afterword.push(
         <div
-          key={this.props.data.next.slug}
+          key={this.props.data.next.frontmatter.slug}
           className={`${styles.postPreview} ${styles.next}`}
+          onClick={() =>
+            navigate(
+              `/${this.props.data.next.frontmatter.date}/${
+                this.props.data.next.frontmatter.slug
+              }`,
+            )
+          }
         >
-          <div
-            onClick={() => navigate(`/${this.props.data.next.slug}`)}
-            role='link'
-            tabIndex={0}
-            className={styles.filter}
-          >
-            <img src={this.props.data.next.thumbnail.fixed.src} alt='next' />
-            <h1>{this.props.data.next.title}</h1>
-            <p>{this.props.data.next.tag}</p>
-            <span>{`${this.props.data.next.date} • ${nttr}`}</span>
+          <div role='link' tabIndex={0} className={styles.filter}>
+            {/* <img
+              src={
+                this.props.data.next.frontmatter.thumbnail.childImageSharp.fluid
+                  .src
+              }
+              alt='next'
+            /> */}
+            <h1>{this.props.data.next.frontmatter.title} &rarr;</h1>
+            {/* <p>{this.props.data.next.tag}</p> */}
+            <span>{`${this.props.data.next.frontmatter.date} • ${nttr}`}</span>
           </div>
         </div>,
       )

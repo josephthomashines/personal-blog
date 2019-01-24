@@ -1,37 +1,30 @@
-require(`dotenv`).config({ path: `.env` })
-
 module.exports = {
   siteMetadata: {
     name: 'josephhines',
     tagline: 'Writing code, among other things.',
+    author: 'Joseph Hines',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        name: `markdown`,
+        path: `${__dirname}/src/static`,
       },
     },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: 'Joseph Hines Personal Blog',
-        short_name: 'josephhines',
-        start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
-        display: 'minimal-ui',
-        icon: 'src/images/logo.ico',
-      },
-    },
-    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 590,
+            },
+          },
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
@@ -42,20 +35,25 @@ module.exports = {
               noInlineHighlight: false,
             },
           },
-          'gatsby-remark-component',
           `gatsby-remark-reading-time`,
+          'gatsby-remark-copy-linked-files',
         ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: 'Joseph Hines Personal Blog',
+        short_name: 'josephhines',
+        start_url: '/',
+        background_color: '#ff4136',
+        theme_color: '#ff4136',
+        display: 'minimal-ui',
+        icon: 'src/images/logo.ico',
       },
     },
     'gatsby-plugin-sass',
     'gatsby-plugin-typescript',
-    {
-      resolve: `gatsby-source-contentful`,
-      options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
-      },
-    },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {

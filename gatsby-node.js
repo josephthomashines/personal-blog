@@ -5,35 +5,39 @@ exports.createPages = ({ graphql, actions }) => {
   return new Promise((resolve, reject) => {
     graphql(`
       {
-        allContentfulPost(sort: { fields: [date], order: DESC }) {
+        allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
           edges {
             node {
-              contentful_id
-              slug
+              frontmatter {
+                date
+                title
+                slug
+              }
+              id
             }
             next {
-              contentful_id
+              id
             }
             previous {
-              contentful_id
+              id
             }
           }
         }
       }
     `).then(result => {
       if (!result.err) {
-        result.data.allContentfulPost.edges.forEach(
+        result.data.allMarkdownRemark.edges.forEach(
           ({ node, next, previous }) => {
             createPage({
-              path: node.slug,
+              path: `${node.frontmatter.date}/${node.frontmatter.slug}`,
               component: path.resolve(`./src/components/BlogPost.tsx`),
               context: {
-                slug: node.slug,
-                contentful_id: node.contentful_id,
+                slug: `${node.frontmatter.date}/${node.frontmatter.slug}`,
+                id: node.id,
                 // Because posts are sorted in DESC order, the PREVIOUS post
                 // chronologically is the NEXT one in DESC order
-                next: previous ? previous.contentful_id : null,
-                previous: next ? next.contentful_id : null,
+                next: previous ? previous.id : null,
+                previous: next ? next.id : null,
               },
             })
           },

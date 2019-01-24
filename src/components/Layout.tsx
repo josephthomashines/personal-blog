@@ -9,6 +9,7 @@ export interface ILayoutProps {
   children: any
   name: string
   tagline: string
+  author: string
 }
 
 class Layout extends React.Component<ILayoutProps> {
@@ -24,6 +25,7 @@ class Layout extends React.Component<ILayoutProps> {
               content:
                 'blog, CS, Computer Science, Drexel, Web Development, Web Design',
             },
+            { name: 'author', content: this.props.author },
           ]}
         >
           <html lang='en' />

@@ -6,7 +6,7 @@
   src: url('./font/CooperHewitt-Medium.woff') format('woff'),
     url('./font/CooperHewitt-Medium.ttf') format('truetype'),
     url('./font/CooperHewitt-Medium.svg#CooperHewitt-Medium') format('svg');
-  font-weight: normal;
+  font-weight: 300;
   font-style: normal;
 }
 @font-face {
@@ -15,7 +15,7 @@
   src: url('./font/CooperHewitt-Bold.woff') format('woff'),
     url('./font/CooperHewitt-Bold.ttf') format('truetype'),
     url('./font/CooperHewitt-Bold.svg#CooperHewitt-Bold') format('svg');
-  font-weight: bold;
+  font-weight: 900;
   font-style: normal;
 }
 @font-face {
@@ -31,11 +31,31 @@
 
 $break: 968px;
 
+@mixin small-screen {
+  @media screen and (max-width: $break) {
+    @content;
+  }
+}
+
+@mixin big-screen {
+  @media screen and (min-width: $break) {
+    @content;
+  }
+}
+
+$white: #ffffff;
+$black: #000000;
+
 $primary: #dddddd;
 $background: #111111;
+$shadow: #a7a7a7;
 
 $darkgrey: #696969;
 $grey: #d8d8d8;
+$othergrey: #e7e7e7;
+
+$offwhite: #aaa;
+
 $red: #ff4136;
 
 * {
@@ -49,11 +69,19 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  border-top: 5px solid #ff4136;
+  border-top: 5px solid $red;
 }
 
 em {
   padding-right: 2px;
+  font-family: 'CooperItalic', sans-serif;
+}
+strong {
+  padding-right: 2px;
+  font-family: 'CooperBold', sans-serif;
+}
+hr {
+  margin-top: 20px;
 }
 
 .header {
@@ -86,15 +114,13 @@ em {
     width: fit-content;
     margin: 0 auto;
   }
-  @media screen and (min-width: $break) {
-  }
 }
 .Container {
-  max-width: 60rem;
+  max-width: 65rem;
   margin: 0 auto;
 
   h1 {
-    color: #333;
+    color: $black;
     img {
       width: 64px;
       padding: 20px;
@@ -103,7 +129,7 @@ em {
   }
 
   p {
-    color: #aaa;
+    color: $primary;
   }
   @media screen and (min-width: $break) {
   }
@@ -114,15 +140,20 @@ em {
   justify-content: space-evenly;
 }
 .postPreview {
-  width: 24rem;
+  width: 30rem;
   height: auto;
-  margin: 20px 0;
+  margin: 20px 5rem;
   overflow: hidden;
+  border-radius: 3px;
+  transition: 0.2s;
+  box-shadow: 0 0 0 $black;
+
+  @include small-screen() {
+    box-shadow: 0 0 8px 0 $shadow, 0 4px 8px 0 $shadow;
+  }
 
   &:hover {
-    -moz-box-shadow: 0 0 8px 0 #a7a7a7;
-    -webkit-box-shadow: 0 0 8px 0 #a7a7a7;
-    box-shadow: 0 0 8px 0 #a7a7a7;
+    box-shadow: 0 0 8px 0 $shadow, 0 4px 8px 0 $shadow;
   }
 
   .filter {
@@ -182,27 +213,27 @@ em {
     text-transform: lowercase;
   }
   h2 {
-    border-left: 8px solid #ff4136;
+    border-left: 8px solid $red;
     margin-top: 30px;
     padding-top: 10px;
     padding-left: 10px;
     width: fit-content;
   }
   span {
-    color: #aaa;
+    color: $offwhite;
   }
   img {
     width: 100%;
     margin-top: 25px;
   }
   p {
-    color: #000000;
+    color: $black;
     font-size: 20px;
     line-height: 1.5;
     margin: 25px auto 0 auto;
   }
-  div > div:first-of-type::first-letter {
-    color: #ff4136;
+  div > p:first-of-type::first-letter {
+    color: red;
     font-size: 3em;
     padding: 0 10px 0 0;
     margin: 0;
@@ -266,7 +297,7 @@ em {
       text-align: center;
       margin: 0 auto;
       text-transform: lowercase;
-      color: #e7e7e7;
+      color: $othergrey;
       font-size: 12px;
     }
   }
@@ -274,28 +305,49 @@ em {
 
 .afterword {
   width: 96%;
+  height: fit-content;
   padding: 2%;
-  margin: 0 0 250px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap-reverse;
 
   .previous {
-    float: left;
+    background: $grey;
+    color: $red;
+
+    &:hover {
+      h1 {
+        text-decoration: underline;
+      }
+    }
   }
   .next {
-    float: right;
+    background: $red;
+
+    h1 {
+      color: $white;
+    }
+    &:hover {
+      h1 {
+        text-decoration: underline;
+      }
+    }
   }
 
   .postPreview {
     width: 48%;
+    min-width: 300px;
+
     margin: 20px 0;
+    cursor: pointer;
 
     .filter {
       all: none;
       top: 0;
       padding: 20px 10px;
-      background: #e7e7e7cc;
       background-size: cover;
       transition: 0.5s;
-      cursor: pointer;
       h1 {
         font-weight: 900;
         text-transform: lowercase;
@@ -312,14 +364,6 @@ em {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-      }
-      &:hover {
-        background: #e7e7e710;
-
-        h1 {
-          color: $red;
-          text-decoration: underline;
-        }
       }
     }
   }

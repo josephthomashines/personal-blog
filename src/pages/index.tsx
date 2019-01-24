@@ -10,31 +10,30 @@ interface IndexPageProps {
       siteMetadata: {
         name: string
         tagline: string
+        author: string
       }
     }
-    allContentfulPost: {
+    allMarkdownRemark: {
       edges: {
         node: {
-          title: string
-          slug: string
-          date: Date
-          tag: string
-          thumbnail: {
-            fixed(
-              width: 2000,
-              height: 1000,
-            ): {
-              tracedSVG: string
-              src: string
-            }
-          }
-          body: {
-            childMarkdownRemark: {
-              fields: {
-                readingTime: {
-                  text: string
+          frontmatter: {
+            title: string
+            date: string
+            tag: string
+            slug: string
+            thumbnail: {
+              childImageSharp: {
+                fluid: {
+                  tracedSVG
+                  src
                 }
               }
+            }
+          }
+          htmlAst
+          fields: {
+            readingTime: {
+              text: string
             }
           }
         }
@@ -49,28 +48,30 @@ export const indexPageQuery = graphql`
       siteMetadata {
         name
         tagline
+        author
       }
     }
-    allContentfulPost(sort: { fields: [date], order: DESC }) {
+    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {
-          title
-          slug
-          date
-          tag
-          thumbnail {
-            fixed(width: 2000, height: 1000) {
-              tracedSVG
-              src
-            }
-          }
-          body {
-            childMarkdownRemark {
-              fields {
-                readingTime {
-                  text
+          frontmatter {
+            title
+            tag
+            date
+            slug
+            thumbnail {
+              childImageSharp {
+                fluid {
+                  tracedSVG
+                  src
                 }
               }
+            }
+          }
+          htmlAst
+          fields {
+            readingTime {
+              text
             }
           }
         }
@@ -81,34 +82,41 @@ export const indexPageQuery = graphql`
 
 export default class IndexPage extends React.Component<IndexPageProps, {}> {
   public renderPost(post: any, index: any): JSX.Element {
-    const ttr: string = post.body.childMarkdownRemark.fields.readingTime.text
+    const ttr: string = post.fields.readingTime.text
     return (
       <React.Fragment key={`post-preview-fragment-${index}`}>
-        {post.thumbnail ? (
+        {post.frontmatter.thumbnail ? (
           <div key={index} className={styles.postPreview}>
             <div
-              onClick={() => navigate(`/${post.slug}`)}
+              onClick={() =>
+                navigate(`/${post.frontmatter.date}/${post.frontmatter.slug}`)
+              }
               role='link'
               tabIndex={0}
               className={styles.filter}
             >
-              <img src={post.thumbnail.fixed.src} alt='thumbnail' />
-              <h1>{post.title}</h1>
-              <p>{post.tag}</p>
-              <span>{`${post.date} • ${ttr}`}</span>
+              <img
+                src={post.frontmatter.thumbnail.childImageSharp.fluid.src}
+                alt='thumbnail'
+              />
+              <h1>{post.frontmatter.title}</h1>
+              <p>{post.frontmatter.tag}</p>
+              <span>{`${post.frontmatter.date} • ${ttr}`}</span>
             </div>
           </div>
         ) : (
           <div key={index} className={styles.postPreview}>
             <div
-              onClick={() => navigate(`/${post.slug}`)}
+              onClick={() =>
+                navigate(`/${post.frontmatter.date}/${post.frontmatter.slug}`)
+              }
               role='link'
               tabIndex={0}
               className={styles.filter}
             >
-              <h1>{post.title}</h1>
-              <p>{post.tag}</p>
-              <span>{`${post.date} • ${ttr}`}</span>
+              <h1>{post.frontmatter.title}</h1>
+              <p>{post.frontmatter.tag}</p>
+              <span>{`${post.frontmatter.date} • ${ttr}`}</span>
             </div>
           </div>
         )}
@@ -116,13 +124,13 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
     )
   }
   public render(): JSX.Element {
-    const { name, tagline } = this.props.data.site.siteMetadata
+    const { name, tagline, author } = this.props.data.site.siteMetadata
 
     // @ts-ignore
-    const posts = this.props.data.allContentfulPost.edges.map(edge => edge.node)
+    const posts = this.props.data.allMarkdownRemark.edges.map(edge => edge.node)
 
     return (
-      <Layout tagline={tagline} name={name}>
+      <Layout tagline={tagline} name={name} author={author}>
         <div className={styles.ContainerPreview}>
           {posts.map((post, index) => this.renderPost(post, index))}
         </div>
