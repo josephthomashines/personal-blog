@@ -3,6 +3,8 @@ import * as styles from '../style/index.module.scss'
 import { navigate } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
+import Logo from '@haiku/josephthomashines-logo/react'
+
 import logo from '../images/logo.png'
 
 export interface ILayoutProps {
@@ -12,7 +14,16 @@ export interface ILayoutProps {
   author: string
 }
 
-class Layout extends React.Component<ILayoutProps> {
+class Layout extends React.Component<ILayoutProps, { ready: boolean }> {
+  constructor(props) {
+    super(props)
+    this.state = { ready: false }
+  }
+
+  componentDidMount() {
+    this.setState({ ready: true })
+  }
+
   public render(): JSX.Element {
     return (
       <React.Fragment>
@@ -32,7 +43,10 @@ class Layout extends React.Component<ILayoutProps> {
         </Helmet>
         <div className={styles.header}>
           <h1 onClick={() => navigate(`/`)} role='link' tabIndex={0}>
-            <img src={logo} alt='logo' />
+            {/* <img src={logo} alt='logo' /> */}
+            <div className={styles.logo}>
+              <Logo sizing='cover' autoplay={this.state.ready} />
+            </div>
             <em>{this.props.name}</em>
           </h1>
           <p>{this.props.tagline}</p>

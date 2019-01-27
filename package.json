@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Joseph Hines",
   "dependencies": {
+    "@haiku/josephthomashines-logo": "^0.0.3",
     "dotenv": "^6.1.0",
     "gatsby": "^2.0.10",
     "gatsby-cli": "^2.4.5",

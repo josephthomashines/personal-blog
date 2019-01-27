@@ -98,10 +98,22 @@ hr {
   h1 {
     color: $background;
     cursor: pointer;
-    img {
+    img,
+    .logo {
+      position: relative;
       width: 64px;
+      height: 64px;
       margin: 0 20px 0 0;
       vertical-align: middle;
+    }
+    .logo {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      left: 0px;
+      top: 0px;
+      margin: 0;
+      vertical-align: none;
     }
     &:hover {
       text-decoration: underline;

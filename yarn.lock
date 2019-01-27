@@ -732,6 +732,18 @@
     follow-redirects "^1.2.5"
     is-buffer "^1.1.5"
 
+"@haiku/core@^4.3.10":
+  version "4.3.10"
+  resolved "https://reservoir.haiku.ai:8910/@haiku%2fcore/-/core-4.3.10.tgz#a680aee08ebb7b35695756c41c522c9fbec4fab5"
+  integrity sha512-wRNdcRipBRlOOwZVqv2qdCX12rm/zCGfwUK4YVf6GP9oQ3qN4kMIy+2e1v6B7yF7KSgIMLgV0mJqy6x708iYCQ==
+
+"@haiku/josephthomashines-logo@^0.0.3":
+  version "0.0.3"
+  resolved "https://reservoir.haiku.ai:8910/@haiku%2fjosephthomashines-logo/-/josephthomashines-logo-0.0.3.tgz#53fdbea65155771df552ca9ae452f12146bb07ec"
+  integrity sha512-cB3pqbQeUV2lFYBA/fiIkBa27wcEj1q+erQCO+tlf7zSP07fLI6C4ZFEwRBfziCNe6ZPC1fku4/PMJ9BntPPuQ==
+  dependencies:
+    "@haiku/core" "^4.3.10"
+
 "@mapbox/hast-util-table-cell-style@^0.1.3":
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/@mapbox/hast-util-table-cell-style/-/hast-util-table-cell-style-0.1.3.tgz#5b7166ae01297d72216932b245e4b2f0b642dca6"
