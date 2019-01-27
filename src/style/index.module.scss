@@ -114,6 +114,8 @@ hr {
       top: 0px;
       margin: 0;
       vertical-align: none;
+
+      padding: 2px;
     }
     &:hover {
       text-decoration: underline;
@@ -153,6 +155,7 @@ hr {
 }
 .postPreview {
   width: 30rem;
+  min-width: 300px;
   height: auto;
   margin: 20px 5rem;
   overflow: hidden;
