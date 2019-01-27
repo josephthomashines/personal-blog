@@ -1,7 +1,7 @@
 ---
 date: '2019/01/23'
 slug: 'three-key-concepts'
-title: '3 Key Concepts for beautiful, responsive layouts'
+title: '3 Key Concepts for Responsive Layouts'
 tag: 'Border-box, Flex-box, and Grids'
 thumbnail: './thumbnail.png'
 ---

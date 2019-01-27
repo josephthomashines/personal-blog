@@ -39,6 +39,7 @@ Personally, I cloned the <elink to="https://github.com/gatsbyjs/gatsby-starter-d
 Before you touch the code, however, there are a few key elements of any Gatsby project that you should know about:
 
 **Conceptual**
+
 _The Data_
 
 - Loosely formatted (often markdown) data to be displayed on the site.
