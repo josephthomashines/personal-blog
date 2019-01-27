@@ -36,8 +36,8 @@ exports.createPages = ({ graphql, actions }) => {
                 id: node.id,
                 // Because posts are sorted in DESC order, the PREVIOUS post
                 // chronologically is the NEXT one in DESC order
-                next: previous ? previous.id : null,
-                previous: next ? next.id : null,
+                next: previous !== null ? previous.id : '',
+                previous: next !== null ? next.id : '',
               },
             })
           },

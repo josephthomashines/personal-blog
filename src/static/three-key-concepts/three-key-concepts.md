@@ -2,7 +2,7 @@
 date: '2019/01/23'
 slug: 'three-key-concepts'
 title: '3 Key Concepts for beautiful, responsive layouts'
-tag: 'Border-box, Flexbox, and Grids'
+tag: 'Border-box, Flex-box, and Grids'
 thumbnail: './thumbnail.png'
 ---
 
@@ -94,7 +94,7 @@ Its dimensions will still be 100px by 100px, but the size of the content-box wil
 Gone are the days of calculating margin between elements based on padding values.
 By applying this to all elements on the page, we ensure that as long as we use non-negative values for our margin and padding no elements will overlap.
 Many popular UI libraries such as
-<elink to="https://getboostrap.com/">Boostrap</elink>
+<elink to="https://getboostrap.com/">Bootstrap</elink>
 use this very technique to make layouts much more simple.
 
 ## Button Padding Example
@@ -134,22 +134,22 @@ This ensures that every element on the page will behave the way I want and expec
 
 ## Why display: flex?
 
-By declaring the display property as flex, we have defined our element to be a flexbox.
+By declaring the display property as flex, we have defined our element to be a flex-box.
 This makes our element a container that applies flex rules, only to its direct children.
 
-## What is a flexbox?
+## What is a flex-box?
 
-A flexbox is a type of container that allows for organization of its children elements in a relative and therefore reactive manner.
-Instead of relying on absolute pixel positions or percentages, we can simply use a flexbox.
-I will not dig too deep here, and only intend to go over some basic things one would need to implemenet a flexbox in most cases.
+A flex-box is a type of container that allows for organization of its children elements in a relative and therefore reactive manner.
+Instead of relying on absolute pixel positions or percentages, we can simply use a flex-box.
+I will not dig too deep here, and only intend to go over some basic things one would need to implement a flex-box in most cases.
 
 Take the examples from above.
 Notice how the form was centered both horizontally and vertically?
-This was done using a flexbox.
+This was done using a flex-box.
 
 ## Organization patterns
 
-When using flexboxes, there are a few things we must always do.
+When using flex-boxes, there are a few things we must always do.
 First, apply `display: flex;` to the container.
 Next, define the height and width of this container.
 (In the previous examples, the dimensions were 100vw x 100vh, or the size of the window).
@@ -160,7 +160,7 @@ Finally, we can define the flex-wrap property, if we want our children to be aut
 
 ## Smart wrapping
 
-Flexboxes provide a way to intelligently wrap your elements when the size of their container shrinks.
+Flex-boxes provide a way to intelligently wrap your elements when the size of their container shrinks.
 A new row is automatically wrapped if:
 
 - The window resizes and shrinks the container
@@ -170,20 +170,19 @@ A key thing to remember is that this is true of the default flex-direction, chan
 
 ## Usage
 
-What has been mentioned above are the basic ideas that one needs in order to use a flexbox in most cases.
+What has been mentioned above are the basic ideas that one needs in order to use a flex-box in most cases.
 Getting more out of this display type mostly revolves around knowing what values each property can have and what they mean.
 
-In order to use flexboxes to their full potential please [review this documentation](W3SCHOOLS).
+In order to use flex-boxes to their full potential please [review this documentation](W3SCHOOLS).
 
 ## Header Example
 
-When using flexboxes, you will often find yourself nesting layers of flexboxes;
+When using flex-boxes, you will often find yourself nesting layers of flex-boxes;
 the following is an example of how this can happen and how to handle it.
 
 ![header_example](./flex/header.png)
 
-See the whole HTML document here:
-[Header Example]()
+See the whole HTML document here: [Header Example]()
 
 ---
 
@@ -197,20 +196,131 @@ See the whole HTML document here:
 
 ## Why display: grid?
 
+Similar to above, this property allows us to define our element as a container, but instead of a flex-box we get a grid.
+These grids give us more control in two dimensions for laying out our data, and often are an easy way to approach situations that can become complicated with just flex-boxes.
+
 ## What is a grid?
 
-### What is a grid area?
+Grids are defined in rows and columns.
+Fortunately, we can define our grids in a simple way to make them responsive.
+With this approach you should be able to get away from having to assign classes like `col-1 3-wide`.
 
-## Column-wise versus row-wise
+The best approach is to think of your page in sections, or grid areas.
+A grid-area is a 'cell' in a grid.
+Grid-areas may span multiple columns and rows.
+
+`grid-area: <area-name>;` is a CSS property that can be applied to children elements of your container.
+A great example of this is a generic page layout, with a fixed header and sidebar.
 
 ## Side Panel Example
 
 Here is a very simple way to layout a page with two containers, with one as a sidebar and the other as the main section.
 
-![grid_example](./grid/grid.png)
+![grid_example_1](./grid/grid_1.png)
+
+Here, the whole body is:
+
+```html
+<body>
+  <div class="wrapper">
+    <div class="sidebar"></div>
+    <div class="head"></div>
+    <div class="main"></div>
+  </div>
+</body>
+```
+
+And here is all of the relevant style:
+
+```css
+.wrapper {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  display: grid; // highlight-line
+  grid-template-columns: 300px auto; // highlight-line
+  grid-template-rows: 200px auto; // highlight-line
+  grid-template-areas: 'sidebar head' 'sidebar main'; // highlight-line
+}
+.sidebar {
+  grid-area: sidebar; // highlight-line
+  min-width: 100%;
+  min-height: 100%;
+  background: #00ff00;
+}
+.head {
+  grid-area: head; // highlight-line
+  min-width: 100%;
+  min-height: 100%;
+  background: #0000ff;
+}
+.main {
+  grid-area: main; // highlight-line
+  min-width: 100%;
+  min-height: 100%;
+  background: #ff0000;
+}
+```
+
+First, I set `grid-template-columns: 300px auto`.
+This define two columns, with the left one being fixed at 300px, while the right will just take up the rest of the space.
+Next, I define `grid-template-rows: 200px auto`.
+This says I have two rows, a fixed top one and a fluid bottom one.
+Same as with flex-boxes, you can use any unit to define the size of your rows and columns.
+Be it percents, pixels, fractions; it all works here.
+Now, I define the layout of grid with `grid-template-areas: 'sidebar head' 'sidebar main';`
+
+When setting this property, each string represents a row.
+There should be as many strings are there are rows, and each string should have as many labels as there are columns.
+A space can be left blank by using a period '.'.
+
+Finally, with our grid defined, we can now assign these areas to other classes by setting their `grid-area` property.
+
+## Benefits
+
+One great thing about grids is that the above grid can be changed to this:
+
+![grid_example_2](./grid/grid_2.png)
+
+just by changing:
+
+```css
+grid-template-areas: 'sidebar head' 'sidebar main';
+```
+
+to:
+
+```css
+grid-template-areas: 'head head' 'sidebar main';
+```
 
 ---
 
 # Combined
 
-## Basic page with header, side panel with navigation, and main display;
+The real potential of these three concepts becomes apparent when they are combined.
+Take this example:
+
+## Header, Sidebar, and Main section
+
+![combined_example](./combined/combined.png)
+
+Thanks to the grid layout system, all that is needed to make this page render on a mobile viewport is a media query where you redefine the grids to be one column.
+The result of just changing the page and main grids is the following:
+
+![combined_mobile_1](./combined/combined_mobile_1.png)
+
+![combined_mobile_2](./combined/combined_mobile_2.png)
+
+## Closing
+
+The crucial takeaway with these three topics is that they become most useful when used in conjunction.
+By nesting flex-boxes and grids you can create responsive layouts with ease.
+
+All of the source code can be found here:
+
+![]()
+
+Thank you for reading!

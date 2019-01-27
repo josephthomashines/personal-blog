@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Combined</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      border: none;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    .wrapper {
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+
+      display: grid;
+      grid-template-columns: 250px auto;
+      grid-template-rows: 100px auto;
+      grid-template-areas: 'sidebar head' 'sidebar main';
+    }
+    .header {
+      grid-area: head;
+      width: 100%;
+      height: 100%;
+      background: #3f5fc7;
+      color: white;
+      padding: 20px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header > * {
+      flex: 1;
+    }
+    .header h1 {
+      text-align: center;
+    }
+    .header p {
+      text-align: right;
+    }
+
+    .sidebar {
+      grid-area: sidebar;
+      width: 100%;
+      height: 100%;
+      background: rgb(255, 249, 249);
+      color: rgb(39, 43, 49);
+      box-shadow: inset -2px 0 2px rgba(116, 116, 116, 0.637);
+    }
+    .sidebar h2 {
+      padding: 60px 0;
+      width: 100%;
+      text-align: center;
+    }
+    .sidebar ul {
+      list-style-type: none;
+      width: 100%;
+      border-bottom: 1px solid rgb(112, 83, 83);
+
+      margin-bottom: 80px;
+    }
+    .sidebar ul li {
+      width: 100%;
+      padding: 25px 0;
+      text-align: center;
+      font-size: 1.1em;
+      border-top: 1px solid rgb(112, 83, 83);
+      cursor: pointer;
+    }
+
+    .main {
+      grid-area: main;
+      width: 100%;
+      height: 100%;
+      background: #eeeeee;
+      box-shadow: inset 2px 2px 4px rgb(145, 145, 145);
+
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: 50% 50%;
+      grid-template-areas: 'a b' 'c d';
+    }
+    .main > .section {
+      width: 100%;
+      height: 100%;
+    }
+    .main > .a > .content {
+      background: rgb(175, 89, 89);
+    }
+    .main > .b > .content {
+      background: rgb(164, 189, 73);
+    }
+    .main > .c > .content {
+      background: rgb(81, 189, 171);
+    }
+    .main > .d > .content {
+      background: rgb(128, 81, 189);
+    }
+    .main .content {
+      color: white;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      transition: 0.2s;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .main .content:hover {
+      font-size: 1.3em;
+      font: 800;
+    }
+    @media only screen and (max-width: 900px) {
+      .wrapper {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 100px auto auto;
+        grid-template-areas: 'head' 'sidebar' 'main';
+      }
+      .sidebar h2 {
+        padding: 20px 0;
+      }
+      .main {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 200px 200px 200px 200px;
+        grid-template-areas: 'a' 'b' 'c' 'd';
+      }
+      .main .content {
+        font-size: 1.1em;
+      }
+    }
+  </style>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <div><span>&larr;</span></div>
+        <div><h1>Title</h1></div>
+        <div><p>User Name</p></div>
+      </div>
+      <div class="sidebar">
+        <h2>Sections</h2>
+        <ul>
+          <li>Section 1</li>
+          <li>Section 2</li>
+          <li>Section 3</li>
+          <li>Section 4</li>
+          <li>Section 5</li>
+        </ul>
+      </div>
+      <div class="main">
+        <div class="section a">
+          <div class="content">Open up this menu!</div>
+        </div>
+        <div class="section b">
+          <div class="content">No, open up this menu!</div>
+        </div>
+        <div class="section c">
+          <div class="content">Actually, you should open up this menu!</div>
+        </div>
+        <div class="section d">
+          <div class="content">You should definitely open up this menu!</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -18,6 +18,7 @@ interface IndexPageProps {
       siteMetadata: {
         name
         tagline
+        author
       }
     }
     main: {
@@ -85,11 +86,12 @@ interface IndexPageProps {
 }
 
 export const blogQuery = graphql`
-  query($id: String!, $next: String, $previous: String) {
+  query($id: String!, $next: [String], $previous: [String]) {
     site {
       siteMetadata {
         name
         tagline
+        author
       }
     }
     main: markdownRemark(id: { eq: $id }) {
@@ -113,7 +115,7 @@ export const blogQuery = graphql`
       }
       htmlAst
     }
-    next: markdownRemark(id: { eq: $next }) {
+    next: markdownRemark(id: { in: $next }) {
       frontmatter {
         title
         date
@@ -133,7 +135,7 @@ export const blogQuery = graphql`
         }
       }
     }
-    previous: markdownRemark(id: { eq: $previous }) {
+    previous: markdownRemark(id: { in: $previous }) {
       frontmatter {
         title
         date
@@ -175,12 +177,12 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
     )
   }
   public render(): JSX.Element {
-    const { name, tagline } = this.props.data.site.siteMetadata
+    const { name, tagline, author } = this.props.data.site.siteMetadata
 
     const post = this.renderPost(this.props.data.main, 0)
     const afterword = []
 
-    if (this.props.data.previous) {
+    if (this.props.data.previous !== null) {
       const pttr: string = this.props.data.previous.fields.readingTime.text
       afterword.push(
         <div
@@ -216,7 +218,7 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
       )
     }
 
-    if (this.props.data.next) {
+    if (this.props.data.next !== null) {
       const nttr: string = this.props.data.next.fields.readingTime.text
       afterword.push(
         <div
@@ -246,7 +248,7 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
       )
     }
     return (
-      <Layout tagline={tagline} name={name}>
+      <Layout tagline={tagline} name={name} author={author}>
         {post}
         <div className={styles.afterword}>{afterword}</div>
       </Layout>
