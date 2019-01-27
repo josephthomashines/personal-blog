@@ -99,11 +99,11 @@ use this very technique to make layouts much more simple.
 
 ## Button Padding Example
 
-Check out these links to see this in action:
+Checkout the source here:
 
-[box-sizing: content-box]()
+- <elink to="https://github.com/josephthomashines/personal-blog/blob/master/src/static/three-key-concepts/border-box/content-box.html">box-sizing: content-box</elink>
 
-[box-sizing: border-box]()
+- <elink to="https://github.com/josephthomashines/personal-blog/blob/master/src/static/three-key-concepts/border-box/border-box.html">box-sizing: border-box</elink>
 
 All of the extraneous CSS is just to center everything so that when the box-sizing is changed, the difference becomes more apparent.
 
@@ -182,7 +182,7 @@ the following is an example of how this can happen and how to handle it.
 
 ![header_example](./flex/header.png)
 
-See the whole HTML document here: [Header Example]()
+See the whole HTML document here: <elink to="https://github.com/josephthomashines/personal-blog/blob/master/src/static/three-key-concepts/flex/header.html">Header Example</elink>
 
 ---
 
@@ -296,6 +296,8 @@ to:
 grid-template-areas: 'head head' 'sidebar main';
 ```
 
+Checkout the source here: <elink to="https://github.com/josephthomashines/personal-blog/blob/master/src/static/three-key-concepts/grid/grid.html">Grid Example</elink>
+
 ---
 
 # Combined
@@ -319,8 +321,8 @@ The result of just changing the page and main grids is the following:
 The crucial takeaway with these three topics is that they become most useful when used in conjunction.
 By nesting flex-boxes and grids you can create responsive layouts with ease.
 
-All of the source code can be found here:
+All of the source code <elink to="https://github.com/josephthomashines/personal-blog/tree/master/src/static/three-key-concepts">
+can be found here!
+</elink>
 
-![]()
-
-Thank you for reading!
+_Thank you for reading!_
