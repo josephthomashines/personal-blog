@@ -3,7 +3,7 @@ import * as styles from '../style/index.module.scss'
 import { navigate } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
-import Logo from '@haiku/josephthomashines-logo/react'
+import Logo from '@haiku/josephthomashines-logov2/react'
 
 import logo from '../images/logo.png'
 
