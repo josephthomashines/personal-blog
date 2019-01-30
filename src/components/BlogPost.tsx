@@ -248,7 +248,7 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
       )
     }
     return (
-      <Layout tagline={tagline} name={name} author={author}>
+      <Layout pageTitle={this.props.data.main.frontmatter.title}>
         {post}
         <div className={styles.afterword}>{afterword}</div>
       </Layout>
