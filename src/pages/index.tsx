@@ -130,7 +130,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
     const posts = this.props.data.allMarkdownRemark.edges.map(edge => edge.node)
 
     return (
-      <Layout tagline={tagline} name={name} author={author}>
+      <Layout pageTitle={'Home'}>
         <div className={styles.ContainerPreview}>
           {posts.map((post, index) => this.renderPost(post, index))}
         </div>

@@ -1,6 +1,6 @@
 {
   "name": "personal-blog",
-  "description": "Learning to use Gatsby.js, content served on Contentful",
+  "description": "Learning to use Gatsby.js",
   "version": "1.0.0",
   "author": "Joseph Hines",
   "dependencies": {
