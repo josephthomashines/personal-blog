@@ -1,8 +1,13 @@
+let siteName = 'josephhines'
+let siteShortName = 'johi'
+let siteTagline = 'Writing code, among other things.'
+let siteAuthor = 'Joseph Hines'
+
 module.exports = {
   siteMetadata: {
-    name: 'josephhines',
-    tagline: 'Writing code, among other things.',
-    author: 'Joseph Hines',
+    name: siteName,
+    tagline: siteTagline,
+    author: siteAuthor,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -43,8 +48,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'Joseph Hines Personal Blog',
-        short_name: 'josephhines',
+        name: siteName,
+        short_name: siteShortName,
         start_url: '/',
         background_color: '#ff4136',
         theme_color: '#ff4136',

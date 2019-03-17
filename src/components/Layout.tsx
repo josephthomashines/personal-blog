@@ -128,7 +128,8 @@ class Layout extends React.Component<ILayoutProps, { ready: boolean }> {
                 </div>
                 <div className={styles.goodbye}>
                   <h2>
-                    Copyright &copy; {new Date().getFullYear()} Joseph Hines
+                    Copyright &copy; {new Date().getFullYear()}{' '}
+                    {data.site.siteMetadata.author}
                   </h2>
                   <h4>All Rights Reserved.</h4>
                 </div>

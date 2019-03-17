@@ -14,13 +14,6 @@ const renderAst = new rehypeReact({
 
 interface IndexPageProps {
   data: {
-    site: {
-      siteMetadata: {
-        name
-        tagline
-        author
-      }
-    }
     main: {
       frontmatter: {
         title: string
@@ -177,8 +170,6 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
     )
   }
   public render(): JSX.Element {
-    const { name, tagline, author } = this.props.data.site.siteMetadata
-
     const post = this.renderPost(this.props.data.main, 0)
     const afterword = []
 
