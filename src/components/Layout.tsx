@@ -17,6 +17,7 @@ export const layoutQuery = graphql`
         name
         tagline
         author
+        shortName
       }
     }
   }
@@ -28,6 +29,7 @@ export type layoutResponse = {
       name: string
       tagline: string
       author: string
+      shortName: string
     }
   }
 }
@@ -70,15 +72,15 @@ class Layout extends React.Component<ILayoutProps, { ready: boolean }> {
                   { name: 'author', content: data.site.siteMetadata.author },
                 ]}
               >
-                <html lang='en' />
+                <html lang="en" />
               </Helmet>
               <div className={styles.header}>
-                <h1 onClick={() => navigate(`/`)} role='link' tabIndex={0}>
+                <h1 onClick={() => navigate(`/`)} role="link" tabIndex={0}>
                   {/* <img src={logo} alt='logo' /> */}
                   <div className={styles.logo}>
-                    <Logo sizing='cover' autoplay={this.state.ready} />
+                    <Logo sizing="cover" autoplay={this.state.ready} />
                   </div>
-                  <em>{data.site.siteMetadata.name}</em>
+                  <em>{data.site.siteMetadata.shortName}</em>
                 </h1>
                 <p>{data.site.siteMetadata.tagline}</p>
               </div>
@@ -98,27 +100,27 @@ class Layout extends React.Component<ILayoutProps, { ready: boolean }> {
                     <div>
                       <p>
                         <a
-                          href='https://josephthomashines.com'
-                          target='_blank'
-                          rel='noopener'
+                          href="https://josephthomashines.com"
+                          target="_blank"
+                          rel="noopener"
                         >
                           CV Site
                         </a>
                       </p>
                       <p>
                         <a
-                          href='http://github.com/josephthomashines'
-                          target='_blank'
-                          rel='noopener'
+                          href="http://github.com/josephthomashines"
+                          target="_blank"
+                          rel="noopener"
                         >
                           Github
                         </a>
                       </p>
                       <p>
                         <a
-                          href='https://www.linkedin.com/in/joseph-hines-iii-b58923139/'
-                          target='_blank'
-                          rel='noopener'
+                          href="https://www.linkedin.com/in/joseph-hines-iii-b58923139/"
+                          target="_blank"
+                          rel="noopener"
                         >
                           LinkedIn
                         </a>

@@ -1,4 +1,4 @@
-let siteName = 'Joseph Hines Blog'
+let siteName = "Joseph Hines' Blog"
 let siteShortName = 'josephhines'
 let siteTagline = 'Writing code, among other things.'
 let siteAuthor = 'Joseph Hines'
@@ -8,6 +8,7 @@ module.exports = {
     name: siteName,
     tagline: siteTagline,
     author: siteAuthor,
+    shortName: siteShortName,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
