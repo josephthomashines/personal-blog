@@ -1,5 +1,5 @@
-let siteName = 'josephhines'
-let siteShortName = 'johi'
+let siteName = 'Joseph Hines Blog'
+let siteShortName = 'josephhines'
 let siteTagline = 'Writing code, among other things.'
 let siteAuthor = 'Joseph Hines'
 
