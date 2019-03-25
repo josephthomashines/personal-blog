@@ -1,32 +1,43 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 @font-face {
-  font-family: Cooper;
-  src: url('./font/CooperHewitt-Medium.eot');
-  src: url('./font/CooperHewitt-Medium.woff') format('woff'),
-    url('./font/CooperHewitt-Medium.ttf') format('truetype'),
-    url('./font/CooperHewitt-Medium.svg#CooperHewitt-Medium') format('svg');
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: CooperBold;
-  src: url('./font/CooperHewitt-Bold.eot');
-  src: url('./font/CooperHewitt-Bold.woff') format('woff'),
-    url('./font/CooperHewitt-Bold.ttf') format('truetype'),
-    url('./font/CooperHewitt-Bold.svg#CooperHewitt-Bold') format('svg');
-  font-weight: 900;
-  font-style: normal;
-}
-@font-face {
-  font-family: CooperItalic;
-  src: url('./font/CooperHewitt-MediumItalic.eot');
-  src: url('./font/CooperHewitt-MediumItalic.woff') format('woff'),
-    url('./font/CooperHewitt-MediumItalic.ttf') format('truetype'),
-    url('./font/CooperHewitt-MediumItalic.svg#CooperHewitt-MediumItalic')
-      format('svg');
+  font-family: 'charterbold_italic';
+  src: url('./fonts/charter_bold_italic-webfont.eot');
+  src: url('./fonts/charter_bold_italic-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('./fonts/charter_bold_italic-webfont.woff') format('woff');
   font-weight: normal;
-  font-style: italic;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'charterbold';
+  src: url('./fonts/charter_bold-webfont.eot');
+  src: url('./fonts/charter_bold-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('./fonts/charter_bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'charteritalic';
+  src: url('./fonts/charter_italic-webfont.eot');
+  src: url('./fonts/charter_italic-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('./fonts/charter_italic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'charterregular';
+  src: url('./fonts/charter_regular-webfont.eot');
+  src: url('./fonts/charter_regular-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('./fonts/charter_regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 $break: 968px;
@@ -65,7 +76,7 @@ $red: #ff4136;
 }
 
 html {
-  font-family: 'Cooper', sans-serif;
+  font-family: 'charterregular', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -74,11 +85,11 @@ html {
 
 em {
   padding-right: 2px;
-  font-family: 'CooperItalic', sans-serif;
+  font-family: 'charteritalic', sans-serif;
 }
 strong {
   padding-right: 2px;
-  font-family: 'CooperBold', sans-serif;
+  font-family: 'charterbold', sans-serif;
 }
 hr {
   margin-top: 20px;
@@ -244,7 +255,7 @@ hr {
   p {
     color: $black;
     font-size: 20px;
-    line-height: 1.5;
+    line-height: 1.7;
     margin: 25px auto 0 auto;
   }
   div > p:first-of-type::first-letter {
@@ -253,7 +264,7 @@ hr {
     padding: 0 10px 0 0;
     margin: 0;
     float: left;
-    font-family: CooperBold;
+    font-family: 'charterbold';
   }
   li {
     font-size: 18px;
