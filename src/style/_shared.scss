@@ -1,0 +1,23 @@
+$break: 968px;
+
+$white: #ffffff;
+$black: #000000;
+
+$darkFont: #212121;
+$lightFont: #dfdfdf;
+$orange: #ff5126;
+$yellow: #ffd026;
+$lightGrey: #4e4e4e;
+$darkGrey: #393939;
+
+@mixin small-screen {
+  @media screen and (max-width: $break) {
+    @content;
+  }
+}
+
+@mixin big-screen {
+  @media screen and (min-width: $break) {
+    @content;
+  }
+}

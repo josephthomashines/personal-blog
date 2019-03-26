@@ -2,8 +2,6 @@ import * as React from 'react'
 import rehypeReact from 'rehype-react'
 import { graphql, navigate } from 'gatsby'
 
-import * as styles from '../style/index.module.scss'
-
 import Layout from './Layout'
 import OutboundLinkContainer from './OutboundLinkContainer'
 
@@ -187,7 +185,7 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
             )
           }
         >
-          <div role='link' tabIndex={0} className={styles.filter}>
+          <div role="link" tabIndex={0} className={styles.filter}>
             {/* <img
               src={
                 this.props.data.previous.frontmatter.thumbnail.childImageSharp
@@ -223,7 +221,7 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
             )
           }
         >
-          <div role='link' tabIndex={0} className={styles.filter}>
+          <div role="link" tabIndex={0} className={styles.filter}>
             {/* <img
               src={
                 this.props.data.next.frontmatter.thumbnail.childImageSharp.fluid

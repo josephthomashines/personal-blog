@@ -1,0 +1,111 @@
+@import 'shared';
+
+img {
+  display: none;
+}
+@include small-screen {
+  .header {
+    height: 85px;
+    width: 100vw;
+    position: relative;
+    top: 0;
+    left: 0;
+    background-color: $yellow;
+    margin-bottom: 50px;
+
+    > .title {
+      position: absolute;
+      top: 30px;
+      left: 20px;
+      width: fit-content;
+      z-index: 1;
+
+      > a {
+        font-size: 28px;
+        font-weight: bold;
+        text-decoration: none;
+        color: $darkFont;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    img {
+      position: relative;
+      display: block;
+      width: 100vw;
+      height: auto;
+      top: 85px;
+    }
+
+    .menuButton {
+      z-index: 2;
+      position: absolute;
+      top: 33px;
+      right: 33px;
+
+      .bar1,
+      .bar2,
+      .bar3 {
+        width: 35px;
+        height: 5px;
+        background-color: $darkFont;
+        margin: 6px 0;
+        transition: 0.4s;
+      }
+      .show.bar1 {
+        -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+        transform: rotate(-45deg) translate(-9px, 6px);
+      }
+
+      .show.bar2 {
+        opacity: 0;
+      }
+
+      .show.bar3 {
+        -webkit-transform: rotate(45deg) translate(-8px, -8px);
+        transform: rotate(45deg) translate(-8px, -8px);
+      }
+    }
+
+    .menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 325px;
+      display: flex;
+      justify-content: center;
+      align-content: flex-end;
+      flex-wrap: wrap;
+      background-color: $yellow;
+      transition: 0.4s ease-in-out;
+      transform: translateY(-100vh);
+
+      &.show {
+        transform: none;
+      }
+
+      a {
+        font-size: 28px;
+        font-weight: bold;
+        text-decoration: none;
+        color: $darkFont;
+        text-transform: lowercase;
+        width: 100%;
+        height: fit-content;
+        text-align: center;
+        cursor: pointer;
+        padding: 10px;
+        margin-bottom: 10px;
+
+        &:last-child {
+          margin-bottom: 80px;
+        }
+      }
+    }
+  }
+}

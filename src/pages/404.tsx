@@ -1,5 +1,4 @@
 import React from 'react'
-import * as styles from '../style/index.module.scss'
 
 import Layout from '../components/Layout'
 
