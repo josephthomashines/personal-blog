@@ -34,9 +34,7 @@
     "sharp": "^0.21.0",
     "typescript": "^3.1.6"
   },
-  "keywords": [
-    "gatsby"
-  ],
+  "keywords": ["gatsby"],
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
@@ -44,16 +42,20 @@
     "develop": "gatsby develop",
     "start": "npm run develop",
     "format": "prettier --write \"src/**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "icon": "npx @svgr/cli --out-dir /src/images"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test": "start-server-and-test develop http://localhost:8000 cy:open",
+    "test:ci": "start-server-and-test develop http://localhost:8000 cy:run"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",
     "@types/react": "^16.7.20",
     "@types/react-dom": "^16.0.11",
     "@types/react-helmet": "^5.0.8",
+    "cypress": "^3.2.0",
     "har-validator": "5.1.0",
-    "prettier": "^1.14.2"
+    "prettier": "^1.14.2",
+    "start-server-and-test": "^1.7.12"
   },
   "repository": {
     "type": "git",

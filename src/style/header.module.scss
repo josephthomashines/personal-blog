@@ -37,7 +37,7 @@
       position: absolute;
       width: 275px;
       height: 200px;
-      bottom: 150px;
+      bottom: calc(7.5vh + 25px);
       left: calc(7.5vw + 75px);
       display: flex;
       justify-content: flex-start;
