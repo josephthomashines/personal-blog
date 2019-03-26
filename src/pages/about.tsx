@@ -44,7 +44,7 @@ const NotFoundPage = () => (
           <img src={github} />
           <span>Github</span>
         </Link>
-        <Link href="resume.pdf" target="_blank" rel="noopener noreferrer">
+        <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer">
           <img src={resume} />
           <span>Resume</span>
         </Link>
