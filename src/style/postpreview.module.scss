@@ -1,50 +1,54 @@
 @import 'shared';
 
-@include small-screen {
-  a {
-    text-decoration: none;
-    color: $darkFont;
-    width: 100vw;
+a {
+  text-decoration: none;
+  color: $darkFont;
+  width: 100vw;
+  transition: 0.2s;
 
-    .preview {
-      width: 90%;
-      max-width: 400px;
-      display: grid;
-      grid-template-rows: auto auto;
-      grid-template-columns: 150px auto;
-      grid-template-areas: 'dt title' 'dt tag';
-      margin-bottom: 50px;
-      cursor: pointer;
+  .preview {
+    width: 90%;
+    max-width: 400px;
 
-      .dt {
-        grid-area: dt;
-        text-align: right;
-        padding: 0 35px 0 0;
-        font-size: 16px;
+    @include big-screen {
+      max-width: 650px;
+    }
 
-        span {
-          display: block;
-          width: 100%;
-          margin-bottom: 8px;
-          font-weight: bold;
-        }
-      }
-      .title {
-        grid-area: title;
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 150px auto;
+    grid-template-areas: 'dt title' 'dt tag';
+    margin-bottom: 50px;
+    cursor: pointer;
+
+    .dt {
+      grid-area: dt;
+      text-align: right;
+      padding: 0 35px 0 0;
+      font-size: 16px;
+
+      span {
+        display: block;
+        width: 100%;
         margin-bottom: 8px;
-        font-size: 24px;
         font-weight: bold;
-        color: $blue;
-      }
-      .tag {
-        grid-area: tag;
-        font-size: 20px;
-        font-style: italic;
       }
     }
+    .title {
+      grid-area: title;
+      margin-bottom: 8px;
+      font-size: 24px;
+      font-weight: bold;
+      color: $blue;
+    }
+    .tag {
+      grid-area: tag;
+      font-size: 20px;
+      font-style: italic;
+    }
+  }
 
-    &:hover {
-      text-decoration: underline;
-    }
+  &:hover {
+    text-decoration: underline;
   }
 }

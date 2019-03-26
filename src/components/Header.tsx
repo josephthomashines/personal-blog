@@ -4,6 +4,8 @@ import styles from '../style/header.module.scss'
 
 import bezier from '../images/Bezier.svg'
 
+import Headshot from './Headshot.tsx'
+
 type Props = {
   title: string
 }
@@ -29,10 +31,11 @@ export class Header extends React.Component<Props, State> {
 
     return (
       <div className={styles.header}>
+        <Headshot className={styles.headshot} />
         <div className={styles.title}>
           <a href="/">{this.props.title}</a>
         </div>
-        <img src={bezier} />
+        <img src={bezier} className={styles.bezier} />
         <div
           className={styles.menuButton + showClass}
           onClick={() => this.toggleMenu()}

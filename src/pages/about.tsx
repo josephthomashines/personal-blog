@@ -27,7 +27,7 @@ const NotFoundPage = () => (
       <h1>About Me</h1>
       {QA(
         'Who are you?',
-        'I am Joe Hines, a computer science student at Drexel Unversity.',
+        'I am Joe Hines, a computer science student at Drexel University.',
       )}
       {QA(
         'What do you do?',

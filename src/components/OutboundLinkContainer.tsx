@@ -7,7 +7,7 @@ export type LinkProps = {
 }
 
 export const OutboundLinkContainer = (props: LinkProps) => (
-  <OutboundLink href={props.to} target='_blank'>
+  <OutboundLink href={props.to} target="_blank" key={'elink-to-' + props.to}>
     {props.children}
   </OutboundLink>
 )

@@ -1,0 +1,24 @@
+@import 'shared';
+
+@include big-screen {
+  .userIcon {
+    display: inline-block;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+
+    > img {
+      width: auto;
+      height: 100%;
+      margin-left: -65px;
+    }
+  }
+}
+
+@include small-screen {
+  .userIcon {
+    display: none;
+  }
+}

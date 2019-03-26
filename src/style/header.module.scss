@@ -1,5 +1,68 @@
 @import 'shared';
 
+@include big-screen {
+  .header {
+    width: 350px;
+    height: 100%;
+    background-color: $darkGrey;
+    border-top-left-radius: $containerRadius;
+    border-bottom-left-radius: $containerRadius;
+
+    a {
+      color: $lightFont;
+      text-decoration: none;
+      font-size: 36px;
+      font-weight: bold;
+      text-transform: lowercase;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    > .headshot {
+      position: relative;
+      top: 50px;
+      left: 75px;
+    }
+
+    > .title {
+      margin-top: 75px;
+      width: 100%;
+      text-align: center;
+    }
+
+    > .menu {
+      background-color: $lightGrey;
+      position: absolute;
+      width: 275px;
+      height: 200px;
+      bottom: 150px;
+      left: calc(7.5vw + 75px);
+      display: flex;
+      justify-content: flex-start;
+      align-content: center;
+      flex-wrap: wrap;
+
+      > a {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+    }
+
+    .bezier {
+      position: fixed;
+      display: block;
+      z-index: 3;
+      top: 7.5vh;
+      right: 7.5vw;
+      width: 500px;
+      border-top-right-radius: $containerRadius;
+    }
+  }
+}
+
 @include small-screen {
   .header {
     height: 85px;
@@ -30,7 +93,7 @@
       }
     }
 
-    img {
+    .bezier {
       position: relative;
       display: block;
       width: 100vw;

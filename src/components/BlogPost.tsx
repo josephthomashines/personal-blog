@@ -158,7 +158,7 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
   public renderPost(post: any, index: any): JSX.Element {
     let ttr: string = post.fields.readingTime.text
     return (
-      <div key={index} className={styles.post}>
+      <div key={index + post.frontmatter.title} className={styles.post}>
         <h1>{post.frontmatter.title}</h1>
         <span>{`${post.frontmatter.date} • ${ttr}`}</span>
         <div className={styles.thumbnail} />
@@ -178,13 +178,16 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
             this.props.data.previous.frontmatter.slug
           }`}
           className={styles.related}
+          key={'previous-anchor-' + this.props.data.main.frontmatter.slug}
         >
           <span>{this.props.data.previous.frontmatter.title}</span>
           <img src={leftArrow} className={styles.left} />
         </a>,
       )
     } else {
-      afterword.push(<div />)
+      afterword.push(
+        <div key={'blank-' + this.props.data.main.frontmatter.slug} />,
+      )
     }
 
     if (this.props.data.next !== null) {
@@ -195,6 +198,7 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
             this.props.data.next.frontmatter.slug
           }`}
           className={styles.related}
+          key={'next-anchor-' + this.props.data.main.frontmatter.slug}
         >
           <span>{this.props.data.next.frontmatter.title}</span>
           <img src={rightArrow} className={styles.right} />
@@ -203,7 +207,10 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
     }
 
     afterword.push(
-      <div className={styles.home}>
+      <div
+        className={styles.home}
+        key={'home-' + this.props.data.main.frontmatter.slug}
+      >
         <a href="/">Back to Home</a>
       </div>,
     )
@@ -211,7 +218,12 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
     return (
       <Layout pageTitle={this.props.data.main.frontmatter.title}>
         {post}
-        <div className={styles.afterword}>{afterword}</div>
+        <div
+          className={styles.afterword}
+          key={'afterword-' + this.props.data.main.frontmatter.slug}
+        >
+          {afterword}
+        </div>
       </Layout>
     )
   }

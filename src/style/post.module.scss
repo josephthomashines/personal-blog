@@ -1,69 +1,75 @@
 @import 'shared';
 
-@include small-screen {
-  .post {
-    width: 100vw;
-    max-width: 650px;
-    margin: 0 auto;
-    padding: 10px;
+.post {
+  position: relative;
+  width: 100vw;
+  max-width: 650px;
+  top: 30px;
+  padding: 10px;
+  overflow-x: hidden;
 
-    :not(h1, h2, h3) {
-      font-size: 20px;
-    }
-    h1 {
-      font-weight: 800;
-      text-transform: lowercase;
-    }
-    h2 {
-      border-left: 8px solid $blue;
-      margin-top: 30px;
-      padding-top: 10px;
-      padding-left: 10px;
-      width: fit-content;
-    }
-    > span {
-      color: $lightGrey;
-    }
-    a {
-      color: $blue;
-      transition: 0.3s;
+  :not(h1, h2, h3) {
+    font-size: 20px;
+  }
+  h1 {
+    font-weight: 800;
+    text-transform: lowercase;
+  }
+  h2 {
+    border-left: 8px solid $blue;
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-left: 10px;
+    width: fit-content;
+  }
+  > span {
+    color: $lightGrey;
+  }
+  a {
+    color: $blue;
+    transition: 0.3s;
 
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-    p {
-      color: $black;
-      font-size: 20px;
-      line-height: 1.7;
-      margin: 25px auto 0 auto;
-
-      > a[href$='.png'] {
-        width: 95% !important;
-        margin-top: 25px;
-      }
-    }
-    div > p:first-of-type::first-letter {
-      color: $blue;
-      font-size: 3em;
-      padding: 0 10px 0 0;
-      margin: 0;
-      float: left;
-      font-family: 'charterbold';
-    }
-    li {
-      font-size: 18px;
-      line-height: 1.5;
+    &:hover {
+      text-decoration: underline;
     }
   }
+  p {
+    color: $black;
+    font-size: 20px;
+    line-height: 1.7;
+    margin: 25px auto 0 auto;
+
+    > a[href$='.png'] {
+      width: 95% !important;
+      margin-top: 25px;
+    }
+  }
+  div > p:first-of-type::first-letter {
+    color: $blue;
+    font-size: 3em;
+    padding: 0 10px 0 0;
+    margin: 0;
+    float: left;
+    font-family: 'charterbold';
+  }
+  li {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+}
+
+.afterword {
+  margin-top: 75px;
+  max-width: 650px;
 
   .related {
     width: 100%;
     text-align: center;
     padding: 10px;
-    margin-top: 50px;
     font-size: 28px;
     display: block;
+    color: $blue;
+    margin: 10px 0;
 
     span {
       width: 70%;
@@ -85,14 +91,13 @@
       float: left;
     }
   }
+}
 
-  .home {
-    width: 100vw;
-    text-align: center;
-    border-top: 3px dashed $orange;
-    margin-top: 30px;
-    padding: 20px;
-    font-size: 32px;
-    font-weight: bold;
-  }
+.home {
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+  padding: 20px;
+  font-size: 32px;
+  font-weight: bold;
 }
