@@ -30,9 +30,7 @@ export class Header extends React.Component<Props, State> {
     return (
       <div className={styles.header}>
         <div className={styles.title}>
-          <a href="/" target="_blank" rel="noopener noreferrer">
-            {this.props.title}
-          </a>
+          <a href="/">{this.props.title}</a>
         </div>
         <img src={bezier} />
         <div
@@ -44,12 +42,8 @@ export class Header extends React.Component<Props, State> {
           <div className={styles.bar3 + showClass} />
         </div>
         <div className={styles.menu + showClass}>
-          <a href="/" target="_blank" rel="noopener noreferrer">
-            Home
-          </a>
-          <a href="/about" target="_blank" rel="noopener noreferrer">
-            About Me
-          </a>
+          <a href="/">Home</a>
+          <a href="/about">About Me</a>
         </div>
       </div>
     )

@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { graphql, navigate } from 'gatsby'
 
+import styles from '../style/index.module.scss'
+
 import Layout from '../components/Layout'
 
 import PostPreview from '../components/PostPreview'
@@ -104,7 +106,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
 
     return (
       <Layout pageTitle={'Home'}>
-        <h1>Blog Posts</h1>
+        <h1 className={styles.header}>Blog Posts</h1>
         <div>{posts.map((post, index) => this.renderPost(post, index))}</div>
       </Layout>
     )

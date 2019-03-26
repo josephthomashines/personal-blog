@@ -1,0 +1,14 @@
+@import 'shared';
+
+@include small-screen {
+  .header {
+    position: relative;
+    top: 10px;
+    left: 36px;
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 75px;
+    width: fit-content;
+    max-width: 80vw;
+  }
+}

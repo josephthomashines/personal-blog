@@ -1,0 +1,22 @@
+@import 'shared';
+
+@include small-screen {
+  .wrapper {
+    h1 {
+      position: relative;
+      left: 36px;
+      top: 20px;
+    }
+    h2 {
+      position: relative;
+      left: 36px;
+      top: 20px;
+      font-style: italic;
+    }
+    p {
+      position: relative;
+      left: 36px;
+      top: 20px;
+    }
+  }
+}

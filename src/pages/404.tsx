@@ -1,20 +1,15 @@
-import React from 'react'
+import * as React from 'react'
 
 import Layout from '../components/Layout'
 
+import styles from '../style/404.module.scss'
+
 const NotFoundPage = () => (
   <Layout pageTitle={'Not Found'}>
-    <div
-      className={styles.Container}
-      style={{
-        textAlign: 'center',
-        border: '2px solid #ff4136',
-      }}
-    >
-      <h1>NOT FOUND</h1>
-      <p style={{ color: '#333333' }}>
-        You just hit a route that doesn&#39;t exist... the sadness.
-      </p>
+    <div className={styles.wrapper}>
+      <h1>Page not found</h1>
+      <h2>Error code: 404</h2>
+      <p>There is nothing to see here; move along...</p>
     </div>
   </Layout>
 )

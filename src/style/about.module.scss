@@ -1,0 +1,43 @@
+@import 'shared';
+
+@include small-screen {
+  .wrapper {
+    h1 {
+      position: relative;
+      top: 20px;
+      left: 36px;
+      margin-bottom: 50px;
+      width: fit-content;
+    }
+
+    .QA {
+      position: relative;
+      left: 40px;
+      width: 100%;
+      max-width: 240px;
+
+      h2 {
+        width: fit-content;
+      }
+      p {
+        font-size: 24px;
+        font-style: italic;
+      }
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 30px;
+      margin-bottom: 40px;
+
+      .link {
+        width: calc(100% - 80px);
+        position: relative;
+        left: 20px;
+      }
+    }
+  }
+}
