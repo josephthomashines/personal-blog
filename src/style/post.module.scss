@@ -21,8 +21,8 @@
       padding-left: 10px;
       width: fit-content;
     }
-    span {
-      color: $white;
+    > span {
+      color: $lightGrey;
     }
     a {
       color: $blue;
@@ -55,5 +55,44 @@
       font-size: 18px;
       line-height: 1.5;
     }
+  }
+
+  .related {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    margin-top: 50px;
+    font-size: 28px;
+    display: block;
+
+    span {
+      width: 70%;
+    }
+
+    .right,
+    .left {
+      width: 48px;
+      padding: 6px;
+      z-index: 3;
+      margin-top: -5px;
+    }
+
+    .right {
+      float: right;
+    }
+
+    .left {
+      float: left;
+    }
+  }
+
+  .home {
+    width: 100vw;
+    text-align: center;
+    border-top: 3px dashed $orange;
+    margin-top: 30px;
+    padding: 20px;
+    font-size: 32px;
+    font-weight: bold;
   }
 }

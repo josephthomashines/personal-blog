@@ -173,10 +173,15 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
     if (this.props.data.previous !== null) {
       const pttr: string = this.props.data.previous.fields.readingTime.text
       afterword.push(
-        <div>
+        <a
+          href={`/${this.props.data.previous.frontmatter.date}/${
+            this.props.data.previous.frontmatter.slug
+          }`}
+          className={styles.related}
+        >
           <span>{this.props.data.previous.frontmatter.title}</span>
-          <img src={leftArrow} />
-        </div>,
+          <img src={leftArrow} className={styles.left} />
+        </a>,
       )
     } else {
       afterword.push(<div />)
@@ -185,12 +190,24 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
     if (this.props.data.next !== null) {
       const nttr: string = this.props.data.next.fields.readingTime.text
       afterword.push(
-        <div>
+        <a
+          href={`/${this.props.data.next.frontmatter.date}/${
+            this.props.data.next.frontmatter.slug
+          }`}
+          className={styles.related}
+        >
           <span>{this.props.data.next.frontmatter.title}</span>
-          <img src={rightArrow} />
-        </div>,
+          <img src={rightArrow} className={styles.right} />
+        </a>,
       )
     }
+
+    afterword.push(
+      <div className={styles.home}>
+        <a href="/">Back to Home</a>
+      </div>,
+    )
+
     return (
       <Layout pageTitle={this.props.data.main.frontmatter.title}>
         {post}

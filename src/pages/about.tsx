@@ -33,7 +33,7 @@ const NotFoundPage = () => (
         'What do you do?',
         'I am a confident frontend web developer, novice designer, and beginner backend developer.',
       )}
-      {QA('Where do you do this?', 'Philadelphia, PA.')}
+      {QA('Where are you based?', 'Philadelphia, PA.')}
       <h1>Links</h1>
       <div className={styles.links}>
         <Link
