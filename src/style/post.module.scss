@@ -1,1 +1,59 @@
 @import 'shared';
+
+@include small-screen {
+  .post {
+    width: 100vw;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 10px;
+
+    :not(h1, h2, h3) {
+      font-size: 20px;
+    }
+    h1 {
+      font-weight: 800;
+      text-transform: lowercase;
+    }
+    h2 {
+      border-left: 8px solid $blue;
+      margin-top: 30px;
+      padding-top: 10px;
+      padding-left: 10px;
+      width: fit-content;
+    }
+    span {
+      color: $white;
+    }
+    a {
+      color: $blue;
+      transition: 0.3s;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    p {
+      color: $black;
+      font-size: 20px;
+      line-height: 1.7;
+      margin: 25px auto 0 auto;
+
+      > a[href$='.png'] {
+        width: 95% !important;
+        margin-top: 25px;
+      }
+    }
+    div > p:first-of-type::first-letter {
+      color: $blue;
+      font-size: 3em;
+      padding: 0 10px 0 0;
+      margin: 0;
+      float: left;
+      font-family: 'charterbold';
+    }
+    li {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+  }
+}

@@ -5,6 +5,11 @@ import { graphql, navigate } from 'gatsby'
 import Layout from './Layout'
 import OutboundLinkContainer from './OutboundLinkContainer'
 
+import leftArrow from '../../node_modules/@fortawesome/fontawesome-free/svgs/regular/hand-point-left.svg'
+import rightArrow from '../../node_modules/@fortawesome/fontawesome-free/svgs/regular/hand-point-right.svg'
+
+import styles from '../style/post.module.scss'
+
 const renderAst = new rehypeReact({
   createElement: React.createElement,
   components: { elink: OutboundLinkContainer },
@@ -156,13 +161,7 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
       <div key={index} className={styles.post}>
         <h1>{post.frontmatter.title}</h1>
         <span>{`${post.frontmatter.date} • ${ttr}`}</span>
-        <div className={styles.thumbnail}>
-          <img
-            src={post.frontmatter.thumbnail.childImageSharp.fluid.src}
-            key={index}
-            alt={`post-${index}`}
-          />
-        </div>
+        <div className={styles.thumbnail} />
         <div>{renderAst(post.htmlAst)}</div>
       </div>
     )
@@ -174,65 +173,21 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
     if (this.props.data.previous !== null) {
       const pttr: string = this.props.data.previous.fields.readingTime.text
       afterword.push(
-        <div
-          key={this.props.data.previous.frontmatter.slug}
-          className={`${styles.postPreview} ${styles.previous}`}
-          onClick={() =>
-            navigate(
-              `/${this.props.data.previous.frontmatter.date}/${
-                this.props.data.previous.frontmatter.slug
-              }`,
-            )
-          }
-        >
-          <div role="link" tabIndex={0} className={styles.filter}>
-            {/* <img
-              src={
-                this.props.data.previous.frontmatter.thumbnail.childImageSharp
-                  .fluid.src
-              }
-              alt='prev'
-            /> */}
-            <h1>&larr; {this.props.data.previous.frontmatter.title}</h1>
-            {/* <p>{this.props.data.previous.tag}</p> */}
-            <span>{`${
-              this.props.data.previous.frontmatter.date
-            } • ${pttr}`}</span>
-          </div>
+        <div>
+          <span>{this.props.data.previous.frontmatter.title}</span>
+          <img src={leftArrow} />
         </div>,
       )
     } else {
-      afterword.push(
-        <div className={`${styles.postPreview} ${styles.previous}`} />,
-      )
+      afterword.push(<div />)
     }
 
     if (this.props.data.next !== null) {
       const nttr: string = this.props.data.next.fields.readingTime.text
       afterword.push(
-        <div
-          key={this.props.data.next.frontmatter.slug}
-          className={`${styles.postPreview} ${styles.next}`}
-          onClick={() =>
-            navigate(
-              `/${this.props.data.next.frontmatter.date}/${
-                this.props.data.next.frontmatter.slug
-              }`,
-            )
-          }
-        >
-          <div role="link" tabIndex={0} className={styles.filter}>
-            {/* <img
-              src={
-                this.props.data.next.frontmatter.thumbnail.childImageSharp.fluid
-                  .src
-              }
-              alt='next'
-            /> */}
-            <h1>{this.props.data.next.frontmatter.title} &rarr;</h1>
-            {/* <p>{this.props.data.next.tag}</p> */}
-            <span>{`${this.props.data.next.frontmatter.date} • ${nttr}`}</span>
-          </div>
+        <div>
+          <span>{this.props.data.next.frontmatter.title}</span>
+          <img src={rightArrow} />
         </div>,
       )
     }

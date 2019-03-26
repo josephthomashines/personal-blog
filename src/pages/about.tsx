@@ -4,6 +4,10 @@ import Layout from '../components/Layout'
 
 import styles from '../style/about.module.scss'
 
+import github from '../../node_modules/@fortawesome/fontawesome-free/svgs/brands/github.svg'
+import resume from '../../node_modules/@fortawesome/fontawesome-free/svgs/regular/file-pdf.svg'
+import linkedin from '../../node_modules/@fortawesome/fontawesome-free/svgs/brands/linkedin.svg'
+
 const QA = (q: string, a: string) => (
   <div className={styles.QA}>
     <h2>{q}</h2>
@@ -11,7 +15,11 @@ const QA = (q: string, a: string) => (
   </div>
 )
 
-const Link = (props) => <div className={styles.link}>{props.children}</div>
+const Link = (props) => (
+  <a {...props} className={styles.link}>
+    {props.children}
+  </a>
+)
 
 const NotFoundPage = () => (
   <Layout pageTitle={'About Me'}>
@@ -28,13 +36,24 @@ const NotFoundPage = () => (
       {QA('Where do you do this?', 'Philadelphia, PA.')}
       <h1>Links</h1>
       <div className={styles.links}>
-        <Link>
+        <Link
+          href="https://github.com/josephthomashines"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={github} />
           <span>Github</span>
         </Link>
-        <Link>
+        <Link href="resume.pdf" target="_blank" rel="noopener noreferrer">
+          <img src={resume} />
           <span>Resume</span>
         </Link>
-        <Link>
+        <Link
+          href="https://www.linkedin.com/in/josephthomashines/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={linkedin} />
           <span>LinkedIn</span>
         </Link>
       </div>
