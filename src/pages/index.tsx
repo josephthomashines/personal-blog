@@ -24,14 +24,6 @@ interface IndexPageProps {
             date: string
             tag: string
             slug: string
-            thumbnail: {
-              childImageSharp: {
-                fluid: {
-                  tracedSVG
-                  src
-                }
-              }
-            }
           }
           htmlAst
           fields: {
@@ -62,14 +54,6 @@ export const indexPageQuery = graphql`
             tag
             date
             slug
-            thumbnail {
-              childImageSharp {
-                fluid {
-                  tracedSVG
-                  src
-                }
-              }
-            }
           }
           htmlAst
           fields {

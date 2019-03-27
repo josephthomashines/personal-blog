@@ -22,14 +22,6 @@ interface IndexPageProps {
         title: string
         date: string
         slug: string
-        thumbnail: {
-          childImageSharp: {
-            fluid: {
-              tracedSVG
-              src
-            }
-          }
-        }
       }
       fields: {
         readingTime: {
@@ -43,14 +35,6 @@ interface IndexPageProps {
         title: string
         date: string
         slug: string
-        thumbnail: {
-          childImageSharp: {
-            fluid: {
-              tracedSVG
-              src
-            }
-          }
-        }
       }
       fields: {
         readingTime: {
@@ -63,14 +47,6 @@ interface IndexPageProps {
         title: string
         date: string
         slug: string
-        thumbnail: {
-          childImageSharp: {
-            fluid: {
-              tracedSVG
-              src
-            }
-          }
-        }
       }
       fields: {
         readingTime: {
@@ -95,14 +71,6 @@ export const blogQuery = graphql`
         title
         date
         slug
-        thumbnail {
-          childImageSharp {
-            fluid {
-              tracedSVG
-              src
-            }
-          }
-        }
       }
       fields {
         readingTime {
@@ -116,14 +84,6 @@ export const blogQuery = graphql`
         title
         date
         slug
-        thumbnail {
-          childImageSharp {
-            fluid {
-              tracedSVG
-              src
-            }
-          }
-        }
       }
       fields {
         readingTime {
@@ -136,14 +96,6 @@ export const blogQuery = graphql`
         title
         date
         slug
-        thumbnail {
-          childImageSharp {
-            fluid {
-              tracedSVG
-              src
-            }
-          }
-        }
       }
       fields {
         readingTime {
@@ -161,7 +113,6 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
       <div key={index + post.frontmatter.title} className={styles.post}>
         <h1>{post.frontmatter.title}</h1>
         <span>{`${post.frontmatter.date} • ${ttr}`}</span>
-        <div className={styles.thumbnail} />
         <div>{renderAst(post.htmlAst)}</div>
       </div>
     )

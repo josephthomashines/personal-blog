@@ -3,7 +3,6 @@ date: '2018/12/13'
 slug: 'building-a-contentful-blog'
 title: 'Building a Contentful Blog with Gatsby'
 tag: 'Static site generation, sourced from an external CMS'
-thumbnail: './thumbnail.png'
 ---
 
 Hey! 👋 I'm Joe Hines, a Computer Science student at Drexel University.
@@ -479,11 +478,11 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
           <div key={index} className={styles.postPreview}>
             <div
               onClick={() => navigate(`/${post.slug}`)}
-              role='link'
+              role="link"
               tabIndex={0}
               className={styles.filter}
             >
-              <img src={post.thumbnail.fixed.src} alt='thumbnail' />
+              <img src={post.thumbnail.fixed.src} alt="thumbnail" />
               <h1>{post.title}</h1>
               <p>{post.tag}</p>
               <span>{post.date}</span>
@@ -494,7 +493,7 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
             <div
               // highlight-next-line
               onClick={() => navigate(`/${post.slug}`)}
-              role='link'
+              role="link"
               tabIndex={0}
               className={styles.filter}
             >
@@ -511,7 +510,9 @@ export default class IndexPage extends React.Component<IndexPageProps, {}> {
     const { name, tagline } = this.props.data.site.siteMetadata
 
     // @ts-ignore
-    const posts = this.props.data.allContentfulPost.edges.map(edge => edge.node)
+    const posts = this.props.data.allContentfulPost.edges.map(
+      (edge) => edge.node,
+    )
 
     return (
       <Layout tagline={tagline} name={name}>
@@ -595,7 +596,7 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
-    `).then(result => {
+    `).then((result) => {
       if (!result.err) {
         result.data.allContentfulPost.edges.forEach(
           ({ node, next, previous }) => {
@@ -890,13 +891,13 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
         >
           <div
             onClick={() => navigate(`/${this.props.data.previous.slug}`)}
-            role='link'
+            role="link"
             tabIndex={0}
             className={styles.filter}
           >
             <img
               src={this.props.data.previous.thumbnail.fixed.src}
-              alt='prev'
+              alt="prev"
             />
             <h1>{this.props.data.previous.title}</h1>
             <p>{this.props.data.previous.tag}</p>
@@ -914,11 +915,11 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
         >
           <div
             onClick={() => navigate(`/${this.props.data.next.slug}`)}
-            role='link'
+            role="link"
             tabIndex={0}
             className={styles.filter}
           >
-            <img src={this.props.data.next.thumbnail.fixed.src} alt='next' />
+            <img src={this.props.data.next.thumbnail.fixed.src} alt="next" />
             <h1>{this.props.data.next.title}</h1>
             <p>{this.props.data.next.tag}</p>
             <span>{this.props.data.next.date}</span>

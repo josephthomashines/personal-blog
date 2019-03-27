@@ -3,7 +3,6 @@ date: '2019/01/23'
 slug: 'three-key-concepts'
 title: '3 Key Concepts for Responsive Layouts'
 tag: 'Border-box, Flex-box, and Grids'
-thumbnail: './thumbnail.png'
 ---
 
 When I first became interested in programming as a freshman in high school, one of the first things I stumbled upon was web development.
