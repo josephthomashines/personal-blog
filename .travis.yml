@@ -10,9 +10,9 @@ notifications:
   webhooks:
     urls:
       - https://api.netlify.com/build_hooks/5c9ce3d0f9d4a5018b13ef93
-    on_success: always # default: always
-    on_failure: never # default: always
-    on_start: never   # default: never
-    on_cancel: never # default: always
-    on_error: never # default: always
+    on_success: always
+    on_failure: never
+    on_start: never
+    on_cancel: never
+    on_error: never
 
