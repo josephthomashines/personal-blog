@@ -46,7 +46,7 @@ export class Header extends React.Component<Props, State> {
         </div>
         <div className={styles.menu + showClass}>
           <a href="/">Home</a>
-          <a href="/about">About Me</a>
+          <a href="/posts">Posts</a>
         </div>
       </div>
     )

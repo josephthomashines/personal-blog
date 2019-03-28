@@ -1,98 +1,64 @@
 import * as React from 'react'
-import { graphql, navigate } from 'gatsby'
-
-import styles from '../style/index.module.scss'
 
 import Layout from '../components/Layout'
 
-import PostPreview from '../components/PostPreview'
+import styles from '../style/index.module.scss'
 
-interface IndexPageProps {
-  data: {
-    site: {
-      siteMetadata: {
-        name: string
-        tagline: string
-        author: string
-      }
-    }
-    allMarkdownRemark: {
-      edges: {
-        node: {
-          frontmatter: {
-            title: string
-            date: string
-            tag: string
-            slug: string
-          }
-          htmlAst
-          fields: {
-            readingTime: {
-              text: string
-            }
-          }
-        }
-      }
-    }
-  }
-}
+import github from '../../node_modules/@fortawesome/fontawesome-free/svgs/brands/github.svg'
+import resume from '../../node_modules/@fortawesome/fontawesome-free/svgs/regular/file-pdf.svg'
+import linkedin from '../../node_modules/@fortawesome/fontawesome-free/svgs/brands/linkedin.svg'
 
-export const indexPageQuery = graphql`
-  query IndexPageQuery {
-    site {
-      siteMetadata {
-        name
-        tagline
-        author
-      }
-    }
-    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
-      edges {
-        node {
-          frontmatter {
-            title
-            tag
-            date
-            slug
-          }
-          htmlAst
-          fields {
-            readingTime {
-              text
-            }
-          }
-        }
-      }
-    }
-  }
-`
+const QA = (q: string, a: string) => (
+  <div className={styles.QA}>
+    <h2>{q}</h2>
+    <p>{a}</p>
+  </div>
+)
 
-export default class IndexPage extends React.Component<IndexPageProps, {}> {
-  public renderPost(post: any, index: any): JSX.Element {
-    return (
-      <PostPreview
-        date={post.frontmatter.date}
-        key={`post-preview-${post.frontmatter.slug}`}
-        slug={post.frontmatter.slug}
-        tag={post.frontmatter.tag}
-        time={post.fields.readingTime.text}
-        title={post.frontmatter.title}
-      />
-    )
-  }
-  public render(): JSX.Element {
-    const { name, tagline, author } = this.props.data.site.siteMetadata
+const Link = (props) => (
+  <a {...props} className={styles.link}>
+    {props.children}
+  </a>
+)
 
-    // @ts-ignore
-    const posts = this.props.data.allMarkdownRemark.edges.map(
-      (edge) => edge.node,
-    )
+const NotFoundPage = () => (
+  <Layout pageTitle={'Home'}>
+    <div className={styles.wrapper}>
+      <h1>Home</h1>
+      {QA(
+        'Who are you?',
+        'I am Joe Hines, a computer science student at Drexel University.',
+      )}
+      {QA(
+        'What do you do?',
+        'I am a confident frontend web developer, novice designer, and beginner backend developer.',
+      )}
+      {QA('Where are you based?', 'Philadelphia, PA.')}
+      <h1>Links</h1>
+      <div className={styles.links}>
+        <Link
+          href="https://github.com/josephthomashines"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={github} />
+          <span>Github</span>
+        </Link>
+        <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+          <img src={resume} />
+          <span>Resume</span>
+        </Link>
+        <Link
+          href="https://www.linkedin.com/in/josephthomashines/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={linkedin} />
+          <span>LinkedIn</span>
+        </Link>
+      </div>
+    </div>
+  </Layout>
+)
 
-    return (
-      <Layout pageTitle={'Home'}>
-        <h1 className={styles.header}>Blog Posts</h1>
-        <div>{posts.map((post, index) => this.renderPost(post, index))}</div>
-      </Layout>
-    )
-  }
-}
+export default NotFoundPage

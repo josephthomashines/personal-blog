@@ -50,7 +50,9 @@ I would come up with one design and roll with it, often feeling like I am forcin
 So, I decided that I needed to challenge myself on this.
 I would go through an iterative design process.
 By iterative design, I mean the process of creating a complete design, and the iterating back over the whole thing after some passage of time.
-This process forces critical thought and action in design, and forces the actor to critically analyze the current state of the design.
+This process forces critical thought and action in design, and forces critical analysis of the current state of he design.
 I decided that I would redesign this website.
 
 ## Less Talking, More Doing
+
+As with every skill one can acquire, the only way to get better is to _do._
