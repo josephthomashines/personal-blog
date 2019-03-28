@@ -1,5 +1,12 @@
 @import 'shared';
 
+h1 {
+  position: relative;
+  top: 20px;
+  margin-bottom: 50px;
+  width: fit-content;
+}
+
 @include small-screen {
   .header {
     position: relative;
@@ -10,13 +17,5 @@
     margin-bottom: 75px;
     width: fit-content;
     max-width: 80vw;
-  }
-
-  h1 {
-    position: relative;
-    top: 20px;
-    left: 20px;
-    margin-bottom: 50px;
-    width: fit-content;
   }
 }

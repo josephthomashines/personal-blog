@@ -162,7 +162,7 @@ export default class BlogPost extends React.Component<IndexPageProps, {}> {
         className={styles.home}
         key={'home-' + this.props.data.main.frontmatter.slug}
       >
-        <a href="/">Back to Home</a>
+        <a href="/posts">Back to Posts</a>
       </div>,
     )
 
