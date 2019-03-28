@@ -18,6 +18,7 @@ export const layoutQuery = graphql`
         tagline
         author
         shortName
+        keywords
       }
     }
   }
@@ -30,6 +31,7 @@ export type layoutResponse = {
       tagline: string
       author: string
       shortName: string
+      keywords: string
     }
   }
 }
@@ -73,8 +75,7 @@ class Layout extends React.Component<
                   },
                   {
                     name: 'keywords',
-                    content:
-                      'blog, CS, Computer Science, Drexel, Web Development, Web Design',
+                    content: data.site.siteMetadata.keywords,
                   },
                   { name: 'author', content: data.site.siteMetadata.author },
                 ]}

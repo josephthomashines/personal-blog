@@ -39,12 +39,13 @@ export class Header extends React.Component<Props, State> {
         <div
           className={styles.menuButton + showClass}
           onClick={() => this.toggleMenu()}
+          id="menuButton"
         >
           <div className={styles.bar1 + showClass} />
           <div className={styles.bar2 + showClass} />
           <div className={styles.bar3 + showClass} />
         </div>
-        <div className={styles.menu + showClass}>
+        <div className={styles.menu + showClass} id="menu">
           <a href="/">Home</a>
           <a href="/posts">Posts</a>
         </div>

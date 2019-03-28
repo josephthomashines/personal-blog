@@ -63,3 +63,4 @@ typings/
 public
 .cache
 .DS_Store
+*.mp4

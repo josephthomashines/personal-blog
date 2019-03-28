@@ -2,6 +2,8 @@ let siteName = "Joseph Hines' Blog"
 let siteShortName = 'josephhines'
 let siteTagline = 'Writing code, among other things.'
 let siteAuthor = 'Joseph Hines'
+let siteKeywords =
+  'blog, CS, Computer Science, Drexel, Web Development, Web Design'
 
 module.exports = {
   siteMetadata: {
@@ -9,6 +11,7 @@ module.exports = {
     tagline: siteTagline,
     author: siteAuthor,
     shortName: siteShortName,
+    keywords: siteKeywords,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
