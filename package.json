@@ -34,7 +34,9 @@
     "sharp": "^0.21.0",
     "typescript": "^3.1.6"
   },
-  "keywords": ["gatsby"],
+  "keywords": [
+    "gatsby"
+  ],
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
@@ -59,6 +61,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/josephthomashines/site"
   }
 }
