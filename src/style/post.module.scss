@@ -39,9 +39,10 @@
     line-height: 1.7;
     margin: 25px auto 0 auto;
 
-    > a[href$='.png'] {
+    a[href$='.png'] {
       width: 95% !important;
       margin-top: 25px;
+			height: auto;
     }
   }
   div > p:first-of-type::first-letter {
