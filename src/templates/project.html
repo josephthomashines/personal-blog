@@ -1,0 +1,1079 @@
+{% extends 'base.html' %}
+{% set active = "Project" %}
+
+{% block title %}
+{{ project.name }}
+{% endblock %}
+
+{% block content %}
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="save">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4>
+  {{ project.name }}
+</h4>
+
+<span class="text-muted" id="save-status"></span>
+
+<div class="container m-2">
+  <div class="row mb-1">
+    <div class="col-sm-8">
+      <div class="form-group">
+        <label for="location-input" class="text-muted" style:" display: inline;">Location: </label>
+        <input
+          type="text"
+          class="form-control"
+          id="location-input"
+          style="display: inline;max-width: 300px;"
+          placeholder="">
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="dropdown col-md-auto ml-auto mb-3 order-md-3">
+      <button class="btn btn-primary"
+              type="button"
+              id="analyticsButton">
+        Analytics
+      </button>
+      <button class="btn btn-dark"
+              type="button"
+              id="reportButton">
+        Report
+      </button>
+    </div>
+    <div class="dropdown col-auto mb-1 order-md-1">
+      <button class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton0"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false">
+        Objects
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton0">
+        <button class="dropdown-item" id="t1">Short Barricade (~8ft)</button>
+        <button class="dropdown-item" id="t2">Long Barricade (~16ft)</button>
+        <button class="dropdown-item" id="t3">Cone</button>
+        <button class="dropdown-item" id="t4">Short Fence</button>
+      </div>
+    </div>
+    <div class="dropdown col-auto mb-1 order-md-1">
+      <button class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false">
+        Vehicles
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <button class="dropdown-item" id="t5">Car</button>
+        <button class="dropdown-item" id="t6">Small Truck</button>
+        <button class="dropdown-item" id="t7">Large Truck</button>
+        <button class="dropdown-item" id="t8">Utility Vehicle</button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-1" style="height: 400px;">
+    <div class="col-sm-8 mb-1" id="map" style="height: 400px;">
+      <div id="popup"></div>
+    </div>
+    <div class="container col-sm-4">
+      <div class="row mb-1">
+        <div class="col-sm card m-0 p-0">
+          <a class="card-header no-link" data-toggle="collapse"
+            href="#personnel-list" role="button"
+            aria-expanded="false" aria-controls="personnel-list">
+            <h4>
+              <i class="fa fa-caret-right"></i>
+              Personnel
+            </h4>
+          </a>
+          <ul class="collapse list-group list-group-flush"
+            id="personnel-list" style="max-height: 300px; overflow-y: scroll;">
+            <li class="list-group-item new-person" id="new-person" style="cursor: pointer;">
+              <i class="fa fa-plus"></i>
+              Add New Person
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-sm card m-0 p-0">
+          <a class="card-header no-link" data-toggle="collapse"
+            href="#step-list" role="button"
+            aria-expanded="false" aria-controls="step-list">
+            <h4>
+              <i class="fa fa-caret-right"></i>
+              Plan
+            </h4>
+          </a>
+          <ul class="collapse list-group list-group-flush"
+            id="step-list" style="max-height: 300px; overflow-y: scroll;">
+            <li class="list-group-item new-step" id="new-step" style="cursor: pointer;">
+              <i class="fa fa-plus"></i>
+              Add New Step
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.2.1/css/ol.css" type="text/css">
+<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.2.1/build/ol.js"></script>
+<script src="/lib/he/he.js"></script>
+<script>
+  // Project ID
+  var PID = "{{ project.pid }}"
+
+  // Global map objects
+  var map = undefined
+  var featureLayer = undefined
+  var popupElement = undefined
+  var popup = undefined
+  var popupVisible = false
+
+  // Map each tool to its corresponding feature/icon
+  var TOOLS = undefined
+  var TOOL_NAMES = {
+    "t1": "Short Barricade",
+    "t2": "Long Barricade",
+    "t3": "Cone",
+    "t4": "Fence",
+    "t5": "Vehicle",
+    "t6": "Small Truck",
+    "t7": "Large Truck",
+    "t8": "Utility Vehicle",
+  }
+
+  // Initializing state
+  var data=he.decode("{{ project.data }}")
+  var state = JSON.parse(data);
+  const initialState = {
+    "currentTool": "t1",
+    "location":"Philadelphia, PA",
+    "zoom": 12,
+    "center": [-8367165.462810878, 4859074.592843575],
+    "features":{},
+    "resources":{},
+    "personnel":{},
+    "steps":{},
+    "featureId":0,
+    "personnelId":0,
+    "stepId":0,
+    "stepOrder":0,
+  }
+
+  // Use state as an "immutable" global ->
+  // must be modified through this function
+  let setState = (stateChanges) => {
+    Object.assign(state, stateChanges)
+    save()
+  }
+
+  // Credit: https://davidwalsh.name/javascript-debounce-function
+  // Returns a function, that, as long as it continues to be invoked, will not
+  // be triggered. The function will be called after it stops being called for
+  // N milliseconds. If `immediate` is passed, trigger the function on the
+  // leading edge, instead of the trailing.
+  let debounce = (func, wait, immediate) => {
+    var timeout;
+    return function() {
+      var context = this, args = arguments;
+      var later = () => {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  };
+
+  // Saves the state to the database, waiting
+  // for 3 seconds of idle before executing
+  let save = (immediate=false) => {
+    $("#save-status").text("Saving changes...")
+
+    debounce(() => {
+      // Get the current view information
+      state.zoom = map.getView().getZoom()
+      state.center = map.getView().getCenter()
+
+      fetch(`/api/saveproject`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          pid: PID,
+          data: state
+        }),
+      }).then(resp => {
+        if (resp.status == 200) {
+          $("#save-status").html(`
+            <i class="fa fa-check-circle" /> Saved.
+          `)
+        } else {
+          $("#save-status").html(`
+            <i class="fa fa-exclamation" /> Can't save changes.
+          `)
+        }
+      })
+    },3000,immediate)()
+  }
+
+  // Set the center of the map
+  // and save the update
+  let setCenter = (location) =>
+    geocode(location).then((resp) => {
+      if (resp) {
+        // Always take the first (most likely) response
+        let {lat,lon} = resp[0]
+
+        map.getView().setCenter(ol.proj.fromLonLat([lon,lat]))
+
+        setState({location: location})
+      }
+    })
+
+  // Binds search bar to geocoding request
+  let bindSearchBar = () => {
+    $("#location-input").on("keypress",debounce((event) => {
+      setCenter(event.target.value)
+    },500))
+  }
+
+  // Binds event handlers to all of the tool buttons
+  let bindToolButtons = () => {
+    let numTools = Object.keys(TOOLS).length
+
+    for (let i = 1;i <= numTools; i++) {
+      let id = "#t"+i
+      $(id).on("click",(event) => {
+        setState({currentTool: event.target.id})
+      })
+    }
+  }
+
+  let addFeatureToMap = (data, id) => {
+    // Convert click coordinate to point on map
+    let geometry = new ol.geom.Point(data.coordinate);
+    var feature = new ol.Feature({
+      geometry: geometry,
+      data: data,
+      id: id,
+    });
+
+    let icon = TOOLS[data.tool]
+
+    // Assign current tool's icon to this feature
+    feature.setStyle(new ol.style.Style({
+      image: icon
+    }));
+
+    featureLayer.getSource().addFeature(feature)
+  }
+
+  let addFeature = (event) => {
+    let features = state.features
+    let resources = state.resources
+
+    // Initialize container for feature
+    if (!features[state.featureId]) {
+      features[state.featureId] = {}
+    }
+
+    // Initialize property for tool
+    if (!resources[state.currentTool]){
+      resources[state.currentTool] = 1
+    }
+
+    // Create unique name, based on count of same tool type
+    let name = TOOL_NAMES[state.currentTool] + " "
+      + (resources[state.currentTool])
+    features[state.featureId] = {
+      name: name,
+      tool: state.currentTool,
+      coordinate: event.coordinate,
+    }
+    resources[state.currentTool]++
+
+    addFeatureToMap(features[state.featureId], state.featureId)
+
+    setState({
+      features: features,
+      resources: resources,
+      featureId: state.featureId+1,
+    })
+
+  }
+
+  // Renders a popup for the selected feature
+  let displayPopup = (event) => {
+    // Grab the selected feature
+    let feature = map.getFeaturesAtPixel(event.pixel)[0]
+    let featureData = feature.get("data")
+    let featureId = feature.get("id")
+
+    // Move the popup to the feature
+    popup.setPosition(event.coordinate)
+
+    // Get a list of the personnel this feature is assigned to
+    let personnelLi = ""
+    for (let id of Object.keys(state.personnel)) {
+      if (Object.keys(state.personnel[id].assigned).includes(String(featureId)) &&
+        state.personnel[id].assigned[featureId]) {
+        personnelLi += `
+        <li class="list-group-item">
+          ${state.personnel[id].name}
+        </li>
+        `
+      }
+    }
+
+    personnelLi = personnelLi == ""
+      ? `<li class="list-group-item">Not assigned to anyone</li>`
+      : personnelLi
+
+    let personnel = `
+    <div class="col-sm card m-0 p-0 my-2">
+      <a class="card-header no-link" data-toggle="collapse"
+        href="#pa-list" role="button"
+        style="max-height: 50px;"
+        aria-expanded="false" aria-controls="step-list">
+        <p>
+          Person(s) Assigned To
+        </p>
+      </a>
+      <ul class="collapse show list-group list-group-flush"
+        id="pa-list" style="max-height: 150px; overflow-y: scroll;">
+        ${personnelLi}
+      </ul>
+    </div>
+    `
+
+    // Get a list of the steps this feature is assigned to
+    let stepsLi = ""
+    for (let id of Object.keys(state.steps)) {
+      if (Object.keys(state.steps[id].assigned).includes(String(featureId)) &&
+        state.steps[id].assigned[featureId]) {
+        stepsLi += `
+        <li class="list-group-item">
+          ${state.steps[id].name}
+        </li>
+        `
+      }
+    }
+
+    stepsLi = stepsLi == ""
+      ? `<li class="list-group-item">Not assigned to anyone</li>`
+      : stepsLi
+
+    let steps = `
+    <div class="col-sm card m-0 p-0 mb-2">
+      <a class="card-header no-link" data-toggle="collapse"
+        href="#sa-list" role="button"
+        style="max-height: 50px;"
+        aria-expanded="false" aria-controls="step-list">
+        <p>
+          Steps(s) Planned In
+        </p>
+      </a>
+      <ul class="collapse show list-group list-group-flush"
+        id="sa-list" style="max-height: 150px; overflow-y: scroll;">
+        ${stepsLi}
+      </ul>
+    </div>
+    `
+
+    // Construct the popup
+    $(popupElement).popover({
+      placement: "bottom",
+      html: true,
+      content: `
+      <div class="container" style="max-height: 300px; overflow-y: scroll;">
+        <input
+        type="text"
+        class="form-control feature-name-input"
+        id="feature-name-${featureId}"
+        value="${featureData.name}">
+        ${personnel}
+        ${steps}
+        <button class="btn btn-danger mt-4 mb-2"
+                id="delete-feature"
+                >Delete this marker</button>
+      </div>
+      `
+    })
+
+    // Show the popup
+    $(popupElement).popover('show')
+    popupVisible = true
+
+    $("#delete-feature").on("click", () => {
+      // Remove from map and close popup
+      featureLayer.getSource().removeFeature(feature)
+      $(popupElement).popover('dispose');
+      popupVisible = false
+
+      // Remove from state
+      let features = state.features
+      delete features[featureId]
+
+      // Remove from personnel assignments
+      let personnel = state.personnel
+      for (let id of Object.keys(personnel)) {
+        delete personnel[id].assigned[featureId]
+      }
+
+      // Remove from step assignments
+      let steps = state.steps
+      for (let id of Object.keys(steps)) {
+        delete steps[id].assigned[featureId]
+      }
+
+      setState({
+        features: features,
+        personnel: personnel,
+        steps: steps,
+      })
+    })
+
+    // Register listener for updating name of feature
+    $(`#feature-name-${featureId}`).on("keyup", debounce((event) => {
+      let features = state.features
+      features[featureId].name = event.target.value
+
+      setState({features: features})
+    },300))
+
+  }
+
+  // Zoom the map so that all markers are visible
+  let fitFeaturesOnMap = () => {
+    // Get bounding box on features
+    let extent = featureLayer.getSource().getExtent()
+
+    // Add some padding to the bounding box
+    let padding = 200
+    extent[0] -= padding; extent[1] -= padding;
+    extent[2] += padding; extent[3] += padding;
+
+    // Execute the fit
+    map.getView().fit(extent)
+  }
+
+  // Binds listener for adding features to map
+  let bindMap = () => {
+    map.on("click", event => {
+      if (popupVisible) {
+        // Remove the popup and set visibilty flag to false
+        $(popupElement).popover('dispose');
+        popupVisible = false
+        return
+      }
+
+      if (map.hasFeatureAtPixel(event.pixel)) {
+        displayPopup(event)
+      } else {
+        // Add a feature to the map
+        addFeature(event)
+      }
+
+    })
+
+    // Create the base popup object and add it to the map
+    popupElement = document.getElementById('popup');
+    popup = new ol.Overlay({
+      element: popupElement,
+      autopan: true,
+      positioning: "bottom-center",
+      stopEvent: false,
+      offset: [0, 0]
+    });
+    map.addOverlay(popup);
+
+    map.on('pointermove', function(event) {
+      if (event.dragging) {
+        $(popupElement).popover('dispose');
+        return
+      }
+      let hit = map.hasFeatureAtPixel(event.pixel);
+      map.getTarget().style.cursor = hit ? 'pointer' : '';
+    });
+  }
+
+  // Takes a loosely formatted address and returns the latlng pair
+  var geocode = async  (query) => {
+    let url = `https://nominatim.openstreetmap.org/search?q=${encodeURI(query)}&format=json`
+    const response = await fetch(url);
+    return await response.json();
+  }
+
+  // Clear the personnel list
+  let clearPersonnel = () => {
+    let sharedClass = "person"
+    $(`.${sharedClass}`).remove()
+  }
+
+  // Update the personnel list to match the data
+  let renderPersonnel = () => {
+    clearPersonnel()
+    let personnelList = $("#personnel-list")
+    let modal = $("#modal")
+
+    // For each person
+    for (let id of Object.keys(state.personnel).reverse()) {
+      let person = state.personnel[id]
+      personnelList.prepend(`
+        <li class="list-group-item person" id="${id}">
+          ${person.name}
+        </li>
+      `)
+
+      // Pop open a modal when person is clicked on
+      personnelList.find(`#${id}`).on("click",(event) => {
+        modal.find("#save").off()
+        modal.find("#save").show()
+        modal.modal()
+
+        modal.find("#title").html(`
+          <div class="container">
+            <label for="person-name-input" style:" display: inline;">Edit </label>
+            <input
+              type="text"
+              class="form-control person-name-input"
+              id="person-name-input"
+              value="${person.name}">
+          </div>
+        `)
+
+        // Build checkboxes for features let checkboxes = ""
+        let checkboxes = ""
+        for (let fid of Object.keys(state.features)) {
+          checkboxes += `
+          <div class="col-md-6">
+            <input type="checkbox" id="check-${fid}" ${person.assigned[fid] ? "checked" : "" }>
+            ${state.features[fid].name}
+          </div>
+          `
+        }
+
+        // Display message if there aren't any resources yet
+        checkboxes = checkboxes == ""
+          ? `<p class="text-muted">No resources placed on map yet...</p>`
+          : checkboxes
+
+        modal.find("#body").html(`
+          <div class="container">
+            <p>Assign Resources</p>
+            <div class="container checkboxes">
+              <div class="row justify-content-md-between">
+                ${checkboxes}
+              </div>
+            </div>
+            <button class="btn btn-danger mt-4 mb-2"
+                    id="delete-person">Delete this person</button>
+          </div>
+        `)
+
+        modal.find("#delete-person").on("click", (event) => {
+          // Remove person from list and save
+          delete state.personnel[id]
+          save()
+
+          // Close modal and re-render list
+          modal.modal('toggle')
+          renderPersonnel()
+        })
+
+        modal.find("#save").on("click", (event) => {
+          let personnel = state.personnel
+          let name = $("#person-name-input").val()
+          let assigned = {}
+
+          // Update all resource assignments
+          for (let fid of Object.keys(state.features)) {
+            assigned[fid] = $(`#check-${fid}`).is(":checked")
+          }
+
+          // Update information
+          personnel[id].name = name
+          personnel[id].assigned = assigned
+
+          // Save changes, close modal, and re-render personnel list
+          setState({personnel: personnel})
+          modal.modal('toggle')
+          renderPersonnel()
+        })
+      })
+    }
+  }
+
+  let addPersonnel = (event) => {
+    let personnel = state.personnel
+    let personnelId = state.personnelId
+
+    // Initialize object for id
+    if (!personnel[personnelId]) {
+      personnel[personnelId] = {}
+    }
+
+    // Initialize resource assignments
+    let assigned = {}
+    for (let id of Object.keys(state.features)) {
+      assigned[id] = false
+    }
+
+    personnel[personnelId] = {
+      name: `Person ${personnelId+1}`,
+      assigned: assigned,
+    }
+
+    setState({
+      personnel: personnel,
+      personnelId: personnelId+1
+    })
+
+    renderPersonnel()
+  }
+
+  let bindPersonnel = () => {
+    // Initial render of any saved personnel
+    renderPersonnel()
+
+    // Bind new person button
+    $("#new-person").on("click", addPersonnel)
+  }
+
+  let clearSteps = () => {
+    let sharedClass = "step"
+    $(`.${sharedClass}`).remove()
+  }
+
+  let renderSteps = () => {
+    clearSteps()
+    let stepList = $("#step-list")
+    let modal = $("#modal")
+    modal.find("#save").show()
+
+    // For each step
+    for (let id of Object.keys(state.steps).reverse()) {
+      let step = state.steps[id]
+      stepList.prepend(`
+        <li class="list-group-item step" id="${id}">
+          ${step.name}
+        </li>
+      `)
+
+      // Pop open a modal when step is clicked on
+      stepList.find(`#${id}`).on("click",(event) => {
+        modal.find("#save").off()
+        modal.find("#save").show()
+        modal.modal()
+
+        modal.find("#title").html(`
+          <div class="container">
+            <label for="step-name-input" style:" display: inline;">Edit </label>
+            <input
+              type="text"
+              class="form-control step-name-input"
+              id="step-name-input"
+              value="${step.name}">
+          </div>
+        `)
+
+        // Build checkboxes for features
+        let checkboxes = ""
+        for (let fid of Object.keys(state.features)) {
+          checkboxes += `
+          <div class="col-md-6">
+            <input type="checkbox" id="check-${fid}" ${step.assigned[fid] ? "checked" : "" }>
+            ${state.features[fid].name}
+          </div>
+          `
+        }
+
+        // Display message if there aren't any resources yet
+        checkboxes = checkboxes == ""
+          ? `<p class="text-muted">No resources placed on map yet...</p>`
+          : checkboxes
+
+        let del = `
+            <button class="btn btn-danger mt-4 mb-2"
+                    id="delete-step">Delete this step</button>
+          `
+        if (id != Object.keys(state.steps).length-1) {
+          del = ""
+        }
+
+        modal.find("#body").html(`
+          <div class="container">
+            <p>Assign Resources</p>
+            <div class="container checkboxes">
+              <div class="row justify-content-md-between">
+                ${checkboxes}
+              </div>
+            </div>
+            <div class="form-group my-1">
+              <label for="note">Note</label>
+              <textarea class="form-control" id="note"
+                rows="3">${step.note ? step.note : ""}</textarea>
+            </div>
+            ${del}
+          </div>
+        `)
+
+        modal.find("#delete-step").on("click", (event) => {
+          // Remove step from list and save
+          delete state.steps[id]
+          setState({stepId: state.stepId-1})
+
+          // Close modal and re-render list
+          modal.modal('toggle')
+          renderSteps()
+        })
+
+        modal.find("#save").on("click", (event) => {
+          let steps = state.steps
+          let name = $("#step-name-input").val()
+          let note = $("#note").val()
+          let assigned = {}
+
+          // Update all resource assignments
+          for (let fid of Object.keys(state.features)) {
+            assigned[fid] = $(`#check-${fid}`).is(":checked")
+          }
+
+          // Update information
+          steps[id].name = name
+          steps[id].assigned = assigned
+          steps[id].note = note
+
+          // Save changes, close modal, and re-render step list
+          setState({steps: steps})
+          modal.modal('toggle')
+          renderSteps()
+        })
+      })
+    }
+  }
+
+  let addStep = (event) => {
+    let steps = state.steps
+    let stepId = state.stepId
+
+    // Initialize object for id
+    if (!steps[stepId]) {
+      steps[stepId] = {}
+    }
+
+    // Initialize resource assignments
+    let assigned = {}
+    for (let id of Object.keys(state.features)) {
+      assigned[id] = false
+    }
+
+    steps[stepId] = {
+      name: `Step ${stepId+1}`,
+      assigned: assigned,
+      note: "",
+    }
+
+    setState({
+      steps: steps,
+      stepId: stepId+1
+    })
+
+    renderSteps()
+  }
+
+  let bindSteps = () => {
+    // Initial render of any saved personnel
+    renderSteps()
+
+    // Bind add step button
+    $("#new-step").on("click", addStep)
+  }
+
+  // Display the analytics info in a modal
+  let renderAnalytics = () => {
+    let modal = $("#modal")
+    modal.find("#save").hide()
+    modal.modal()
+    modal.modal('toggle')
+
+    modal.find("#title").html(`
+      <div class="container">
+        <label for="" style:" display: inline;">Analytics </label>
+      </div>
+    `)
+
+    let unassigned = ""
+    let unassignedCount = 0
+    for (let fid of Object.keys(state.features)) {
+      let isAssigned = false;
+      for (let pid of Object.keys(state.personnel)) {
+        if (Object.keys((state.personnel[pid].assigned)).includes(fid) &&
+            state.personnel[pid].assigned[fid]) {
+          isAssigned = true
+          break
+        }
+      }
+
+      if (!isAssigned) {
+        unassigned += `
+        <div class="col-md-6">
+          ${state.features[fid].name}
+        </div>
+        `
+        unassignedCount++
+      }
+    }
+
+    // Display message if there aren't any resources yet
+    unassigned = unassigned == ""
+      ? `
+        <p class="text-muted">
+          <i class="fa fa-check-circle" />
+          All Resources Assigned!
+        </p>
+      `
+      : unassigned
+
+    let unplanned = ""
+    let unplannedCount = 0
+    for (let fid of Object.keys(state.features)) {
+      let isPlanned = false;
+      for (let pid of Object.keys(state.steps)) {
+        if (Object.keys((state.steps[pid].assigned)).includes(fid) &&
+            state.steps[pid].assigned[fid]) {
+          isPlanned = true
+          break
+        }
+      }
+
+      if (!isPlanned) {
+        unplanned += `
+        <div class="col-md-6">
+          ${state.features[fid].name}
+        </div>
+        `
+        unplannedCount++
+      }
+    }
+
+    // Display message if there aren't any resources yet
+    unplanned = unplanned == ""
+      ? `
+        <p class="text-muted">
+          <i class="fa fa-check-circle" />
+          All Resources Planned!
+        </p>
+      `
+      : unplanned
+
+    let resourceCountsData = {}
+    for (let fid of Object.keys(state.features)) {
+      let tool = state.features[fid].tool
+      if (!resourceCountsData[tool]) {
+        resourceCountsData[tool] = 1
+      } else {
+        resourceCountsData[tool]++
+      }
+    }
+
+    let resourceCounts = ""
+    for (let tool of Object.keys(resourceCountsData)) {
+      resourceCounts += `
+      <div class="col-md-6">
+        ${resourceCountsData[tool]}
+        ${TOOL_NAMES[tool]}
+      </div>
+      `
+    }
+
+    // Display message if there aren't any resources yet
+    resourceCounts = resourceCounts == ""
+      ? `
+        <p class="text-muted">
+          No Resources Placed
+        </p>
+      `
+      : resourceCounts
+
+    modal.find("#body").html(`
+      <div class="container">
+        <h5>Unassigned Resources (${unassignedCount})</h5>
+        <div class="container list mb-3 mt-2">
+          <div class="row justify-content-md-between">
+            ${unassigned}
+          </div>
+        </div>
+        <h5>Unplanned Resources (${unplannedCount})</h5>
+        <div class="container list mb-2">
+          <div class="row justify-content-md-between">
+            ${unplanned}
+          </div>
+        </div>
+        <h5>Resource Counts</h5>
+        <div class="container list mb-2">
+          <div class="row justify-content-md-between">
+            ${resourceCounts}
+          </div>
+        </div>
+      </div>
+    `)
+  }
+
+  // Bind analyticsButton
+  $("#analyticsButton").on("click", (event) => {
+    renderAnalytics()
+  })
+
+  // Bind reportButton
+  $("#reportButton").on("click", (event) => {
+    window.open(`/report/${PID}`)
+  })
+
+  // Binds handlers to UI components
+  let main = () => {
+    // Initialize state if not set yet
+    if (JSON.stringify(state) == '{}') {
+      state = initialState
+    }
+
+    try {
+      // MapTiler API key
+      var key = 'FMVS54oSrqPDSRjALXxA';
+      var attributions = '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> ' +
+        '<a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
+
+      // Load street map from MapTiler
+      var roads = new ol.layer.Tile({
+        source: new ol.source.XYZ({
+          attributions: attributions,
+          url: 'https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=' + key,
+          tileSize: 512,
+          maxZoom: 22
+        })
+      });
+
+      // Create the map object
+      map = new ol.Map({
+        layers: [roads],
+        target: document.getElementById('map'),
+        view: new ol.View({
+          zoom: state.zoom,
+        })
+      });
+
+      const scale = 0.1
+
+      // Set the tools
+      TOOLS = {
+        "t1": new ol.style.Icon({
+          src: "/img/short_barricade.png",
+          scale,
+        }),
+        "t2": new ol.style.Icon({
+          src: "/img/long_barricade.png",
+          scale,
+        }),
+        "t3": new ol.style.Icon({
+          src: "/img/cone.png",
+          scale,
+        }),
+        "t4": new ol.style.Icon({
+          src: "/img/fence.png",
+          scale,
+        }),
+        "t5": new ol.style.Icon({
+          src: "/img/vehicle.png",
+          scale,
+        }),
+        "t6": new ol.style.Icon({
+          src: "/img/small_truck.png",
+          scale,
+        }),
+        "t7": new ol.style.Icon({
+          src: "/img/large_truck.png",
+          scale,
+        }),
+        "t8": new ol.style.Icon({
+          src: "/img/utility.png",
+          scale,
+        }),
+      }
+
+      // Create featureLayer
+      var vectorSource = new ol.source.Vector({
+        features: []
+      })
+      featureLayer = new ol.layer.Vector({
+        source: vectorSource
+      })
+      map.addLayer(featureLayer);
+
+      // Bind UI
+      bindSearchBar()
+      bindToolButtons()
+      bindMap()
+      bindPersonnel()
+      bindSteps()
+
+      // Set center of map
+      map.getView().setCenter(state.center)
+
+      // Ensure that the location input field matches
+      // the saved location
+      $("#location-input").val(state.location)
+
+      // Add all saved features back to the map
+      for (let id of Object.keys(state.features)) {
+        addFeatureToMap(state.features[id],id)
+      }
+
+      // If there are enough features, zoom so that they are included
+      if (Object.keys(state.features).length > 8) {
+        fitFeaturesOnMap()
+      }
+
+      // Kick off first save
+      save()
+    } catch(err) {
+      $("#map").html("<div class=\"alert alert-danger\">Unable to load map from OpenStreetMaps...</div>");
+      console.error(err)
+    }
+
+  }
+
+  // When page is loaded
+  $(document).ready(()=>{
+    main()
+  })
+</script>
+
+{% endblock %}
