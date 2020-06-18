@@ -2,17 +2,16 @@
 <html>
 
   <head>
-    <title>{% block title %}{% endblock %} - Municipal Solutions</title>
+    <title>{% block title %}{% endblock %}- ephjos</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
-    <link href="/fa/css/all.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/logo.ico">
 
-    <script src="/lib/jquery/jquery-3.3.1.min.js"></script>
-    <script src="/lib/popper/popper.min.js"></script>
+    <!--<script src="/lib/popper/popper.min.js"></script>-->
     <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
   </head>
 
@@ -20,45 +19,31 @@
     <header>
       <div class="container">
         <div class="row">
-          <div class="col-sm">
-            <nav class="navbar navbar-expand-md navbar-dark">
+          <div class="col m-0 p-0">
+            <nav class="navbar navbar-expand navbar-dark">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item{% if active == 'Home' %} active{% endif %}">
+                <li class="nav-item active">
                   <a class="nav-link home-button" href="/">
-                    <img src="/img/logo.png" class="logo" />
-                    MSol
+                    <span class="first">eph</span>
+                    <span class="second">jos</span>
                   </a>
                 </li>
               </ul>
 
-              <a class="navbar-brand" href="/"><img src="" style="max-height: 40px;"></a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                                                                                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                  <li class="nav-item{% if active == 'About' %} active{% endif %}">
-                    <a class="nav-link" href="/about">About Us</a>
-                  </li>
-                  {% if session['user'] %}
-                  <li class="nav-item dropdown{% if active == 'Dashboard' %} active{% endif %}">
-                    <a class="nav-link" href="/dashboard">Dashboard</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout</a>
-                  </li>
-                  {% else %}
-                  <li class="nav-item dropdown{% if active == 'Login' %} active{% endif %}">
-                    <a class="nav-link" href="/login">Login</a>
-                  </li>
-                  <li class="nav-item dropdown{% if active == 'Signup' %} active{% endif %}">
-                    <a class="nav-link" href="/signup">Sign up</a>
-                  </li>
-                  {% endif %}
-                </ul>
-              </div>
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/blog">
+                    <span class="first">bl</span>
+                    <span class="second">og</span>
+                  </a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="https://www.github.com/ephjos" target="_blank" rel="noopener noreferrer">
+                    <span class="first">git</span>
+                    <span class="second">hub</span>
+                  </a>
+                </li>
+              </ul>
             </nav>
           </div>
         </div>
@@ -75,6 +60,7 @@
         </div>
         {% endif %}
 
+        <div class="mb-3"></div>
         {% block content %}{% endblock %}
       </div>
     </main>

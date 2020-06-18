@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ name }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container blog-container">
+  <div class="row">
+    <h3>
+      {{ name }}
+    </h3>
+    <span class="text-muted">
+      {{ date }}
+    </span>
+  </div>
+  <div class="row">
+  </div>
+  <div class="row">
+    <p>
+      {{ body|safe }}
+    </p>
+  </div>
+</div>
+
+{% endblock %}

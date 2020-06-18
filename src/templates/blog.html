@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+blog
+{% endblock %}
+
+{% block content %}
+
+<div class="container blog-container">
+  <h3>
+    blog posts
+  </h3>
+  <div class="card-deck my-3">
+    {% for post in posts %}
+    <a href="/blog/{{ post.name }}" class="card mb-3 no-link">
+      <div class="card-header">{{ post.name }}</div>
+      <div class="card-body">
+        <p class="card-text text-muted">{{ post.datestr }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
