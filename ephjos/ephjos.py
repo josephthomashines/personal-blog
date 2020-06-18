@@ -1,22 +1,17 @@
 from flask import \
     Flask,\
     render_template,\
-    redirect
+    redirect,\
+    url_for
 import json
 from datetime import datetime
 
-PORT = 8080
-BLOGI = "./public/blog/index.json"
-BLOGF = "./public/blog/{}.html"
+app = Flask(__name__)
+
+
+BLOGI = "./static/blog/index.json"
+BLOGF = "./static/blog/{}.html"
 DATEF = "%m/%d/%Y"
-
-app = Flask(__name__, static_folder='public', static_url_path='')
-
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
 
 class BlogPost:
     def __init__(self, datestr, name):
@@ -36,6 +31,11 @@ def render_blogpost(blog: BlogPost, body: str):
 
 def str_to_date(s):
     return datetime.strptime(s, DATEF)
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 
 @app.route('/blog/')
@@ -72,7 +72,3 @@ def post(name):
 @app.route('/<name>')
 def generic(name):
     return render_template(name + '.html')
-
-
-if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=PORT, debug=True)
