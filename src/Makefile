@@ -12,3 +12,7 @@ venv: install.sh
 	-@source ./venv/bin/activate && \
 		python $*.py
 
+run: venv
+	-@source ./venv/bin/activate && \
+		./venv/bin/gunicorn wsgi
+
