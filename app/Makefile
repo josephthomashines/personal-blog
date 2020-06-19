@@ -14,5 +14,5 @@ venv: install.sh
 
 run: venv
 	-@source ./venv/bin/activate && \
-		./venv/bin/gunicorn wsgi
+		python main.py
 
