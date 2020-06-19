@@ -1,17 +1,16 @@
 from flask import \
     Flask,\
     render_template,\
-    redirect,\
-    url_for
+    redirect
 import json
 from datetime import datetime
 
 app = Flask(__name__)
 
-
 BLOGI = "./static/blog/index.json"
 BLOGF = "./static/blog/{}.html"
 DATEF = "%m/%d/%Y"
+
 
 class BlogPost:
     def __init__(self, datestr, name):
