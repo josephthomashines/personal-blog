@@ -1,5 +1,8 @@
 {
   "placeholders, and their importance in web design": {
     "date": "06/18/2020"
+  },
+  "deploy a flask app over https using docker and nginx": {
+    "date": "06/23/2020"
   }
 }

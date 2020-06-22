@@ -12,10 +12,14 @@ blog
   </h3>
   <div class="card-deck my-3">
     {% for post in posts %}
-    <a href="/blog/{{ post.name }}" class="card mb-3 no-link">
-      <div class="card-header">{{ post.name }}</div>
-      <div class="card-body">
-        <p class="card-text text-muted">{{ post.datestr }}</p>
+    <a href="/blog/{{ post.name }}" class="card no-link mx-auto">
+      <div class="card-body text-white row">
+        <div class="col-md-3 text-muted">
+          {{ post.datestr }}
+        </div>
+        <div class="col-md-9">
+          {{ post.name }}
+        </div>
       </div>
     </a>
     {% endfor %}

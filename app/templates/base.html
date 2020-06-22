@@ -10,9 +10,9 @@
     <link href="{{ url_for('static', filename='lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.ico') }}">
-
-    <!--<script src="/lib/popper/popper.min.js"></script>-->
-    <script src="{{ url_for('static', filename='lib/bootstrap/js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='lib/hljs/gruvbox-dark.min.css') }}">
+    <script src="{{ url_for('static',filename='lib/hljs/highlight.min.js') }}"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
   </head>
 
   <body>
