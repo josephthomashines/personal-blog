@@ -88,14 +88,14 @@ header {
   color: var(--acc);
 }
 
+h3 {
+  color: var(--acc-alt);
+}
+
 .blog-container {
   width: 100%;
   max-width: 768px;
   color: var(--white);
-}
-
-h3 {
-  color: var(--acc-alt);
 }
 
 .blog-container .date {
@@ -124,6 +124,16 @@ h3 {
 .blog-container h4,
 .blog-container h5 {
   color: var(--acc-alt);
+}
+
+.blog-container .back-button {
+  margin: 40px auto;
+  padding: 40px 100px;
+  border: 3px solid var(--acc);
+  color: var(--acc);
+}
+
+a {
 }
 
 .card {

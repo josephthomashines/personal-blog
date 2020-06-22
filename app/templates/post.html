@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<div class="container blog-container">
+<div class="container blog-container mb-3">
   <div class="row">
     <h3>
       {{ name }}
@@ -21,6 +21,9 @@
     <p>
       {{ body|safe }}
     </p>
+  </div>
+  <div class="row">
+    <a href="/blog" class="back-button">back to blog posts</a>
   </div>
 </div>
 
