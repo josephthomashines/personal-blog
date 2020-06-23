@@ -1,0 +1,196 @@
+<div class="blog-container">
+  <span>
+    This post is a quick overview of how to deploy
+    a flask application that is structured like
+    <a
+      href="https://github.com/ephjos/flask-docker-example"
+      target="_blank"
+      rel="noopener noreferrer">this example project</a>.
+    <br />
+    <br />
+  </span>
+  <p>
+    With our flask app nicely wrapped up into
+    a docker container, it is time to deploy it
+    on a server! In order to do this, you will need
+    a domain name and a VPS. I've used
+    <a
+      href="https://www.namecheap.com/"
+      target="_blank"
+      rel="noopener noreferrer">NameCheap</a> to
+    get domain names and
+    <a
+      href="https://www.vultr.com/?ref=8614760-6G"
+      target="_blank"
+      rel="noopener noreferrer">Vultr</a> for
+    web hosting. You can use any combination you like,
+    as long as you can configure your purchased domain
+    name to point to your VPS instance. With these sites,
+    you can setup your NameCheap domain to use Vultr's
+    name servers (configure this on NameCheap), and then
+    tell Vultr to redirect that domain name to the IP
+    of the instance you are using (configure this on
+    Vultr).
+  </p>
+  <p>
+    For most flask applications, you will not
+    need much compute, so spring for the options that
+    have IPv4 and fit your budget and needs. For the
+    operating system on this instance, choose whatever
+    you're comfortable with as this (in general) will
+    not be a restriction. In this vein, Ubuntu and Debian
+    are good choices. Their popularity means that there is
+    a wealth of information available online about how
+    to use them.
+    When it
+    comes to getting a domain, you can find cheap ones
+    if you look out for extensions like <b>.xyz</b> and try to
+    use unique names. As we go forward, anywhere you see your_domain
+    you should replace with the domain that you purchased and setup.
+    Once you get that all setup,
+    lets jump into the instance on the server.
+  </p>
+
+  <p>
+    It is in your best interest to setup ssh keys, so that
+    logging in to your server is easy and secure.
+    <a
+      href="https://serverpilot.io/docs/how-to-use-ssh-public-key-authentication/"
+      target="_blank"
+      rel="noopener noreferrer">This</a> is a guide
+    that goes over how to create and setup these keys.
+    Once you have this setup, you could also choose to
+    remove the ability to log in with the password, which
+    is often a good idea. Only people with access to your
+    key (hopefully only you) would be able to log in. If the
+    key is lost or compromised, you'll have to create a new
+    instance. Enough with the setup, on to the deploying part!
+  </p>
+  <p>
+    Log into your instance. First, we have to install some dependencies.
+    We will be using <b>nginx</b>, <b>certbot</b>, and <b>docker</b>. On Ubuntu, these
+    packages can be installed with
+
+    <pre>
+      <code class="Bash">
+sudo apt-get install nginx certbot python3-cerbot docker.io
+      </code>
+    </pre>
+  </p>
+  <p>
+    Once their installed we need to configure nginx. Using your
+    preferred editor (its vim), open <b>/etc/nginx/sites-enabled/your_domain</b>.
+    You'll want to modify this so that it looks more like the following
+    <pre><code class="nginx">
+server {
+  listen 80;
+  server_name your_domain www.your_domain;
+
+  location / {
+    proxy_pass http://127.0.0.1:5001;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
+}
+    </pre></code>
+  </p>
+
+  <p>
+    After this, we can reload nginx with
+    <pre><code class="Bash">nginx -s reload</pre></code>
+  </p>
+
+  <p>
+    nginx is a reverse-proxy, which in plain terms means that it
+    will listen to incoming traffic on specified ports (80 in the above case),
+    and you can tell it how to redirect that traffic to different ports internally.
+    Since our flask app is setup to run on localhost:5001, we tell nginx to
+    route all requests over port 80 for your_domain to localhost:5001. To test
+    that this is working, hit your domain in your browser. You should see
+    an error like the following:
+    <img src="/static/blog/img/nginx-error.png" />
+    <br />
+    <br />
+    Note that the error is an nginx error, which means that we have set this part
+    up correctly. nginx is trying to route the traffic, but their is nothing
+    running on localhost:5001, let's fix that now.
+  </p>
+
+  <p>
+    This step is dead simple, since we have the flask app wrapped up into a
+    docker image. If you followed the steps from the example project's README,
+    then you should have the image published to your docker hub account. This means
+    that we can just run
+    <pre><code class="Bash">docker run -d --restart always -p 5001:5001 USER/TAG</pre></code>
+    where USER and TAG specify where the image is on docker hub.
+  </p>
+
+  <p>
+    This process will pull the container down from docker hub (which can be
+    done manually with docker pull USER/TAG), and then runs it. If you go back
+    to your browser and refresh the page, you should see the site is working.
+    The last thing we need to do it setup HTTPS; this is where certbot comes in.
+  </p>
+
+  <p>
+    cerbot makes enabling https super simple with this setup. All we have to do
+    is run
+    <pre><code class="Bash">certbot --nginx</pre></code>
+  </p>
+
+  <p>
+    You will be asked a few questions about your domain, including providing
+    the email you used for registering the domain. When asked what domains
+    you wish to enable, you will be provided with both your_domain and
+    www.your_domain, select both. When asked what to do about http traffic,
+    choose redirect. After that is all setup, go ahead and reload nginx again
+    with
+    <pre><code class="Bash">nginx -s reload</pre></code>
+    and refresh your browser again.
+  </p>
+  <p>
+    You should see the same page as before, but now served through https.
+    Voila! You can stop here, but I'd recommend setting up a cronjob so that
+    your certificates auto-renew. In order to update your site, make your
+    changes, run docker build, push them to dockerhub, log on the server,
+    stop the old instance of the container, pull the new image, and docker
+    run it again.
+  </p>
+
+  <br />
+  <br />
+
+  <p>
+    While this may same over-engineered to some, that's because it is.
+    This is a really simple case where you can get experience using these
+    tools and actually make something you can use and show off. One
+    major benefit of this setup is that if you wish to add another site,
+    say from another project, and you'd like to be served on this domain;
+    it is easy. All you need is to run that server on a different port and
+    then point nginx to it on a new endpoint. "/" will point to your
+    main server, but "/project" can point to the server from the
+    project.
+  </p>
+
+  <p>
+    This post goes over the process that I used to setup and deploy this
+    site. I struggled to find a lot of this information in a clear
+    way, and there was a lot of noise in the information I did find.
+    I do not propose that this is a perfect guide, but I hope that
+    it conveys the message without too much superfluous information.
+    While there are much simpler static site solutions like
+    <a
+      href="https://www.netlify.com/"
+      target="_blank"
+      rel="noopener noreferrer">Netlify</a>, the freedom that comes
+    with having control of the backend is much more appealing; as
+    this VPS can be used for other things, while also hosting the
+    website. I also have a few projects that I would like to have
+    hosted live at some point, which is easily enabled by this setup.
+  </p>
+
+  <br />
+  <br />
+
+  <span>Thanks for reading!</span>
+</div>

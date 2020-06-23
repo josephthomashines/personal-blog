@@ -3,7 +3,7 @@
  */
 @font-face {
   font-family: JetBrains;
-  src: url("../font/JetBrainsMono-Bold.ttf");
+  src: url("../font/JetBrainsMono-Regular.ttf");
 }
 
 @font-face {
@@ -27,6 +27,10 @@ body {
   font-size: 1rem;
   background: var(--bg);
   overflow-x: hidden;
+}
+
+b {
+  font-family: "JetBrainsBold";
 }
 
 header {
@@ -100,6 +104,7 @@ h3 {
   width: 100%;
   max-width: 768px;
   color: var(--white);
+  color: #a7a7a7;
 }
 
 .blog-container .date {
@@ -109,7 +114,7 @@ h3 {
 
 .blog-container p {
   text-indent: 2rem;
-  font-size: 1.1rem;
+  /*font-size: 1.1rem;*/
 }
 
 .blog-container img {
