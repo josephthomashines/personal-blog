@@ -33,6 +33,10 @@ header {
   background: var(--bg);
 }
 
+p {
+  color: #a7a7a7;
+}
+
 .jumbotron {
     padding: 1.5rem;
     background: 0;
