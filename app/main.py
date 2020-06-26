@@ -37,6 +37,13 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/jarbs.sh')
+def jarbs():
+    return redirect(
+        "https://raw.githubusercontent.com/ephjos/JARBS/master/jarbs.sh"
+    )
+
+
 @app.route('/blog/')
 def posts():
     blogs = []
