@@ -9,6 +9,7 @@ app = Flask(__name__, static_url_path='')
 
 BLOG_DIR = "./static/blog/"
 BLOGF = BLOG_DIR+"{}.html"
+META_SPLIT = "-----"
 DATEF = "%m/%d/%Y %H:%M:%S"
 
 
@@ -19,12 +20,13 @@ class BlogPost:
         self.datestr = datetime.strftime(date, DATEF)
 
 
-def render_blogpost(blog: BlogPost, body: str):
+def render_blogpost(blog: BlogPost, body: str, meta: str):
     return render_template(
         "post.html",
         date=blog.datestr,
         name=blog.name,
         body=body,
+        meta=meta,
     )
 
 
@@ -65,13 +67,17 @@ def post(name):
     try:
         path = BLOGF.format(name)
         with open(path) as html_raw:
-            body = html_raw.read()
+            body_raw = html_raw.read().split(META_SPLIT)
+            meta = body_raw[0]
+            body = body_raw[1]
+
             file = path.split("/")[-1]
             mtime = get_post_mtime(file)
             name = file.split(".html")[0]
             return render_blogpost(
                 BlogPost(mtime, name),
                 body,
+                meta,
             )
     except Exception:
         return redirect("/blog")
