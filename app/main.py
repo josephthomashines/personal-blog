@@ -2,21 +2,21 @@ from flask import \
     Flask,\
     render_template,\
     redirect
-import json
 from datetime import datetime
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
-BLOGI = "./static/blog/index.json"
-BLOGF = "./static/blog/{}.html"
-DATEF = "%m/%d/%Y"
+BLOG_DIR = "./static/blog/"
+BLOGF = BLOG_DIR+"{}.html"
+DATEF = "%m/%d/%Y %H:%M:%S"
 
 
 class BlogPost:
-    def __init__(self, datestr, name):
-        self.datestr = datestr
+    def __init__(self, date, name):
+        self.date = date
         self.name = name
-        self.date = str_to_date(datestr)
+        self.datestr = datetime.strftime(date, DATEF)
 
 
 def render_blogpost(blog: BlogPost, body: str):
@@ -28,8 +28,10 @@ def render_blogpost(blog: BlogPost, body: str):
     )
 
 
-def str_to_date(s):
-    return datetime.strptime(s, DATEF)
+def get_post_mtime(file):
+    epoch_time = os.stat(BLOG_DIR+file).st_mtime
+    mtime = datetime.fromtimestamp(epoch_time)
+    return mtime
 
 
 @app.route('/')
@@ -47,11 +49,12 @@ def jarbs():
 @app.route('/blog/')
 def posts():
     blogs = []
-    with open(BLOGI) as index_raw:
-        index = json.load(index_raw)
-        for name in index.keys():
-            date = index.get(name).get("date")
-            blogs.append(BlogPost(date, name))
+
+    for file in os.listdir(BLOG_DIR):
+        name = file.split(".html")[0]
+        mtime = get_post_mtime(file)
+
+        blogs.append(BlogPost(mtime, name))
 
     blogs = sorted(blogs, key=lambda x: x.date, reverse=True)
     return render_template("blog.html", posts=blogs)
@@ -60,24 +63,18 @@ def posts():
 @app.route('/blog/<name>')
 def post(name):
     try:
-        with open(BLOGI) as index_raw:
-            index = json.load(index_raw)
-            if name in index:
-                date = index.get(name).get("date")
-                with open(BLOGF.format(name)) as html_raw:
-                    body = html_raw.read()
-                    return render_blogpost(
-                        BlogPost(date, name),
-                        body,
-                    )
+        path = BLOGF.format(name)
+        with open(path) as html_raw:
+            body = html_raw.read()
+            file = path.split("/")[-1]
+            mtime = get_post_mtime(file)
+            name = file.split(".html")[0]
+            return render_blogpost(
+                BlogPost(mtime, name),
+                body,
+            )
     except Exception:
-        pass
-    return redirect("/blog")
-
-
-@app.route('/<name>')
-def generic(name):
-    return render_template(name + '.html')
+        return redirect("/blog")
 
 
 if __name__ == "__main__":
