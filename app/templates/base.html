@@ -12,8 +12,7 @@
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.ico') }}">
     <link async rel="stylesheet" href="{{ url_for('static',filename='lib/hljs/gruvbox-dark.min.css') }}">
-    <script defer async src="{{ url_for('static',filename='lib/hljs/highlight.min.js') }}">
-      hljs.initHighlightingOnLoad();
+    <script defer src="{{ url_for('static',filename='lib/hljs/highlight.min.js') }}" onload="hljs.initHighlightingOnLoad();">
     </script>
   </head>
 
