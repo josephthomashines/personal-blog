@@ -25,7 +25,7 @@ home
         <div class="col-md-8">
           <p>Joseph Hines, a 5th year BS/MS Computer Science Student at Drexel University,
           from a Northeast Philly suburb.</p>
-          <img class="fluid headshot" src="{{ url_for('static', filename='img/headshot_cropped.jpg') }}" alt="< headshot here >"/>
+          <img class="fluid headshot" src="{{ url_for('static', filename='img/headshot.jpg') }}" alt="< headshot here >"/>
         </div>
       </div>
       <div class="row">
@@ -45,8 +45,12 @@ home
         </div>
         <div class="col-md-8">
           <p>All of the answers and more can be found
-            <a href="{{ url_for('static', filename='files/resume.pdf') }}" target="_blank" rel="noopener noreferrer">here</a>,
-            in my resume</p>
+            <a
+              href="{{ url_for('static', filename='files/resume.pdf') }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              >in my resume</a>
+          </p>
         </div>
       </div>
       <div class="row">

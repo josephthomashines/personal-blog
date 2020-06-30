@@ -4,11 +4,13 @@
 @font-face {
   font-family: JetBrains;
   src: url("../font/JetBrainsMono-Regular.ttf");
+  font-display: swap;
 }
 
 @font-face {
   font-family: JetBrainsBold;
   src: url("../font/JetBrainsMono-ExtraBold.ttf");
+  font-display: swap;
 }
 
 html {
