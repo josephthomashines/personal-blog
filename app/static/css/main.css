@@ -39,8 +39,27 @@ header {
   background: var(--bg);
 }
 
-p {
-  color: #a7a7a7;
+@keyframes slide_right {
+  0% {
+    transform: translateX(-300%);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(20%);
+  }
+  80% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide_right {
+  animation-name: slide_right;
+  animation-duration: 0.4s;
+  animation-timing-function: ease;
 }
 
 .jumbotron {
@@ -48,8 +67,6 @@ p {
     background: 0;
 }
 
-.jumbotron img {
-}
 
 .jumbotron p, .jumbotron li {
   color: var(--white);
@@ -112,11 +129,13 @@ h3 {
 .blog-container .date {
   padding: 10px;
   margin-left: 20px;
+  color: var(--acc);
 }
 
 .blog-container p {
   text-indent: 2rem;
   /*font-size: 1.1rem;*/
+  color: #efefef;
 }
 
 .blog-container img {
@@ -142,9 +161,6 @@ h3 {
   padding: 40px 100px;
   border: 3px solid var(--acc);
   color: var(--acc);
-}
-
-a {
 }
 
 .card {
