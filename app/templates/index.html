@@ -7,12 +7,12 @@ home
 {% block meta %}
 <meta
   name="description"
-  content="writing code, among other things"
+  content="joseph hines - GNU/Linux poweruser, vim elitist, avid MMA fan, aspiring coffee/beer snob, and budding metalhead"
   >
-{% endblock %}
+  {% endblock %}
 
-{% block content %}
-<section class="jumbotron">
+  {% block content %}
+  <section class="jumbotron">
     <div class="container">
       <div class="row">
         <div class="col-md-4">
@@ -20,33 +20,43 @@ home
         </div>
         <div class="col-md-8">
           <p>Joseph Hines, a 5th year BS/MS Computer Science Student at Drexel University,
-          from a Northeast Philly suburb.</p>
+            from a Northeast Philly suburb.</p>
           <img class="fluid headshot slide_right" src="/img/headshot.jpg" alt="< headshot here >"/>
         </div>
       </div>
-      <div class="row">
+      <div class="row mb-3">
         <div class="col-md-4">
           <h3>What are my interests?</h3>
         </div>
         <div class="col-md-8">
-          <p>Full Stack Web Development, Computer Vision, Deep Learning,
-            Operating Systems, and Algorithms.</p>
-          <p>I am a Linux + VIM evangelist, avid MMA fan, aspiring coffee/beer snob,
-            and budding metalhead.</p>
+          <p>full stack web development, computer vision, deep learning,
+            operating systems, and algorithms</p>
+          <p>I am a GNU/Linux <i>poweruser</i>, a vim elitist, avid MMA fan, aspiring coffee/beer snob,
+            and budding metalhead</p>
+          <span class="text-muted">&gt; i use arch btw</span>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
-          <h3>What have you done?</h3>
+          <h3>What have you worked on?</h3>
         </div>
         <div class="col-md-8">
-          <p>All of the answers and more can be found
-            <a
-              href="/files/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              >in my resume</a>
-          </p>
+          <ul>
+            <li>Check out
+              <a
+                href="https://github.com/ephjos"
+                target="_blank"
+                rel="noopener noreferrer"
+                >my github</a>
+            </li>
+            <li>Take a look at
+              <a
+                href="/files/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                >my resume</a>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="row">
@@ -54,8 +64,6 @@ home
           <h3>What are you working on?</h3>
         </div>
         <div class="col-md-8">
-          <p>Aside from school and trying to stay healthy, I have a few projects that
-            are slowly being completed</p>
           <ul>
             <li>
               Maintaining my Arch linux dotfiles and
@@ -66,7 +74,7 @@ home
                 >bootstrapping script</a>
             </li>
             <li>
-              The Ray Tracer Challenge in Go,
+              The Ray Tracer Challenge in Go (and Kotlin),
               <a href="https://pragprog.com/titles/jbtracer/" target="_blank" rel="noreferrer noopener">
                 more here
               </a>
@@ -77,6 +85,6 @@ home
         </div>
       </div>
     </div>
-</section>
+  </section>
 
-{% endblock %}
+  {% endblock %}
