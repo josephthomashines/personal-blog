@@ -1,6 +1,7 @@
 version: '3'
 services:
   site:
+    container_name: site
     image: josephthomashines/site
     ports:
       - "5001:5001"
