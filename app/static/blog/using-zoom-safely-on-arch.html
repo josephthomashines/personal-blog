@@ -1,0 +1,158 @@
+<meta
+  name="description"
+  content="how to safely use zoom in firejail on arch linux"
+  >
+-----
+<div class="container">
+  <p>
+    With the whole world at home, we have seen the rise of
+    applications that were previously unknown to most
+    of the population. Unfortunately, one such application
+    is Zoom. As a student, I was forced to have to download
+    and use this piece of software for most of my lectures.
+    Given the astronomical increase in users, there were
+    many questions around just
+    <a
+      href="https://nymag.com/intelligencer/2020/04/the-zoom-app-has-a-lot-of-security-problems.html"
+      target="_blank"
+      rel="noopener noreferrer">
+      how safe is zoom?
+    </a>
+    Unfortunately, the answer is not "very".
+  <p>
+  <p>
+    There was a lot of finger pointing and shaming around this
+    topic, and I wish to engage in none of that. At the end of the
+    day, Zoom was an application that was simply not ready for
+    the amount of users it acquired. This made the application
+    a massive target, and stressed the system to its limits.
+    Since it had not been pushed to this level before, there were
+    many bugs and issues that posed serious security threats to
+    users. Combine these concerns with our inability to verify the
+    code running on their servers, and we effectively have a closed
+    source application that has not proven itself to be secure and
+    resilient; and we just moved nearly all business and education
+    meetings to its platform. Unfortunately, I still had no way to
+    avoid using this application, so I looked into the best way
+    that I could protect myself while attending lecture. After
+    some searching, I found a simple setup that helped move me
+    towards that goal.
+  </p>
+  <p>
+    The tool I found is called
+    <a
+      href="https://github.com/netblue30/firejail"
+      target="_blank"
+      rel="noopener noreferrer">
+      firejail</a>.
+    A simple C application with nearly no external dependencies,
+    firejail uses mechanisms to separate applications from the
+    system's environment. This restricts the application's access
+    to your system and can help get in the way of any potential
+    security threats. While firejail is almost certainly not
+    100% effective, and does not mitigate every kind of attack,
+    it does help protect your system and data. It is not advisable
+    to knowingly run malicious hardware within firejail, as holes
+    are likely to exist. Regardless, this is a clear step that
+    can be taken to help protect oneself. However, this does not help deal
+    with the issues of transmitting audio, video, and text in a
+    potentially unsecure way to a potentially untrustworthy party.
+  </p>
+  <p>
+    firejail can be installed on almost any linux system by building
+    from source, as well as installing it through a package manager.
+    On arch, I was able to install from the community repos using:
+  </p>
+  <pre>
+    <code class="Bash">
+yay -S firejail xorg-server-xephyr openbox
+    </code>
+  </pre>
+  <p>
+    The other two packages provide the functionality firejail uses to talk to
+    your machine's X server, and a window manager to be used within firejail.
+    This allows applications that open multiple windows to be easily
+    supported and organized. Before running firejail, we have to configure
+    audio pass through using:
+  </p>
+  <pre>
+    <code class="Bash">
+firecfg --fix-sound
+    </code>
+  </pre>
+  <p>
+    From here, you can choose to run <code class="Bash">sudo firecfg</code>
+    which will install profiles for all of your installed applications, and
+    automatically wrap them in an environment when run. I do not recommend
+    this, and I ran into issues when I tried it. Finally, we need just need to
+    launch firejail, telling it to use xephyr and openbox to run zoom.
+  </p>
+  <pre>
+    <code class="Bash">
+firejail --x11 --xephyr-screen=1280x720 --noprofile openbox --startup "zoom"
+    </code>
+  </pre>
+  <p>
+    Voila, zoom is launched within openbox inside of firejail.
+    In openbox, <b>ctrl+alt+⬅/➡</b>
+    will move to the left and right adjacent workspaces. Windows can be moved
+    left or right using <b>shift+alt+⬅/➡</b>. When done,
+    simply close out firejail and you're set.
+  </p>
+  <p style="margin-top: 15px">
+    In order to make this easier, I wrote a script which allows the user to easily
+    select the desired aspect ratio and resolution of the firejail window.
+  </p>
+  <pre>
+    <code class="Bash">
+#!/bin/bash
+#
+# e.g.
+#   launch_firejail zoom
+#
+
+if [ -z "${1}" ]; then
+  echo "You need to specify the application to run"
+  exit 0
+fi
+
+sizes=""
+
+echo "Pick your desired aspect ratio"
+select ar in 4:3 16:9 16:10
+do
+  case $ar in
+  4:3)
+    sizes="640x480 800x600 960x720 1024x768 1280x960 \
+    1400x1050 1440x1080 1600x1200 1856x1392 1920x1440 2048x1536"
+    ;;
+  16:9)
+    sizes="1024x576 1152x648 1280x720 1366x768 1600x900 \
+    1920x1080 2560x1440 3840x2160"
+    ;;
+  16:10)
+    sizes="1280x800 1440x900 1680x1050 1920x1200 2560x1600"
+    ;;
+  esac
+  break
+done
+
+echo "Select a resolution"
+select size in $sizes
+do
+  firejail --x11 --xephyr-screen="$size" --noprofile openbox --startup "$1"
+  break
+done
+    </code>
+  </pre>
+  <p>
+    While this is far from perfect, I had to take some step to help protect
+    myself and my system from a potentially dangerous piece of software.
+    Until I am no longer compelled to use this application for educational
+    and professional purposes, this will have to suffice. This whole experience
+    has reaffirmed my belief in having free and open source software,
+    and has sparked my interest in code validation. If we were able to publish
+    code publicly and prove that the servers are running this exact code,
+    then the whole web could be much more transparent and secure.
+  </p>
+</div>

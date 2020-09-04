@@ -134,8 +134,9 @@ h3 {
 
 .blog-container p {
   text-indent: 2rem;
-  /*font-size: 1.1rem;*/
+  font-size: 18px;
   color: #efefef;
+  line-height: 150%;
 }
 
 .blog-container img {
@@ -158,8 +159,8 @@ h3 {
 
 .blog-container .back-button {
   margin: 40px auto;
-  padding: 40px 100px;
-  border: 3px solid var(--acc);
+  padding: 40px 60px;
+  /*border: 3px solid var(--acc);*/
   color: var(--acc);
 }
 
