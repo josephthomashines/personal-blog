@@ -19,8 +19,8 @@ blog
   </h3>
   <div class="card-deck my-3">
     {% for post in posts %}
-    <a href="/blog/{{ post.name }}" class="card no-link mx-auto">
-      <div class="card-body text-white row">
+    <a href="/blog/{{ post.name }}" class="card no-link mx-auto my-0">
+      <div class="card-body text-white row my-0 p-2">
         <div class="col-md-3 text-muted">
           {{ post.datestr }}
         </div>

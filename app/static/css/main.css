@@ -2,64 +2,78 @@
  * Import fonts
  */
 @font-face {
-  font-family: JetBrains;
-  src: url("../font/JetBrainsMono-Regular.ttf");
-  font-display: swap;
+    font-family: JetBrains;
+    src: url("../font/JetBrainsMono-Regular.ttf");
+    font-display: swap;
 }
 
 @font-face {
-  font-family: JetBrainsBold;
-  src: url("../font/JetBrainsMono-ExtraBold.ttf");
-  font-display: swap;
+    font-family: JetBrainsBold;
+    src: url("../font/JetBrainsMono-ExtraBold.ttf");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Charter;
+    src: url("../font/CharterRegular.ttf");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: CharterBold;
+    src: url("../font/CharterBold.ttf");
+    font-display: swap;
 }
 
 html {
     /*
      * Variable declarations, available everywhere on the page
      */
-    --bg: #0B0c10;
-    --bg-alt: #1f2833;
-    --main: #c5c6c7;
-    --acc: #66fcf1;
-    --acc-alt: #f64c72;
+--bg: #15171e;
+--bg-alt: #1f2833;
+--main: #c5c6c7;
+--acc: #66fcf1;
+--acc-alt: #f64c72;
+--text: #ffffffe0;
+--link: #6495ED;
 }
 
 body {
-  font-family: "JetBrains";
-  font-size: 1rem;
-  background: var(--bg);
-  overflow-x: hidden;
+    font-family: "JetBrains", mono;
+    font-size: 1rem;
+    background: var(--bg);
+    overflow-x: hidden;
 }
 
 b {
-  font-family: "JetBrainsBold";
+    font-family: "JetBrainsBold", mono;
 }
 
 header {
-  background: var(--bg);
+    background: var(--bg);
 }
 
 @keyframes slide_right {
-  0% {
-    transform: translateX(-300%);
-    opacity: 0;
-  }
-  60% {
-    transform: translateX(20%);
-  }
-  80% {
-    transform: translateX(-10%);
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+    0% {
+        transform: translateX(-300%);
+        opacity: 0;
+    }
+    60% {
+        transform: translateX(20%);
+    }
+    80% {
+        transform: translateX(-10%);
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .slide_right {
-  animation-name: slide_right;
-  animation-duration: 0.4s;
-  animation-timing-function: ease;
+    animation-name: slide_right;
+    animation-duration: 0.4s;
+    animation-timing-function: ease;
 }
 
 .jumbotron {
@@ -69,123 +83,161 @@ header {
 
 
 .jumbotron p, .jumbotron li {
-  color: var(--white);
+    color: white;
 }
 
 .headshot {
-  width: 300px;
-  padding: 20px;
+    width: 300px;
+    padding: 20px;
 }
 
 .logo {
-  width: 30px;
-  height:30px;
+    width: 30px;
+    height:30px;
 }
 
 .text-bg {
-  color: var(--bg);
-  font-size: 1.3rem;
+    color: var(--bg);
+    font-size: 1.3rem;
 }
 
 .no-link, .no-link:hover {
-  color: #000;
-  text-decoration: none;
+    color: #000;
+    text-decoration: none;
 }
 
 .navbar {
-  font-size: 1.8rem;
+    font-size: 1.8rem;
 }
 
 .nav-link:hover {
-  text-decoration: underline var(--white);
+    text-decoration: underline white;
 }
 
 .nav-link > .second {
-  margin-left: -1.1rem;
+    margin-left: -1.1rem;
 }
 
 .nav-link > span {
-  position: relative;
-  transition: left 0.2s;
-  left: 0%;
-  color: var(--white);
+    position: relative;
+    transition: left 0.2s;
+    left: 0%;
+    color: white;
 }
 
 .home-button > span {
-  color: var(--acc);
+    color: var(--acc);
 }
 
 h3 {
-  color: var(--acc-alt);
+    color: var(--acc-alt);
 }
 
 .blog-container {
-  width: 100%;
-  max-width: 768px;
-  color: var(--white);
-  color: #a7a7a7;
+    width: 100%;
+    max-width: 768px;
+    color: #a7a7a7;
 }
 
 .blog-container .date {
-  padding: 10px;
-  margin-left: 20px;
-  color: var(--acc);
+    padding: 10px;
+    margin-left: 20px;
+    color: var(--acc);
 }
 
 .blog-container p {
-  text-indent: 2rem;
-  font-size: 18px;
-  color: #efefef;
-  line-height: 150%;
+    font-family: "Charter", serif;
+    padding: none;
+    margin-bottom: 1.75rem;
+    text-indent: 2rem;
+    font-size: 18px;
+    color: var(--text);
+    line-height: 150%;
+}
+
+a {
+    color: var(--link);
+}
+
+.blog-container p a {
+    text-decoration: underline;
+}
+
+.blog-container p a::hover {
+    color: var(--link);
+}
+
+.blog-container blockquote {
+    font-family: "Charter", serif;
+    font-size: 16px;
+    color: var(--text);
+    line-height: 125%;
+    margin-left: 20px;
+    padding-left: 20px;
+    border-left: 10px solid var(--bg-alt);
 }
 
 .blog-container img {
-  margin-top: 10px;
-  padding: 10px;
-  width: 100%;
-  box-shadow: 0px 0px 5px white;
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    box-shadow: 0px 0px 5px white;
 }
 
 .blog-container code {
-  padding: 20px;
+    padding: 20px;
 }
 
 .blog-container h2,
 .blog-container h3,
 .blog-container h4,
 .blog-container h5 {
-  color: var(--acc-alt);
+    color: var(--acc-alt);
 }
 
 .blog-container .back-button {
-  margin: 40px auto;
-  padding: 40px 60px;
-  /*border: 3px solid var(--acc);*/
-  color: var(--acc);
+    margin: 40px auto;
+    padding: 40px 60px;
+    /*border: 3px solid var(--acc);*/
+    color: var(--acc);
+}
+
+.blog-container p:first-of-type{
+    margin-top: 20px;
+}
+
+.blog-container p:first-of-type:first-letter {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--acc-alt);
 }
 
 .card {
-  min-width: 100%;
-  transition: 0.2s;
-  background: none;
-  border: 1px solid var(--bg);;
+    min-width: 100%;
+    transition: 0.2s;
+    background: none;
+    border: 1px solid var(--bg);;
 }
 
 .card-img-overlay {
-  background: rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.8);
 }
 
 .card:hover {
-  cursor: pointer;
-  border: 1px solid grey;
+    cursor: pointer;
+    border: 1px solid grey;
+}
+
+.no-indent {
+    text-indent: 0 !important;
 }
 
 @media only screen and (min-width: 768px) {
-  .nav-link:hover > .first {
-    left: 50%;
-  }
+    .nav-link:hover > .first {
+        left: 50%;
+    }
 
-  .nav-link:hover > .second {
-    left: -50%;
-  }
+    .nav-link:hover > .second {
+        left: -50%;
+    }
 }

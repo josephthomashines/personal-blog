@@ -10,7 +10,7 @@ app = Flask(__name__, static_url_path='')
 BLOG_DIR = "./static/blog/"
 BLOGF = BLOG_DIR+"{}.html"
 META_SPLIT = "-----"
-DATEF = "%m/%d/%Y %H:%M:%S"
+DATEF = "%m/%d/%Y"
 
 
 class BlogPost:
@@ -31,9 +31,12 @@ def render_blogpost(blog: BlogPost, body: str, meta: str):
 
 
 def get_post_mtime(file):
-    epoch_time = os.stat(BLOG_DIR+file).st_mtime
-    mtime = datetime.fromtimestamp(epoch_time)
-    return mtime
+    with open(BLOG_DIR+file) as file:
+        line = next(file).strip()
+        try:
+            return datetime.strptime(line, DATEF)
+        except Exception:
+            return None
 
 
 @app.route('/')
@@ -55,8 +58,8 @@ def posts():
     for file in os.listdir(BLOG_DIR):
         name = file.split(".html")[0]
         mtime = get_post_mtime(file)
-
-        blogs.append(BlogPost(mtime, name))
+        if mtime is not None:
+            blogs.append(BlogPost(mtime, name))
 
     blogs = sorted(blogs, key=lambda x: x.date, reverse=True)
     return render_template("blog.html", posts=blogs)
@@ -68,7 +71,7 @@ def post(name):
         path = BLOGF.format(name)
         with open(path) as html_raw:
             body_raw = html_raw.read().split(META_SPLIT)
-            meta = body_raw[0]
+            meta = "\n".join(body_raw[0].split("\n")[1:])
             body = body_raw[1]
 
             file = path.split("/")[-1]
