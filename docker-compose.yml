@@ -3,7 +3,6 @@ services:
   site:
     container_name: site
     build: .
-    image: josephthomashines/site
     ports:
       - "5001:5001"
     environment:

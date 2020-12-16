@@ -1,11 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'base.tmpl' %}
 
-{% block title %}
-{{ name.replace("-", " ") }}
-{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block meta %}
-{{ meta|safe }}
+<meta
+  name="description"
+  content="{{ description }}">
 <link
   rel="preload"
   href="/lib/hljs/gruvbox-dark.min.css"
@@ -26,7 +26,7 @@
 <div class="container blog-container mb-3">
   <div class="row">
     <h3>
-      {{ name.replace("-", " ") }}
+      {{ title }}
     </h3>
     <span class="date">
       {{ date }}
@@ -36,11 +36,13 @@
   </div>
   <div class="row">
     <p>
-      {{ body|safe }}
+      <div class="blog-container">
+        {{ content|safe }}
+      </div>
     </p>
   </div>
   <div class="row">
-    <a href="/blog" class="back-button">⬅ back to blog posts</a>
+    <a href="/blog.html" class="back-button">⬅ back to blog posts</a>
   </div>
 </div>
 

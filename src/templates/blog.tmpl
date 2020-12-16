@@ -1,8 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'base.tmpl' %}
 
-{% block title %}
-blog
-{% endblock %}
+{% block title %}blog{% endblock %}
 
 {% block meta %}
 <meta
@@ -12,20 +10,19 @@ blog
 {% endblock %}
 
 {% block content %}
-
 <div class="container blog-container">
   <h3>
     blog posts
   </h3>
   <div class="card-deck my-3">
     {% for post in posts %}
-    <a href="/blog/{{ post.name }}" class="card no-link mx-auto my-0">
+    <a href="/blog/{{ post.slug }}" class="card no-link mx-auto my-0">
       <div class="card-body text-white row my-0 p-2">
         <div class="col-md-3 text-muted">
-          {{ post.datestr }}
+          {{ post.date }}
         </div>
         <div class="col-md-9">
-          {{ post.name.replace("-", " ") }}
+          {{ post.title }}
         </div>
       </div>
     </a>
