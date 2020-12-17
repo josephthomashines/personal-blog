@@ -140,9 +140,11 @@ h3 {
 }
 
 .blog-container .date {
+  /*
   padding: 10px;
   margin-left: 20px;
   color: var(--acc);
+  */
 }
 
 .blog-container p {
@@ -153,6 +155,10 @@ h3 {
   font-size: 18px;
   color: var(--text);
   line-height: 150%;
+}
+
+.blog-container .footnotes p {
+  text-indent: 0rem;
 }
 
 a {
@@ -187,6 +193,7 @@ a {
 
 .blog-container pre {
   padding: 20px;
+  color: var(--text);
 }
 
 .blog-container h2,

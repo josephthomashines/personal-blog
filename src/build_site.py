@@ -27,7 +27,7 @@ def parse_md(fn):
             extras=[
                 'metadata', 'footnotes', 'code-friendly', 'target-blank-links',
                 'fenced-code-blocks'],
-            footnote_return_symbol="Back")
+            footnote_return_symbol="goto")
         return {
             'content': pmd,
             'title': pmd.metadata['title'],
