@@ -26,7 +26,7 @@ def estimate_read_time(content):
     """
     wpm = 200
     words = len(content.split(" "))
-    return "Est. reading time: {} mins".format(words // wpm)
+    return "{} minute read".format(max(1,words // wpm))
 
 def parse_md(fn):
     with open(os.path.join(POSTS, fn), 'r') as fp:
