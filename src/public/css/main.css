@@ -139,13 +139,13 @@ h3 {
   color: #a7a7a7;
 }
 
+/*
 .blog-container .date {
-  /*
   padding: 10px;
   margin-left: 20px;
   color: var(--acc);
-  */
 }
+*/
 
 .blog-container p {
   font-family: "Charter", serif;
@@ -157,8 +157,13 @@ h3 {
   line-height: 150%;
 }
 
-.blog-container .footnotes p {
+.blog-container .footnotes p,
+.blog-container blockquote p {
   text-indent: 0rem;
+}
+
+.blog-container sup {
+  padding: 2px;
 }
 
 a {

@@ -21,7 +21,10 @@ slow website. The source for the site was spread over a small collection of
 components, using a proper build system to generate the final output. Making
 changes required changes in code, which was not conducive to writing. The
 resulting bundle was more than a few megabytes, which is unacceptable.
-**Frameworks are for web applications, not websites.** This is a realization
+
+> Frameworks are for web applications, not websites.
+
+This is a realization
 that I had all too recently, but I feel it is important to say. Especially in
 today's climate where we spend so much time chasing and learning new tools, just
 for the sake of their novelty. A tool should be selected for its value to the
