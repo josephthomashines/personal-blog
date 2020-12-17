@@ -13,6 +13,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY mime.types /etc/nginx/conf/mime.types
 RUN cp -r dist/ /var/www
 
+ENV LISTEN_PORT 5001
 EXPOSE 5001
 
 CMD ["nginx"]

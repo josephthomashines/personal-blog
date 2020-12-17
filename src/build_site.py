@@ -20,6 +20,14 @@ DIST = '../dist/'
 
 DATE_FMT = '%Y/%m/%d'
 
+def estimate_read_time(content):
+    """
+    Using an estimated words per minute, estimate reading time
+    """
+    wpm = 200
+    words = len(content.split(" "))
+    return "Est. reading time: {} mins".format(words // wpm)
+
 def parse_md(fn):
     with open(os.path.join(POSTS, fn), 'r') as fp:
         pmd = markdown(
@@ -36,6 +44,7 @@ def parse_md(fn):
                 ".html",
             'date': pmd.metadata['date'],
             'description': pmd.metadata['description'],
+            'read_time': estimate_read_time(pmd),
         }
 
 def populate_page(fn):
