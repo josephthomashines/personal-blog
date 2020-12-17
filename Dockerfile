@@ -12,6 +12,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY mime.types /etc/nginx/conf/mime.types
 RUN cp -r dist/ /var/www
 
-EXPOSE 80
+EXPOSE 5001
 
 CMD ["nginx"]

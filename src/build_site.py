@@ -21,7 +21,12 @@ DATE_FMT = '%Y/%m/%d'
 
 def parse_md(fn):
     with open(os.path.join(POSTS, fn), 'r') as fp:
-        pmd = markdown(fp.read(), extras=['metadata'])
+        pmd = markdown(
+            fp.read(),
+            extras=[
+                'metadata', 'footnotes', 'code-friendly', 'target-blank-links',
+                'fenced-code-blocks'],
+            footnote_return_symbol="Back")
         return {
             'content': pmd,
             'title': pmd.metadata['title'],
