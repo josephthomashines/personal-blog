@@ -2,6 +2,7 @@ version: '3'
 services:
   site:
     container_name: site
+    image: josephthomashines/site
     build: .
     ports:
       - "5001:5001"

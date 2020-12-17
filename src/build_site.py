@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from datetime import datetime
 import glob
+from loguru import logger
 from jinja2 import Environment, PackageLoader
 from markdown2 import markdown
 import os
@@ -44,6 +45,7 @@ def populate_page(fn):
     with open(os.path.join(DIST, fn), 'w') as fp:
         tmpl = env.get_template(fn)
         fp.write(tmpl.render())
+        logger.info("Populated {}".format(fn))
 
 def prepare_dir():
     """
@@ -51,8 +53,10 @@ def prepare_dir():
     """
     if os.path.isdir(DIST):
         shutil.rmtree(DIST)
+        logger.info("Removed {}".format(DIST))
     shutil.copytree(PUBLIC, DIST)
     os.makedirs(BLOG)
+    logger.info("Initialized {}".format(DIST))
 
 def build_pages():
     """
@@ -79,6 +83,7 @@ def build_blog():
         os.makedirs('/'.join(full.split('/')[:-1]), exist_ok=True)
         with open(full, 'w') as fp:
             fp.write(post_template.render(post))
+            logger.info("Created post '{}'".format(post['title']))
 
 def main():
     prepare_dir()
