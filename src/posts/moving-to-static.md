@@ -2,7 +2,7 @@ title: Moving to a lightweight static site
 date: 2020/12/17
 description: A lightweight custom static site generator using python, Jinja2, and Markdown2
 
-After one too many conversions about the state of the web, arguing against giant
+After one too many conversations about the state of the web, arguing against giant
 bundles and slow sites, I have decided to make this site fully static with no
 external JavaScript libraries. Previous
 iterations of the site have both been static and server-side rendered. The
@@ -50,8 +50,8 @@ but to do it by myself, and try to include no external JavaScript on the client.
 The solution I have now is using python3, inspired by
 [this post on dev.to](https://dev.to/nqcm/making-a-static-site-generator-with-python-part-1-3kn3).
 Using the Jinja2[^jinja] module for templating and Markdown2[^markdown2] for markdown parsing, it is
-remarkably simple to roll your own static site generator. Jinja key contribution
-is that it allows the site to be decoupled. This allows separation of both
+remarkably simple to roll your own static site generator. Jinja's key contribution
+is that it allows the site's components to be decoupled. This allows separation of both
 structure and content, but also allows for repeated HTML to be easily shared.
 For example, the header component of this page is part of the base template,
 which every other page extends. I can change the header in this base file,
@@ -97,9 +97,6 @@ markdown again, there is much less friction when trying to start which I hope
 will allow me to write more. Since things are much simpler, I do not have to
 worry about external factors nearly as much as before. The final site is just
 HTML and CSS, with room for some of my own JavaScript if necessary.
-Going forward, I want to setup some additional features like estimated reading
-time and hot-reloading for development. I am not committing to anything just
-yet, but I am interested in the idea of writing here on a consistent basis.
 
 If you read all the way here, stop using React for simple websites and enjoy
 the holidays.
