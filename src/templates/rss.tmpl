@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+   <title>ephjos's blog</title>
+   <description>ephjos's blog</description>
+   <link>http://www.ephjos.io</link>
+   <atom:link href="http://ephjos.io/feed.xml"
+     rel="self" type="application/rss+xml" />
+
+   {% for post in posts %}
+   <item>
+      <title>{{ post.title }}</title>
+      <link>http://ephjos.io/blog/{{ post.slug }}</link>
+      <guid>http://ephjos.io/blog/{{ post.slug }}</guid>
+      <pubDate>{{ post.pub_date }}</pubDate>
+   </item>
+   {% endfor %}
+
+</channel>
+</rss>
