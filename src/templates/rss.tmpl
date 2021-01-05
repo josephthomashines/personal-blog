@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/">
 <channel>
    <title>ephjos's blog</title>
-   <description>ephjos's blog</description>
-   <link>http://www.ephjos.io</link>
-   <atom:link href="http://ephjos.io/feed.xml"
-     rel="self" type="application/rss+xml" />
+   <description>
+      joseph hines - GNU/Linux poweruser, vim elitist, avid MMA fan,
+      aspiring coffee/beer snob, and budding metalhead
+   </description>
+   <link href="https://ephjos.io/feed.xml" rel="self" type="application/atom+xml"/>
+   <link href="https://ephjos.io/" rel="alternate" type="text/html"/>
+   <author>
+      <name>ephjos</name>
+   </author>
 
    {% for post in posts %}
    <item>
@@ -13,6 +19,12 @@
       <link>http://ephjos.io/blog/{{ post.slug }}</link>
       <guid>http://ephjos.io/blog/{{ post.slug }}</guid>
       <pubDate>{{ post.pub_date }}</pubDate>
+      <content:encoded>
+         <![CDATA[ {{ post.content }} ]]>
+      </content:encoded>
+      <author>
+         <name>ephjos</name>
+      </author>
    </item>
    {% endfor %}
 
