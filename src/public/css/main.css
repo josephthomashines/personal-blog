@@ -45,6 +45,9 @@ body {
   overflow-x: hidden;
 }
 
+main {
+}
+
 b {
   font-family: "JetBrainsBold", mono;
 }
@@ -247,6 +250,26 @@ a {
   text-indent: 0 !important;
 }
 
+footer {
+  text-align: center;
+  color: var(--text);
+  padding: 5px;
+  margin-top: 10px;
+}
+
+footer > div {
+  padding: 5px;
+}
+
+footer > div > a {
+  margin: 0 4px;
+}
+
+footer > div > div {
+  margin: 8px 4px 0px 4px;
+  font-size: 0.8rem;
+}
+
 @media only screen and (min-width: 768px) {
   .nav-link:hover > .first {
     left: 50%;
@@ -256,3 +279,4 @@ a {
     left: -50%;
   }
 }
+
