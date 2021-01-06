@@ -4,7 +4,7 @@ RUN apk add --update py3-pip
 
 COPY src/ src/
 WORKDIR src/
-RUN pip3 install markdown2 Jinja2 Pygments loguru
+RUN pip3 install markdown2 Jinja2 Pygments loguru bs4
 RUN python3 --version
 RUN python3 build_site.py
 WORKDIR ..

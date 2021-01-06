@@ -169,6 +169,12 @@ h3 {
   padding: 2px;
 }
 
+.blog-container .preview-text p {
+  font-size: 0.9rem;
+  text-indent: 0rem;
+  color: #ffffffb0;
+}
+
 a {
   color: var(--link);
 }
