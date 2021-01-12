@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import argparse
 from bs4 import BeautifulSoup
 from datetime import datetime
 import glob
@@ -19,6 +20,7 @@ TEMPLATES = './templates/'
 PUBLIC = './public/'
 BLOG = '../dist/blog/'
 DIST = '../dist/'
+DEV = False
 
 DATE_FMT = '%Y/%m/%d'
 
@@ -65,7 +67,7 @@ def populate_page(fn):
     '''
     with open(os.path.join(DIST, fn), 'w') as fp:
         tmpl = env.get_template(fn)
-        fp.write(tmpl.render())
+        fp.write(tmpl.render(dev=DEV))
         logger.info('Populated {}'.format(fn))
 
 def prepare_dir():
@@ -104,11 +106,11 @@ def build_blog():
 
     # Create blog index page
     with open(os.path.join(DIST, 'blog.html'), 'w') as fp:
-        fp.write(blog_template.render(posts=sposts))
+        fp.write(blog_template.render(posts=sposts, dev=DEV))
 
     # Create RSS feed
     with open(os.path.join(DIST, 'feed.xml'), 'w') as fp:
-        fp.write(rss_template.render(posts=sposts))
+        fp.write(rss_template.render(posts=sposts, dev=DEV))
     logger.info('Created feed.xml')
 
     # Create each post page
@@ -116,7 +118,7 @@ def build_blog():
         full = os.path.join(BLOG, post['slug'])
         os.makedirs('/'.join(full.split('/')[:-1]), exist_ok=True)
         with open(full, 'w') as fp:
-            fp.write(post_template.render(post))
+            fp.write(post_template.render(post, dev=DEV))
             logger.info('Created post \'{}\''.format(post['title']))
 
 def main():
@@ -125,5 +127,20 @@ def main():
     build_blog()
 
 if __name__ == '__main__':
+    def str2bool(v):
+        if isinstance(v, bool):
+           return v
+        if v.lower() in ('yes', 'true', 't', 'y', '1'):
+            return True
+        elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+            return False
+        else:
+            raise argparse.ArgumentTypeError('Boolean value expected.')
+    parser = argparse.ArgumentParser(description='Configure site build')
+    parser.add_argument("--dev", type=str2bool, nargs='?',
+                        const=True, default=False,
+                        help="Activate dev.")
+    args = parser.parse_args()
+    DEV = args.dev
     main()
 
