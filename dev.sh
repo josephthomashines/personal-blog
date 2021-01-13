@@ -2,7 +2,10 @@
 #
 
 filewatch() {
-  while inotifywait --exclude .swp -e modify -r . &> /dev/null; do clear; $@; done;
+  while inotifywait --exclude .swp -e modify -r . &> /dev/null; do
+    clear;
+    $@;
+  done;
 }
 
 (cd src && . ./venv/bin/activate && \
