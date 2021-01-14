@@ -45,9 +45,6 @@ body {
   overflow-x: hidden;
 }
 
-main {
-}
-
 b {
   font-family: "JetBrainsBold", mono;
 }
@@ -274,6 +271,10 @@ footer > div > a {
 footer > div > div {
   margin: 8px 4px 0px 4px;
   font-size: 0.8rem;
+}
+
+hr {
+  background: #fff;
 }
 
 @media only screen and (min-width: 768px) {
