@@ -173,7 +173,8 @@ a {
   margin: 10px auto 0 auto;
   padding: 5px;
   display: block;
-  width: 700px;
+  width: 100%;
+  max-width: 800px;
 }
 
 .back:hover {
@@ -272,6 +273,11 @@ a {
   line-height: 150%;
 }
 
+.post .footnotes {
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
 .post .footnotes p,
 .post blockquote p {
   text-indent: 0rem;
@@ -305,6 +311,7 @@ a {
 .post pre {
   padding: 20px;
   color: var(--text);
+  margin-bottom: 10px;
 }
 
 .post h2,
@@ -319,8 +326,6 @@ a {
   width: max-content;
   padding: 5px;
   margin: 5px auto;
-  /*border: 3px solid var(--acc);*/
-  /*color: var(--acc);*/
 }
 
 footer {
