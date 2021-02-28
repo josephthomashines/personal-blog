@@ -55,6 +55,26 @@ html {
                  var(--ts-delta) var(--ts-delta) var(--ts-spread) var(--pink);
 }
 
+@keyframes glowCyan {
+  0% {
+    text-shadow: none;
+  }
+  50% {
+    text-shadow: var(--cyan-shadow);
+  }
+  100% {
+    text-shadow: none;
+  }
+}
+
+@keyframes wiggle {
+    0% { transform: rotate(0deg);  }
+   80% { transform: rotate(0deg);  }
+   85% { transform: rotate(15deg);  }
+   95% { transform: rotate(-15deg); }
+  100% { transform: rotate(0deg);  }
+}
+
 body {
   font-family: "JetBrains", mono;
   font-size: 1rem;
@@ -101,6 +121,7 @@ a {
   display: inline;
   color: var(--cyan);
   vertical-align: middle;
+  animation: glowCyan 10s ease-in-out 0s infinite;
 }
 
 .full-center > .container > .info {
@@ -112,11 +133,40 @@ a {
   margin-left: 20px;
 }
 
-.full-center > .container > .info > span:nth-child(even) {
+
+.full-center > .container > .info > span:nth-child(odd) {
+  animation-name: wiggle;
+  animation-iteration-count: infinite;
 }
 
-.full-center > .container > span {
-  margin-left: 20px;
+.full-center > .container > .info > span:nth-child(1) {
+  animation-duration: 5s;
+  animation-delay: 1s;
+}
+
+.full-center > .container > .info > span:nth-child(3) {
+  animation-duration: 3s;
+  animation-delay: 2s;
+}
+
+.full-center > .container > .info > span:nth-child(5) {
+  animation-duration: 7s;
+  animation-delay: 0s;
+}
+
+.full-center > .container > .info > span:nth-child(7) {
+  animation-duration: 9s;
+  animation-delay: 4s;
+}
+
+.full-center > .container > .info > span:nth-child(9) {
+  animation-duration: 3s;
+  animation-delay: 6s;
+}
+
+.full-center > .container > .info > span:nth-child(11) {
+  animation-duration: 4s;
+  animation-delay: 2s;
 }
 
 footer {
@@ -139,5 +189,4 @@ footer > .disclaimer {
 footer > .copy {
   margin-top: 10px;
   color: var(--pink);
-  text-shadow: var(--pink-shadow);
 }
