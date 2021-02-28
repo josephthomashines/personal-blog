@@ -100,7 +100,7 @@ a {
 .container {
   margin: 0 auto;
   max-width: 600px;
-  padding: 10px;
+  padding: 20px;
   color: var(--text);
   display: flex;
   flex-wrap: wrap;
@@ -132,7 +132,6 @@ a {
   margin-top: 10px;
   margin-left: 20px;
 }
-
 
 .full-center > .container > .info > span:nth-child(odd) {
   animation-name: wiggle;
@@ -169,14 +168,22 @@ a {
   animation-delay: 2s;
 }
 
-.home {
+.back {
   text-decoration: none;
+  margin: 10px auto 0 auto;
+  padding: 5px;
+  display: block;
+  width: 700px;
+}
+
+.back:hover {
+  text-decoration: underline;
 }
 
 .blog-container {
   margin: 0 auto;
   max-width: 600px;
-  padding: 10px;
+  padding: 20px;
   color: var(--text);
   display: flex;
   flex-wrap: wrap;
@@ -223,6 +230,97 @@ a {
   color: var(--text);
   margin-left: 5px;
   font-size: 0.9rem;
+}
+
+.post-container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 80ch;
+  padding: 20px;
+  color: var(--text);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.post-container > span:nth-child(1) {
+  color: var(--text-muted);
+}
+
+.post-container > span:nth-child(2) {
+  margin-left: 10px;
+}
+
+.post-container > h2 {
+  color: var(--pink);
+  width: 100%;
+}
+
+.post-container > .post {
+  color: var(--text);
+  width: 100%;
+  max-width: 70ch;
+  margin: 10px auto 0 auto;
+}
+
+.post p {
+  font-family: "Charter", serif;
+  padding: none;
+  margin-bottom: 1.75rem;
+  text-indent: 2rem;
+  font-size: 18px;
+  color: var(--text);
+  line-height: 150%;
+}
+
+.post .footnotes p,
+.post blockquote p {
+  text-indent: 0rem;
+}
+
+.post sup {
+  padding: 2px;
+}
+
+.post p a {
+  text-decoration: underline;
+}
+
+.post blockquote {
+  font-family: "Charter", serif;
+  font-size: 16px;
+  color: var(--text);
+  line-height: 125%;
+  margin-left: 20px;
+  padding-left: 20px;
+  border-left: 10px solid var(--bg-light);
+}
+
+.post img {
+  display: block;
+  margin: 10px 0 10px 0;
+  padding: 10px 0 10px 0;
+  width: 100%;
+}
+
+.post pre {
+  padding: 20px;
+  color: var(--text);
+}
+
+.post h2,
+.post h3,
+.post h4,
+.post h5 {
+  color: var(--acc-alt);
+}
+
+.post-container > .back-button {
+  display: block;
+  width: max-content;
+  padding: 5px;
+  margin: 5px auto;
+  /*border: 3px solid var(--acc);*/
+  /*color: var(--acc);*/
 }
 
 footer {

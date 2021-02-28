@@ -18,32 +18,16 @@
 
 {% block content %}
 
-<div class="container blog-container mb-3">
-  <div class="row">
-    <span class="date text-muted">
-      {{ date }}
-    </span>
-    <span class="ml-3">
-      {{ read_time }}
-    </span>
+<a class="back" href="/blog.html">&lt;- Blog</a>
+<div class="post-container">
+  <span>{{ date }}</span><span>{{ read_time }}</span>
+  <h2>
+    {{ title }}
+  </h2>
+  <div class="post">
+    {{ content|safe }}
   </div>
-  <div class="row">
-    <h3>
-      {{ title }}
-    </h3>
-  </div>
-  <div class="row my-2">
-  </div>
-  <div class="row">
-    <p>
-      <div class="blog-container">
-        {{ content|safe }}
-      </div>
-    </p>
-  </div>
-  <div class="row">
-    <a href="/blog.html" class="back-button umami--click--back-blog-button">back to blog posts</a>
-  </div>
+  <a href="/blog.html" class="back-button umami--click--back-blog-button">back to blog posts</a>
 </div>
 
 {% endblock %}
