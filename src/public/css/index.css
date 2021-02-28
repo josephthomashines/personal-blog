@@ -312,6 +312,11 @@ a {
   padding: 20px;
   color: var(--text);
   margin-bottom: 10px;
+  overflow-x: auto;
+}
+
+.post p code {
+  color: var(--pink);
 }
 
 .post h2,
