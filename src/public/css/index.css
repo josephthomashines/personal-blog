@@ -1,0 +1,143 @@
+/*
+ * Import fonts
+ */
+@font-face {
+  font-family: JetBrains;
+  src: url("../font/JetBrainsMono-Regular.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: JetBrainsBold;
+  src: url("../font/JetBrainsMono-ExtraBold.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Charter;
+  src: url("../font/CharterRegular.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: CharterBold;
+  src: url("../font/CharterBold.ttf");
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+}
+
+html {
+  /*
+   * Variable declarations, available everywhere on the page
+   */
+  --bg: #15171e;
+  --bg-light: #1f2833;
+  --gray: #c5c6c7;
+  --cyan: #66fcf1;
+  --pink: #f64c72;
+  --text: #ffffffe0;
+  --text-muted: #888888;
+  --link-blue: #6495ED;
+
+  --ts-delta: 2px;
+  --ts-neg-delta: calc(-1 * var(--ts-delta));
+  --ts-spread: 10px;
+
+  --cyan-shadow: var(--ts-neg-delta) var(--ts-neg-delta) var(--ts-spread) var(--cyan),
+                 var(--ts-delta) var(--ts-delta) var(--ts-spread) var(--cyan);
+  --pink-shadow: var(--ts-neg-delta) var(--ts-neg-delta) var(--ts-spread) var(--pink),
+                 var(--ts-delta) var(--ts-delta) var(--ts-spread) var(--pink);
+}
+
+body {
+  font-family: "JetBrains", mono;
+  font-size: 1rem;
+  background: var(--bg);
+  overflow-x: hidden;
+}
+
+b {
+  font-family: "JetBrainsBold", mono;
+}
+
+a {
+  color: var(--link-blue);
+}
+
+.full-center {
+  width: 100vw;
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 10px;
+  color: var(--text);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.full-center > .container > * {
+  width: 100%;
+}
+
+.full-center > .container > .brand > img {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.full-center > .container > .brand > h1 {
+  width: auto;
+  display: inline;
+  color: var(--cyan);
+  vertical-align: middle;
+}
+
+.full-center > .container > .info {
+  display: grid;
+  grid-template-columns: 30px auto;
+  grid-template-rows: auto;
+  row-gap: 5px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.full-center > .container > .info > span:nth-child(even) {
+}
+
+.full-center > .container > span {
+  margin-left: 20px;
+}
+
+footer {
+  width: 100vw;
+  text-align: center;
+  padding: 10px;
+}
+
+footer > .links > a  {
+  margin: 5px;
+}
+
+footer > .disclaimer {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  width: 200px;
+  margin: 10px auto 0 auto;
+}
+
+footer > .copy {
+  margin-top: 10px;
+  color: var(--pink);
+  text-shadow: var(--pink-shadow);
+}

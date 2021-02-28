@@ -10,7 +10,7 @@ filewatch() {
 
 (cd src && . ./venv/bin/activate && \
   python build_site.py --dev && filewatch python build_site.py --dev) &
-(browser-sync start --server dist --watch src/**/*) &
+(browser-sync start --server --serveStatic dist --watch src/** src/**/** src/**/**/** --no-open) &
 
 wait
 
