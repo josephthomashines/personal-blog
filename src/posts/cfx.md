@@ -1,4 +1,4 @@
-title: cfx: simple native C visualization using Xlib and ffmpeg
+title: cfx - simple native C visualization using Xlib and ffmpeg
 date: 2021/01/14
 description: Using Xlib and ffmpeg (libav) to easily visualize and record
 using C
@@ -13,10 +13,10 @@ spending a lot of time searching the web, I found
 starting point. This library provides a simple way to create a window and draw
 some primitives to it.
 
-My initial concern was the lack of cleanup code present in gfx, so this is where
-I started. Delving into the amorphous and incomplete Xlib documentation was a
-pain, and I found that exploring the source code was a much more efficient way
-to understand the API.
+My initial concern was the lack of cleanup code present in gfx, so this
+is where I started. Delving into the amorphous and incomplete
+Xlib documentation was a pain, and I found that exploring the source code
+was a much more efficient way to understand the API.
 
 All of the
 [source code is on my github](https://github.com/ephjos/cut/tree/main/cfx).

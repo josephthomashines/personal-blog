@@ -326,6 +326,11 @@ a {
   color: var(--acc-alt);
 }
 
+.post hr {
+  border: 1px dashed var(--text-muted);
+  margin-bottom: 10px;
+}
+
 .post-container > .back-button {
   display: block;
   width: max-content;
