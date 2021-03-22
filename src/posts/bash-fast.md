@@ -7,10 +7,10 @@ support, my bash loading time had slowed down substantially. I was consistently
 opening a new shell and typing before my prompt was printed, which was irritating
 to say the least. I stumbled on Daniel Parker's post on
 [Faster Bash Startup](https://danpker.com/posts/faster-bash-startup/), which
-was a great starting point.
-The two key takeaways here are the tool
+was a great starting point to fix this issue.
+The two key takeaways from this post are using the tool
 [hyperfine](https://github.com/sharkdp/hyperfine) and carefully avoiding
-computation where necessary.
+unnecessary computation.
 
 ## Hyperfine
 
