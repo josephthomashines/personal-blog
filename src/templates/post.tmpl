@@ -11,6 +11,30 @@
   href="/css/monokai.css"
   as="style"
   onload="this.onload=null;this.rel='stylesheet'">
+<script type="text/javascript" defer>
+  // Automatically add link for headings that have ids
+  window.addEventListener("load", () => {
+    const post = document.querySelector("div.post");
+    if (!post) {
+      return;
+    }
+    const heads = post.querySelectorAll("h2", "h3", "h4", "h5");
+    if (!heads) {
+      return;
+    }
+    for (const head of heads) {
+        if (!head.hasAttribute("id")) {
+          continue;
+        }
+        const id = head.getAttribute("id");
+        const link = document.createElement("a");
+        link.innerText = "#";
+        link.href = "#" + id;
+        link.classList.add("heading-link");
+        head.appendChild(link);
+    }
+  })
+</script>
 <noscript>
   <link rel="stylesheet" href="/css/monokai.css">
 </noscript>

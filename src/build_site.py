@@ -38,7 +38,7 @@ def parse_md(fn):
             fp.read(),
             extras=[
                 'metadata', 'footnotes', 'code-friendly', 'target-blank-links',
-                'fenced-code-blocks'],
+                'fenced-code-blocks', 'header-ids'],
             footnote_return_symbol='goto')
 
         pub_date = datetime\

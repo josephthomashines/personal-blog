@@ -1,4 +1,4 @@
-title: Moving to a lightweight static site
+title: moving to a lightweight static site
 date: 2020/12/17
 description: A lightweight custom static site generator using python, Jinja2, and Markdown2
 

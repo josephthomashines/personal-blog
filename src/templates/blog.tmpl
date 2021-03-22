@@ -19,7 +19,7 @@
     {% for post in posts %}
     <a href="/blog/{{ post.slug }}" class="card">
       <div class="card-body">
-        <span>{{ post.date }}</span>
+        <span>{{ post.date }} - {{ post.read_time }}</span>
         <h4>{{ post.title }}</h4>
         <p>
           {{ post.preview }}

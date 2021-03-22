@@ -41,7 +41,7 @@ html {
   --gray: #c5c6c7;
   --cyan: #66fcf1;
   --pink: #f64c72;
-  --text: #ffffffe0;
+  --text: #cccccc;
   --text-muted: #888888;
   --link-blue: #6495ED;
 
@@ -236,7 +236,7 @@ a {
 .post-container {
   margin: 0 auto;
   width: 100%;
-  max-width: 80ch;
+  max-width: 70ch;
   padding: 20px;
   color: var(--text);
   display: flex;
@@ -266,11 +266,18 @@ a {
 .post p {
   font-family: "Charter", serif;
   padding: none;
-  margin-bottom: 1.75rem;
   text-indent: 2rem;
   font-size: 18px;
   color: var(--text);
   line-height: 150%;
+}
+
+.post *:first-child {
+  margin-top: 1.5rem;
+}
+
+.post * + * {
+  margin-top: 1rem;
 }
 
 .post .footnotes {
@@ -311,7 +318,6 @@ a {
 .post pre {
   padding: 20px;
   color: var(--text);
-  margin-bottom: 10px;
   overflow-x: auto;
 }
 
@@ -323,19 +329,25 @@ a {
 .post h3,
 .post h4,
 .post h5 {
-  color: var(--acc-alt);
+  color: var(--cyan);
+  padding: 5px 0px;
 }
+
+.post .heading-link {
+  color: var(--text-muted);
+  padding: 5px;
+}
+
 
 .post hr {
   border: 1px dashed var(--text-muted);
-  margin-bottom: 10px;
 }
 
 .post-container > .back-button {
   display: block;
   width: max-content;
   padding: 5px;
-  margin: 5px auto;
+  margin: 1rem auto 0 auto;
 }
 
 footer {
