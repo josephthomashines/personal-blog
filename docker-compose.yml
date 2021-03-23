@@ -8,4 +8,3 @@ services:
       - "5001:5001"
     environment:
       - TZ="America/New_York"
-    restart: always
