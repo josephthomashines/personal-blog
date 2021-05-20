@@ -284,6 +284,7 @@ a {
   display: block;
   width: 100% !important;
   height: auto !important;
+  background-color: black;
 }
 
 .post .footnotes {

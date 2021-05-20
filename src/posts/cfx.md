@@ -33,14 +33,19 @@ with how they came out.
 
 [Problem](https://adventofcode.com/2020/day/5)
 
-<video autoplay preload loop>
+<video autoplay muted playsinline preload loop>
   <source src="/vid/aoc2020_d05.mp4" type="video/mp4">
+  Your browser cannot play this video, try downloading it
+  <a href="/video/aoc2020_d05.mp4">here.</a>
 </video>
 
 ## Day 8
 
 [Problem](https://adventofcode.com/2020/day/8)
 
-<video autoplay preload loop>
+<video autoplay muted playsinline preload loop>
   <source src="/vid/aoc2020_d08.mp4" type="video/mp4">
+  Your browser cannot play this video, try downloading it
+  <a href="/video/aoc2020_d08.mp4">here.</a>
 </video>
+
