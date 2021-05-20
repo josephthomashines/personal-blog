@@ -1,10 +1,14 @@
-FROM nginx:1.19-alpine
+FROM nginx:stable-alpine
 
-RUN apk add --update py3-pip
+RUN apk --no-cache update
+RUN apk --no-cache upgrade
+RUN apk --no-cache add --update \
+  linux-headers build-base py3-pip python3-dev gcc libc-dev libffi-dev
+RUN pip3 install --upgrade pip
 
 COPY src/ src/
 WORKDIR src/
-RUN pip3 install markdown2 Jinja2 Pygments loguru bs4
+RUN pip3 install -r requirements.txt
 RUN python3 --version
 RUN python3 build_site.py
 WORKDIR ..

@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import argparse
-from bs4 import BeautifulSoup
 from datetime import datetime
 import glob
 from loguru import logger
@@ -45,12 +44,8 @@ def parse_md(fn):
             .strptime(pmd.metadata['date'], DATE_FMT)\
             .strftime('%a, %d %b %Y 00:00:00')
 
-        soup = BeautifulSoup(pmd, features='html5lib')
-        preview = soup.get_text().replace('\n', ' ')[:256] + "..."
-
         return {
             'content': pmd,
-            'preview': preview,
             'title': pmd.metadata['title'],
             'slug': pmd.metadata['date'] + '/' + \
                 pmd.metadata['title'].lower().replace(' ', '-') + \
