@@ -1,4 +1,4 @@
-title: cfx - simple native C visualization using Xlib and ffmpeg
+title: simple native C visualization using Xlib and ffmpeg
 date: 2021/01/14
 description: Using Xlib and ffmpeg (libav) to easily visualize and record
 using C
@@ -16,10 +16,13 @@ some primitives to it.
 My initial concern was the lack of cleanup code present in gfx, so this
 is where I started. Delving into the amorphous and incomplete
 Xlib documentation was a pain, and I found that exploring the source code
-was a much more efficient way to understand the API.
+was a much more efficient way to understand the API. This was not a fun
+experience, but I managed to put something together that was usable and I am
+relatively happy with.
 
-All of the
-[source code is on my github](https://github.com/ephjos/cut/tree/main/cfx).
+I created **cfx**, a header-only Xlib wrapper for simple visualizations that can
+be saved straight to disk using ffmpeg. The
+[source code can be found on my github](https://github.com/ephjos/cut/tree/main/cfx).
 
 ---
 
@@ -30,11 +33,14 @@ with how they came out.
 
 [Problem](https://adventofcode.com/2020/day/5)
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/KpM9SZY"  ><a href="//imgur.com/a/KpM9SZY">AOC 2020 - Day 5 Visualization</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+<video autoplay preload loop>
+  <source src="/vid/aoc2020_d05.mp4" type="video/mp4">
+</video>
 
 ## Day 8
 
 [Problem](https://adventofcode.com/2020/day/8)
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/HYya5kn"  ><a href="//imgur.com/a/HYya5kn">AOC 2020 - Day 8 Visualization</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
-
+<video autoplay preload loop>
+  <source src="/vid/aoc2020_d08.mp4" type="video/mp4">
+</video>

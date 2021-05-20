@@ -280,6 +280,12 @@ a {
   margin-top: 1rem;
 }
 
+.post video {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+}
+
 .post .footnotes {
   max-width: 60ch;
   margin: 0 auto;
