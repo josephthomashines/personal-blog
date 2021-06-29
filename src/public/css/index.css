@@ -111,8 +111,10 @@ a {
 }
 
 .full-center > .container > .brand > img {
-  width: 30px;
-  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
   vertical-align: middle;
 }
 
@@ -122,6 +124,7 @@ a {
   color: var(--cyan);
   vertical-align: middle;
   animation: glowCyan 10s ease-in-out 0s infinite;
+  margin-left: 10px;
 }
 
 .full-center > .container > .info {
@@ -129,7 +132,7 @@ a {
   grid-template-columns: 30px auto;
   grid-template-rows: auto;
   row-gap: 5px;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-left: 20px;
 }
 
